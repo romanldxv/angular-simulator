@@ -1,6 +1,30 @@
 @use './fonts';
+@use './normalize';
 
 * {
   font-family: 'Nunito Sans';
+  font-size: 18px;
+  font-style: normal;
 }
 
+.container {
+  width: 1180px;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.semi-bold {
+  font-weight: 600;
+}
+
+.fs-16 {
+  font-size: 16px;
+}
+
+:root {
+  --primary-color: #18121E;
+  --secondary-color: #1A3E3E;
+  --gray-color: #FDFDFD;
+}

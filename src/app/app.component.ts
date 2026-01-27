@@ -9,4 +9,6 @@ import './training'
 })
 export class AppComponent {
 
+  companyName: string = 'румтибет';
+
 }

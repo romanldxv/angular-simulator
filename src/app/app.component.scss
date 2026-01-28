@@ -1,3 +1,5 @@
+@import '../assets/mixins';
+
 .header {
   color: var(--gray-color);
   height: 72px;
@@ -7,6 +9,7 @@
     display: flex;
     justify-content: space-between;
   }
+
   .company-logo {
     display: flex;
     flex-direction: column;
@@ -91,25 +94,24 @@
           flex-direction: column;
 
           .tour-select {
-            width: 270px;
-            height: 52px;
-            border: 1px solid #E1E3E4;
-            border-radius: 8px;
+            @include tour-select-block;
+          }
+
+          .tour-input {
+            @include tour-select-block;
+          }
+
+          .tour-input::placeholder {
             color: var(--gray-color);
             line-height: 150%;
-            appearance: none;
-            background-color: transparent;
-            background-position: right 10px center;
-            background-repeat: no-repeat;
-            padding-left: 16px;
           }
 
           .arrow-down-icon {
-            background-image: url('/ic-arrow-down.svg');
+            background-image: url('/icons/ic-arrow-down.svg');
           }
 
           .date-icon {
-            background-image: url('/ic-calendar.svg');
+            background-image: url('/icons/ic-calendar.svg');
           }
         }
       

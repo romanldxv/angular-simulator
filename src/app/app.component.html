@@ -1,7 +1,7 @@
 <header class="header container">
   <div class="header-wrapper">
     <div class="company-logo">
-      <img src="/ic-company.svg" alt="company logo" width="137">
+      <img src="/icons/ic-company.svg" alt="company logo" width="137">
       <span class="company-name">{{ companyName }}</span>
     </div>
     <nav class="navigation">
@@ -40,21 +40,19 @@
           <select class="tour-select arrow-down-icon bold fs-16 white" name="select-tour">
             <option disabled value="" selected>Локация для тура</option>
           </select>
-          <label class="select-description" for="select-tour">выберите из списка</label>
+          <label class="select-description">выберите из списка</label>
         </div>
         <div class="tour-select-block">
-          <select class="tour-select date-icon bold fs-16 white" name="select-tour">
-            <option disabled value="" selected>Дата похода</option>
-          </select>
-          <label class="select-description" for="select-tour">укажите диапазон</label>
+          <input class="tour-input date-icon bold fs-16 white" placeholder="Дата похода" name="select-tour">
+          <label class="select-description">укажите диапазон</label>
         </div>
         <div class="tour-select-block">
           <select class="tour-select arrow-down-icon bold fs-16 white" name="select-tour">
             <option disabled value="" selected>Участники</option>
           </select>
-          <label class="select-description" for="select-tour">минимум 4 человека</label>
+          <label class="select-description">минимум 4 человека</label>
         </div>
-        <button class="search-tour-btn bold fs-16">Найти программу</button>
+        <button class="search-tour-btn bold fs-16" type="submit">Найти программу</button>
       </form>
     </div>
   </div>

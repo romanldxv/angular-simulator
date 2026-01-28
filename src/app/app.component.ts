@@ -32,9 +32,9 @@ function saveVisitDate(): void {
 
 function saveEntryCount(): void {
   if (!localStorage.getItem('visitCount')) {
-    localStorage.setItem('visitCount', JSON.stringify(1))
+    localStorage.setItem('visitCount', JSON.stringify(1));
   } else {
-    let visitCount: number = JSON.parse(localStorage.getItem('visitCount')!);
+    const visitCount: number = JSON.parse(localStorage.getItem('visitCount')!);
     localStorage.setItem('visitCount', JSON.stringify(visitCount + 1));
   }
 }

@@ -32,8 +32,7 @@ export class AppComponent {
   }
 
   saveVisitCount(): void {
-    let visitCount: number = JSON.parse(localStorage.getItem(this.VISIT_COUNT) || '0');
-    visitCount++;
+    let visitCount: number = JSON.parse(localStorage.getItem(this.VISIT_COUNT) || '0') + 1;
     localStorage.setItem(this.VISIT_COUNT, JSON.stringify(visitCount));
   }
 

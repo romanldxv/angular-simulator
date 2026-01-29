@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import './training'
-import { Color } from '../enums/Colors';
+import { Color } from '../enums/Color';
 import { Collection } from './collection';
 
 @Component({
@@ -11,36 +11,36 @@ import { Collection } from './collection';
 })
 export class AppComponent {
 
+  LAST_VISIT_DATE: string = 'last-visit-date';
+  VISIT_COUNT: string = 'visit-count';
+  
   companyName: string = 'румтибет';
-
+  
   constructor() {
-    saveVisitDate();
-    saveEntryCount();
+    this.saveLastVisitDate();
+    this.saveVisitCount();
   }
 
-}
-
-function isMainColor(color: string): boolean {
-  const mainColors: string[] = Object.values(Color);
-  return mainColors.includes(color);
-}
-
-function saveVisitDate(): void {
-  const todayDate: Date = new Date();
-  localStorage.setItem('lastVisitDate', todayDate.toString());
-}
-
-function saveEntryCount(): void {
-  if (!localStorage.getItem('visitCount')) {
-    localStorage.setItem('visitCount', JSON.stringify(1));
-  } else {
-    const visitCount: number = JSON.parse(localStorage.getItem('visitCount')!);
-    localStorage.setItem('visitCount', JSON.stringify(visitCount + 1));
+  isMainColor(color: Color): boolean {
+    const mainColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
+    return mainColors.includes(color);
   }
+
+  saveLastVisitDate(): void {
+    const todayDate: Date = new Date();
+    localStorage.setItem(this.LAST_VISIT_DATE, todayDate.toString());
+  }
+
+  saveVisitCount(): void {
+    let visitCount: number | null = JSON.parse(localStorage.getItem(this.VISIT_COUNT)!);
+    !visitCount ? visitCount = 1 : visitCount++;
+    localStorage.setItem(this.VISIT_COUNT, JSON.stringify(visitCount));
+  }
+
+  products: string[] = ['apple', 'carrot', 'milk', 'bread'];
+  colors: Color[] = Object.values(Color);
+
+  productCollection: Collection<string> = new Collection(this.products);
+  colorCollection: Collection<Color> = new Collection(this.colors);
+
 }
-
-const products: string[] = ['apple', 'carrot', 'milk', 'bread'];
-const colors: Color[] = Object.values(Color);
-
-const productCollection: Collection<string> = new Collection(products);
-const colorCollection: Collection<Color> = new Collection(colors);

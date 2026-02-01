@@ -1,1 +1,59 @@
-<h1 style="display: flex; justify-content: center; font-family: sans-serif;">NGX SIMULATOR</h1>
+<header class="header container">
+  <div class="header-wrapper">
+    <div class="company-logo">
+      <img src="/icons/ic-company.svg" alt="company logo" width="137">
+      <span class="company-name">{{ companyName }}</span>
+    </div>
+    <nav class="navigation">
+      <ul class="navigation-list">
+        <li>
+          <a class="navigation-list-item" href="#">Главная</a>
+        </li>
+        <li>
+          <a class="navigation-list-item" href="#">Про гида</a>
+        </li>
+        <li>
+          <a class="navigation-list-item" href="#">Программа тура</a>
+        </li>
+        <li>
+          <a class="navigation-list-item" href="#">Стоимость</a>
+        </li>
+        <li>
+          <a class="navigation-list-item" href="#">Блог</a>
+        </li>
+        <li>
+          <a class="navigation-list-item" href="#">Контакты</a>
+        </li>
+      </ul>
+      <button class="consultation-btn fs-16">Консультация</button>
+    </nav>
+  </div>
+</header>
+
+<section class="main-info">
+  <div class="banner"></div>
+  <div class="main-info-content">
+    <h1 class="main-info-content-title">Насладись прогулкой в горах <br>с командой единомышленников</h1>
+    <div class="search-tour container">
+      <form class="search-tour-form">
+        <div class="tour-select-block">
+          <select class="tour-select arrow-down-icon bold fs-16 white" name="select-tour">
+            <option disabled value="" selected>Локация для тура</option>
+          </select>
+          <label class="select-description">выберите из списка</label>
+        </div>
+        <div class="tour-select-block">
+          <input class="tour-input date-icon bold fs-16 white" placeholder="Дата похода" name="select-tour">
+          <label class="select-description">укажите диапазон</label>
+        </div>
+        <div class="tour-select-block">
+          <select class="tour-select arrow-down-icon bold fs-16 white" name="select-tour">
+            <option disabled value="" selected>Участники</option>
+          </select>
+          <label class="select-description">минимум 4 человека</label>
+        </div>
+        <button class="search-tour-btn bold fs-16" type="submit">Найти программу</button>
+      </form>
+    </div>
+  </div>
+</section>

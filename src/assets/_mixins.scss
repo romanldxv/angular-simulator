@@ -1,0 +1,14 @@
+@mixin tour-select-block {
+  box-sizing: border-box;
+  width: 270px;
+  height: 52px;
+  border: 1px solid #E1E3E4;
+  border-radius: 8px;
+  appearance: none;
+  color: var(--gray-color);
+  line-height: 150%;
+  background-color: transparent;
+  background-position: right 10px center;
+  background-repeat: no-repeat;
+  padding-left: 16px;
+}

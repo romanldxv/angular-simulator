@@ -91,7 +91,7 @@
               name="selectParticipants"
               required
               >
-              <option disabled value="0" selected>Участники</option>
+              <option disabled value="" selected>Участники</option>
               @for (tourParticipant of tourParticipants; track tourParticipant.id) {
                 <option class="tour-select-option">{{ tourParticipant.minCount + '-' + tourParticipant.maxCount + ' человек' }}</option>
               }

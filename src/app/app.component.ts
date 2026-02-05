@@ -37,7 +37,7 @@ export class AppComponent {
 
   selectedTourLocation: string = '';
   selectedTourDate: string = '';
-  selectedCountTourParticipants: number = 0;
+  selectedCountTourParticipants: number | '' = '';
 
   tourLocations: ITourLocation[] = [
     { id: 1, title: 'Плато Лаго-Наки' },

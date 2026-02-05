@@ -1,59 +1,162 @@
-<header class="header container">
-  <div class="header-wrapper">
-    <div class="company-logo">
-      <img src="/icons/ic-company.svg" alt="company logo" width="137">
-      <span class="company-name">{{ companyName }}</span>
+@if (isLoadingPage) {
+  <div class="loading-container">
+    <div class="loading-container-wrapper">
+      <p class="fs-24 bold">Загружаем...</p>
+      <img class="loading-icon" src="/icons/ic-loading.svg" alt="loading icon">
     </div>
-    <nav class="navigation">
-      <ul class="navigation-list">
-        <li>
-          <a class="navigation-list-item" href="#">Главная</a>
-        </li>
-        <li>
-          <a class="navigation-list-item" href="#">Про гида</a>
-        </li>
-        <li>
-          <a class="navigation-list-item" href="#">Программа тура</a>
-        </li>
-        <li>
-          <a class="navigation-list-item" href="#">Стоимость</a>
-        </li>
-        <li>
-          <a class="navigation-list-item" href="#">Блог</a>
-        </li>
-        <li>
-          <a class="navigation-list-item" href="#">Контакты</a>
-        </li>
-      </ul>
-      <button class="consultation-btn fs-16">Консультация</button>
-    </nav>
   </div>
-</header>
+} @else {
+  <header class="header container">
+    <div class="header-wrapper">
+      <div class="company-logo">
+        <img src="/icons/ic-company.svg" alt="company logo" width="137">
+        <span class="company-name">{{ companyName }}</span>
+      </div>
+      <nav class="navigation">
+        <ul class="navigation-list">
+          <li>
+            <a class="navigation-list-item" href="#">Главная</a>
+          </li>
+          <li>
+            <a class="navigation-list-item" href="#">Про гида</a>
+          </li>
+          <li>
+            <a class="navigation-list-item" href="#">Программа тура</a>
+          </li>
+          <li>
+            <a class="navigation-list-item" href="#">Стоимость</a>
+          </li>
+          <li>
+            <a class="navigation-list-item" href="#">Блог</a>
+          </li>
+          <li>
+            <a class="navigation-list-item" href="#">Контакты</a>
+          </li>
+        </ul>
+        <button class="consultation-btn fs-16">Консультация</button>
+      </nav>
+    </div>
 
-<section class="main-info">
-  <div class="banner"></div>
-  <div class="main-info-content">
-    <h1 class="main-info-content-title">Насладись прогулкой в горах <br>с командой единомышленников</h1>
-    <div class="search-tour container">
-      <form class="search-tour-form">
-        <div class="tour-select-block">
-          <select class="tour-select arrow-down-icon bold fs-16 white" name="select-tour">
-            <option disabled value="" selected>Локация для тура</option>
-          </select>
-          <label class="select-description">выберите из списка</label>
+    <div class="interactive-container">
+      <div class="interactive-container-text">
+        @if (isClickerActive) {
+          <div class="clicker">
+            <button class="clicker-btn" (click)="addOne()">+</button>
+            <p>{{ clickerCount }}</p>
+            <button class="clicker-btn" (click)="subtractOne()" [disabled]="clickerCount == 0">-</button>
         </div>
-        <div class="tour-select-block">
-          <input class="tour-input date-icon bold fs-16 white" placeholder="Дата похода" name="select-tour">
-          <label class="select-description">укажите диапазон</label>
-        </div>
-        <div class="tour-select-block">
-          <select class="tour-select arrow-down-icon bold fs-16 white" name="select-tour">
-            <option disabled value="" selected>Участники</option>
-          </select>
-          <label class="select-description">минимум 4 человека</label>
-        </div>
-        <button class="search-tour-btn bold fs-16" type="submit">Найти программу</button>
-      </form>
+        } @else {
+          <p>{{ currentTime }}</p>
+        }
+      </div>
+      <button class="interactive-container-btn fs-16" (click)="activateInteractive()">{{ isClickerActive ? 'Показать таймер' : 'Показать кликер' }}</button>
     </div>
-  </div>
-</section>
+  </header>
+
+  <section class="main-info">
+    <div class="banner"></div>
+    <div class="main-info-content">
+      <h1 class="main-info-content-title lh-150">Насладись прогулкой в горах <br>с командой единомышленников</h1>
+      <div class="search-tour container">
+        <form class="search-tour-form" #selectTourForm="ngForm">
+          <div class="tour-select-block">
+            <select 
+              class="tour-select arrow-down-icon bold fs-16 white" 
+              [(ngModel)]="selectedTourLocation" 
+              name="selectTour"
+              required
+              >
+              <option disabled value="" selected>Локация для тура</option>
+              @for (tourLocation of tourLocations; track tourLocation.id) {
+                <option class="tour-select-option">{{ tourLocation.title }}</option>
+              }
+            </select>
+            <label class="select-description lh-150">выберите из списка</label>
+          </div>
+          <div class="tour-select-block">
+            <input 
+              class="tour-input date-icon bold fs-16 white"
+              placeholder="Дата похода"
+              name="inputTourDate"
+              [(ngModel)]="selectedTourDate"
+              required
+              >
+            <label class="select-description lh-150">укажите диапазон</label>
+          </div>
+          <div class="tour-select-block">
+            <select 
+              class="tour-select arrow-down-icon bold fs-16 white" 
+              [(ngModel)]="selectedCountTourParticipants" 
+              id="select-tour-participants"
+              name="selectParticipants"
+              required
+              >
+              <option disabled value="0" selected>Участники</option>
+              @for (tourParticipant of tourParticipants; track tourParticipant.id) {
+                <option class="tour-select-option">{{ tourParticipant.minCount + '-' + tourParticipant.maxCount + ' человек' }}</option>
+              }
+            </select>
+            <label class="select-description lh-150">выберите из списка</label>
+          </div>
+          <button
+            class="search-tour-btn bold fs-16"
+            type="submit"
+            [disabled]="selectTourForm.invalid"
+            >
+            Найти программу
+          </button>
+        </form>
+      </div>
+      <div class="live-input-block">
+        <div class="live-input-container">
+          <input type="text" class="live-input" [(ngModel)]="liveInputText" placeholder="live input">
+          <img class="live-input-icon" src="/icons/ic-arrow-down.svg" alt="arrow right">
+        </div>
+        <p class="live-text">{{ liveInputText }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tour-program bg-white">
+    <div class="tour-program-content container">
+      <div class="content-images">
+        <img class="forward-img" src="/images/tour-program-forward.png" alt="tour program forward">
+        <img class="rearward-img" src="/images/tour-program-rearward.png" alt="tour program rearward">
+      </div>
+      <div class="content-text">
+        <p class="super-title fs-24">о нашем походе</p>
+        <h2 class="lh-120 margin-top-8 fs-32 extra-bold">Исследуйте все горные массивы мира вместе с нами</h2>
+        <p class="title-description lh-150">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
+        <button class="tour-program-btn">Программа тура</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="company-offer bg-gray">
+    <div class="company-offer-content container">
+      <div class="content-text">
+        <p class="super-title fs-24">наше предложение</p>
+        <h2 class="lh-120 fs-32 extra-bold">Лучшие программы для тебя</h2>
+        <p class="title-description lh-150">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
+        <div class="content-text-advantages">
+          @for (advantage of advantages; track advantage.id) {
+            <div class="advantage">
+              <img [src]="'/icons/advantages/' + advantage.iconName + '.svg'">
+              <div>
+                <h5 class="advantage-title bold">{{ advantage.title }}</h5>
+                <p class="advantage-description fs-14">{{ advantage.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+        <button class="company-offer-btn">Стоимость программ</button>
+      </div>
+      <div class="content-images">
+        <img src="/images/company-offer-left-top.png" alt="company offer left top" width="250">
+        <img src="/images/company-offer-right-top.png" alt="company offer right top" width="250">
+        <img src="/images/company-offer-left-bottom.png" alt="company offer left bottom" width="250">
+        <img src="/images/company-offer-right-bottom.png" alt="company offer right bottom" width="250">
+      </div>
+    </div>
+  </section>
+}

@@ -1,9 +1,39 @@
 @import '../assets/mixins';
+@import '../assets/animations';
+
+.loading-container {
+  font-size: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .loading-icon {
+      width: 51px;
+      height: 51px;
+      margin-top: 20px;
+
+      animation-name: loading;
+      animation-duration: 900ms;
+      animation-iteration-count: infinite;
+    }
+  }
+}
 
 .header {
-  color: var(--gray-color);
+  * {
+    color: var(--light-gray-color);
+  }
+
   height: 72px;
   margin: 16px auto auto;
+  position: relative;
 
   &-wrapper {
     display: flex;
@@ -34,25 +64,64 @@
 
       a {
         text-decoration: none;
-        color: var(--gray-color);
+        color: var(--light-gray-color);
       }
     }
 
     .consultation-btn {
-      color: var(--gray-color);
-      background-color: var(--secondary-color);
       width: 157px;
       height: 44px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
       margin-left: 49px;
+      @include default-btn;
+    }
+  }
+
+  .interactive-container {
+    width: 375px;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    margin-top: 20px;
+
+    &-text {
+      width: 178px;
+      display: flex;
+      justify-content: end;
+      font-weight: 600;
+
+      .clicker {
+        width: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &-btn {
+          width: 20px;
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+
+          &:disabled {
+            color: #c0c0c0;
+            cursor: default;
+          }
+        }
+      }
+    }
+
+    &-btn {
+      width: 157px;
+      height: 44px;
+      @include default-btn;
     }
   }
 }
 
 .main-info {
-  color: var(--gray-color);
+  color: var(--light-gray-color);
   height: 897px;
   display: flex;
   flex-direction: column;
@@ -60,12 +129,14 @@
 
   &-content {
     margin-inline: auto;
-    margin-bottom: 82px;
+    margin-bottom: 15px;
+    * {
+      color: var(--light-gray-color);
+    }
 
     .main-info-content-title {
       font-size: 50px;
       font-weight: 400;
-      line-height: 150%;
       letter-spacing: 2%;
       text-transform: uppercase;
       margin-bottom: 41px;
@@ -94,16 +165,22 @@
           flex-direction: column;
 
           .tour-select {
-            @include tour-select-block;
+            @include default-input;
+            @include default-input-wrapper;
+
+            &-option {
+              color: black;
+            }
           }
 
           .tour-input {
-            @include tour-select-block;
-          }
+            @include default-input;
+            @include default-input-wrapper;
 
-          .tour-input::placeholder {
-            color: var(--gray-color);
-            line-height: 150%;
+            &::placeholder {
+              color: var(--light-gray-color);
+              line-height: 150%;
+            }
           }
 
           .arrow-down-icon {
@@ -118,7 +195,6 @@
         .select-description {
           font-size: 14px;
           font-weight: 400;
-          line-height: 150%;
           margin-top: 8px;
           margin-left: 8px;
         }
@@ -134,9 +210,15 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
+
+        &:disabled {
+          background-color: rgb(207, 207, 207);
+          cursor: default;
+        }
       }
     }
   }
+
   .banner {
     width: 100%;
     height: 985px;
@@ -147,5 +229,168 @@
     top: 0;
     z-index: -1;
   }
+
+  .live-input-block {
+    width: 454px;
+    height: 52px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+
+    .live-input-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 270px;
+      height: 52px;
+      
+      @include default-input-wrapper;
+
+      .live-input {
+        @include default-input;
+
+        &-icon {
+          transform: rotate(-90deg);
+        }
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+          color: var(--light-gray-color);
+          line-height: 150%;
+        }
+      }
+    }
+
+    .live-text {
+      margin-left: 50px;
+    }
+  }
 }
 
+.tour-program {
+  height: 726px;
+  padding: 100px 0;
+
+  &-content:hover {
+    transform: translateX(-70px);
+  }
+
+  &-content {
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+    margin: 0 auto;
+    transition: transform 0.4s;
+
+    .content-images {
+      min-width: 480px;
+      height: 526px;
+      position: relative;
+
+      .forward-img {
+        width: 350px;
+        position: absolute;
+        z-index: 0;
+        bottom: 0px;
+        right: 0px;
+      }
+
+      .rearward-img {
+        width: 350px;
+        z-index: -1;
+      }
+    }
+
+    .content-text {
+      height: 398px;
+      align-self: center;
+
+      .title-description {
+        @include title-description;
+      }
+    }
+  }
+
+  &-btn {
+    width: 200px;
+    height: 52px;
+    @include default-btn;
+  }
+}
+
+.company-offer {
+  height: 771px;
+  padding-top: 80px;
+
+  &-content:hover {
+    transform: scale(1.05);
+  }
+
+  &-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 90px;
+    margin: 0 auto;
+    height: 591px;
+    transition: transform .5s;
+
+    .content-text {
+      .title-description {
+        height: 81px;
+        @include title-description;
+      }
+
+      &-advantages {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        margin-block: 40px;
+
+        .advantage {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 16px;
+          height: 64px;
+
+          &-title {
+            line-height: 20px;
+            letter-spacing: 1.2%;
+            margin-bottom: 4px;
+          }
+
+          &-description {
+            width: 505px;
+          }
+        }
+      }
+    }
+
+    .content-images {
+      width: 510px;
+      height: 510px;
+
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      row-gap: 10px;
+    }
+  }
+
+  &-btn {
+    width: 236px;
+    height: 52px;
+    @include default-btn;
+  }
+}
+
+.super-title {
+  color: var(--yellow-color);
+  line-height: 20px;
+  margin-bottom: 8px;
+}

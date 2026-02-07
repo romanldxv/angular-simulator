@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import './training'
 import { Color } from '../enums/Color';
 import { Collection } from './collection';
 import { IAdvatage } from '../interfaces/IAdvantage';
 import { FormsModule } from '@angular/forms';
 import { ITourLocation } from '../interfaces/ITourLocation';
 import { ITourParticipant } from '../interfaces/ITourParticipant';
+import './training';
 
 @Component({
   selector: 'app-root',
@@ -15,29 +15,21 @@ import { ITourParticipant } from '../interfaces/ITourParticipant';
 })
 export class AppComponent {
 
-  private LAST_VISIT_DATE: string = 'last-visit-date';
-  private VISIT_COUNT: string = 'visit-count';
-  
   companyName: string = 'румтибет';
-
   currentTime: string = new Date().toLocaleString();
-
   isLoadingPage: boolean = true;
-
   clickerCount: number = 0;
   isClickerActive: boolean = false;
-
   liveInputText!: string;
-
+  selectedTourLocation!: string;
+  selectedTourDate!: string;
+  selectedCountTourParticipants!: number;
+  private LAST_VISIT_DATE: string = 'last-visit-date';
+  private VISIT_COUNT: string = 'visit-count';
   private products: string[] = ['apple', 'carrot', 'milk', 'bread'];
   private colors: Color[] = Object.values(Color);
-
   private productCollection: Collection<string> = new Collection(this.products);
   private colorCollection: Collection<Color> = new Collection(this.colors);
-
-  selectedTourLocation: string = '';
-  selectedTourDate: string = '';
-  selectedCountTourParticipants: number | '' = '';
 
   tourLocations: ITourLocation[] = [
     { id: 1, title: 'Плато Лаго-Наки' },
@@ -45,13 +37,13 @@ export class AppComponent {
     { id: 3, title: 'Гора Фишт' },
     { id: 4, title: 'Гора Чегет' },
     { id: 5, title: 'Софийские озера' }
-  ]
+  ];
 
   tourParticipants: ITourParticipant[] = [
     { id: 1, minCount: 4, maxCount: 6 },
     { id: 2, minCount: 6, maxCount: 10 },
     { id: 3, minCount: 10, maxCount: 18 }
-  ]
+  ];
 
   advantages: IAdvatage[] = [
     {
@@ -72,7 +64,7 @@ export class AppComponent {
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       iconName: 'ic-safe-hiking'
     }
-  ]
+  ];
   
   constructor() {
     this.saveLastVisitDate();
@@ -80,11 +72,11 @@ export class AppComponent {
 
     setTimeout(() => {
       this.isLoadingPage = false;
-    }, 2000)
+    }, 2000);
 
     setInterval(() => {
       this.currentTime = new Date().toLocaleString();
-    }, 1000)
+    }, 1000);
   }
 
   private isMainColor(color: Color): boolean {
@@ -102,15 +94,15 @@ export class AppComponent {
     localStorage.setItem(this.VISIT_COUNT, JSON.stringify(visitCount));
   }
 
-  activateInteractive() {
-    this.isClickerActive ? this.isClickerActive = false : this.isClickerActive = true;
+  toggleClicker(): void {
+    this.isClickerActive = !this.isClickerActive;
   }
 
-  addOne() {
+  increaseClicker(): void {
     this.clickerCount++;
   }
 
-  subtractOne() {
+  decreaseClicker(): void {
     if (this.clickerCount > 0) {
       this.clickerCount--;
     }

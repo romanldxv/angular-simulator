@@ -130,6 +130,7 @@
   &-content {
     margin-inline: auto;
     margin-bottom: 15px;
+
     * {
       color: var(--light-gray-color);
     }
@@ -309,6 +310,10 @@
       height: 398px;
       align-self: center;
 
+      .title {
+        margin-top: 8px;
+      }
+
       .title-description {
         @include title-description;
       }
@@ -339,34 +344,32 @@
     height: 591px;
     transition: transform .5s;
 
-    .content-text {
-      .title-description {
-        height: 81px;
-        @include title-description;
-      }
+    .title-description {
+      height: 81px;
+      @include title-description;
+    }
 
-      &-advantages {
+    .content-text-advantages {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-block: 40px;
+
+      .advantage {
         display: flex;
-        flex-direction: column;
-        gap: 40px;
-        margin-block: 40px;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        height: 64px;
 
-        .advantage {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 16px;
-          height: 64px;
+        &-title {
+          line-height: 20px;
+          letter-spacing: 1.2%;
+          margin-bottom: 4px;
+        }
 
-          &-title {
-            line-height: 20px;
-            letter-spacing: 1.2%;
-            margin-bottom: 4px;
-          }
-
-          &-description {
-            width: 505px;
-          }
+        &-description {
+          width: 505px;
         }
       }
     }
@@ -374,7 +377,6 @@
     .content-images {
       width: 510px;
       height: 510px;
-
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;

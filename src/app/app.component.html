@@ -39,17 +39,17 @@
 
     <div class="interactive-container">
       <div class="interactive-container-text">
-        @if (isClickerActive) {
+        @if (currentWidget === 'clicker') {
           <div class="clicker">
-            <button class="clicker-btn" id="increase-clicker-btn" (click)="increaseClicker()">+</button>
+            <button class="clicker-btn" id="increase-clicker-btn" (click)="increaseCounter()">+</button>
             <p>{{ clickerCount }}</p>
-            <button class="clicker-btn" id="decrease-clicker-btn" (click)="decreaseClicker()" [disabled]="clickerCount == 0">-</button>
+            <button class="clicker-btn" id="decrease-clicker-btn" (click)="decreaseCounter()" [disabled]="clickerCount == 0">-</button>
         </div>
         } @else {
           <p>{{ currentTime }}</p>
         }
       </div>
-      <button class="interactive-container-btn fs-16" id="toggle-clicker-btn" (click)="toggleClicker()">{{ isClickerActive ? 'Показать таймер' : 'Показать кликер' }}</button>
+      <button class="interactive-container-btn fs-16" id="toggle-clicker-btn" (click)="toggleWidget(currentWidget)">{{ currentWidget === 'clicker' ? 'Показать таймер' : 'Показать кликер' }}</button>
     </div>
   </header>
 

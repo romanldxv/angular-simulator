@@ -19,13 +19,13 @@ export class AppComponent {
   currentTime: string = new Date().toLocaleString();
   isLoadingPage: boolean = true;
   clickerCount: number = 0;
-  isClickerActive: boolean = false;
+  currentWidget: 'clicker' | 'date' = 'date';
   liveInputText!: string;
   selectedTourLocation!: string;
   selectedTourDate!: string;
   selectedCountTourParticipants!: number;
-  private LAST_VISIT_DATE: string = 'last-visit-date';
-  private VISIT_COUNT: string = 'visit-count';
+  readonly LAST_VISIT_DATE_KEY: string = 'last-visit-date';
+  readonly VISIT_COUNT_KEY: string = 'visit-count';
   private products: string[] = ['apple', 'carrot', 'milk', 'bread'];
   private colors: Color[] = Object.values(Color);
   private productCollection: Collection<string> = new Collection(this.products);
@@ -86,23 +86,23 @@ export class AppComponent {
 
   private saveLastVisitDate(): void {
     const todayDate: Date = new Date();
-    localStorage.setItem(this.LAST_VISIT_DATE, todayDate.toString());
+    localStorage.setItem(this.LAST_VISIT_DATE_KEY, todayDate.toString());
   }
 
   private saveVisitCount(): void {
-    let visitCount: number = JSON.parse(localStorage.getItem(this.VISIT_COUNT) || '0') + 1;
-    localStorage.setItem(this.VISIT_COUNT, JSON.stringify(visitCount));
+    let visitCount: number = JSON.parse(localStorage.getItem(this.VISIT_COUNT_KEY) || '0') + 1;
+    localStorage.setItem(this.VISIT_COUNT_KEY, JSON.stringify(visitCount));
   }
 
-  toggleClicker(): void {
-    this.isClickerActive = !this.isClickerActive;
+  toggleWidget(widget: 'clicker' | 'date'): void {
+    widget === 'clicker' ? this.currentWidget = 'date' : this.currentWidget = 'clicker'
   }
 
-  increaseClicker(): void {
+  increaseCounter(): void {
     this.clickerCount++;
   }
 
-  decreaseClicker(): void {
+  decreaseCounter(): void {
     if (this.clickerCount > 0) {
       this.clickerCount--;
     }

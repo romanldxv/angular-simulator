@@ -95,7 +95,7 @@ export class AppComponent {
   }
 
   toggleWidget(widget: 'clicker' | 'date'): void {
-    widget === 'clicker' ? this.currentWidget = 'date' : this.currentWidget = 'clicker'
+    this.currentWidget = widget;
   }
 
   increaseCounter(): void {

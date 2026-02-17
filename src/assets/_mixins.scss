@@ -1,14 +1,31 @@
-@mixin tour-select-block {
-  box-sizing: border-box;
+@mixin default-input {
   width: 270px;
   height: 52px;
-  border: 1px solid #E1E3E4;
-  border-radius: 8px;
-  appearance: none;
-  color: var(--gray-color);
+  color: var(--light-gray-color);
   line-height: 150%;
   background-color: transparent;
   background-position: right 10px center;
   background-repeat: no-repeat;
+  appearance: none;
+  border: none;
+}
+
+@mixin default-input-wrapper {
+  border: 1px solid #E1E3E4;
+  border-radius: 8px;
   padding-left: 16px;
+  padding-right: 10px;
+}
+
+@mixin default-btn {
+  color: var(--light-gray-color);
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@mixin title-description {
+  width: 576px;
+  margin-block: 40px;
 }

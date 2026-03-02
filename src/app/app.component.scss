@@ -396,3 +396,18 @@
   line-height: 20px;
   margin-bottom: 8px;
 }
+
+.popular-destinations-container {
+  margin-top: 20px;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  
+  .title-container {
+    text-align: center;
+  }
+
+  .popular-destinations {
+    
+  }
+}

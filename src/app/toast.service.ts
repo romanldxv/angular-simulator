@@ -6,7 +6,11 @@ import { IToast } from '../interfaces/IToast';
 })
 export class ToastService {
   
-  toasts: IToast[] = [];
+  private toasts: IToast[] = [];
+
+  getToasts(): IToast[] {
+    return this.toasts;
+  }
 
   addToast(addingToast: IToast): void {
     this.toasts.unshift(addingToast);

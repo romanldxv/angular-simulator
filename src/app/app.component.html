@@ -220,7 +220,7 @@
   </section>
 
   <div class="toasts-container">
-    @for (toast of toastService.toasts; track toast.id) {
+    @for (toast of toastService.getToasts(); track toast.id) {
       <ng-container [ngTemplateOutlet]="toastTemplate" [ngTemplateOutletContext]="{ toast: toast }"></ng-container>
     }
   </div>

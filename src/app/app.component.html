@@ -2,14 +2,14 @@
   <div class="loading-container">
     <div class="loading-container-wrapper">
       <p class="fs-24 bold">Загружаем...</p>
-      <img class="loading-icon" src="/icons/ic-loading.svg" alt="loading icon">
+      <img class="loading-icon" src="/icons/loading.svg" alt="loading icon">
     </div>
   </div>
 } @else {
-  <header class="header container">
-    <div class="header-wrapper">
+  <header class="header">
+    <div class="header-wrapper container">
       <div class="company-logo">
-        <img src="/icons/ic-company.svg" alt="company logo" width="137">
+        <img src="/icons/company.svg" alt="company logo" width="137">
         <span class="company-name">{{ companyName }}</span>
       </div>
       <nav class="navigation">
@@ -35,21 +35,20 @@
         </ul>
         <button class="consultation-btn fs-16" id="consultation-btn">Консультация</button>
       </nav>
-    </div>
-
-    <div class="interactive-container">
-      <div class="interactive-container-text">
-        @if (currentWidget === 'clicker') {
-          <div class="clicker">
-            <button class="clicker-btn" id="increase-clicker-btn" (click)="increaseCounter()">+</button>
-            <p>{{ clickerCount }}</p>
-            <button class="clicker-btn" id="decrease-clicker-btn" (click)="decreaseCounter()" [disabled]="clickerCount == 0">-</button>
+      <div class="interactive-container">
+        <div class="interactive-container-text">
+          @if (currentWidget === 'clicker') {
+            <div class="clicker">
+              <button class="clicker-btn" id="increase-clicker-btn" (click)="increaseCounter()">+</button>
+              <p>{{ clickerCount }}</p>
+              <button class="clicker-btn" id="decrease-clicker-btn" (click)="decreaseCounter()" [disabled]="clickerCount == 0">-</button>
+          </div>
+          } @else {
+            <p>{{ currentTime }}</p>
+          }
         </div>
-        } @else {
-          <p>{{ currentTime }}</p>
-        }
+        <button class="interactive-container-btn fs-16" id="toggle-clicker-btn" (click)="toggleWidget(currentWidget === 'clicker' ? 'date' : 'clicker')">{{ currentWidget === 'clicker' ? 'Показать таймер' : 'Показать кликер' }}</button>
       </div>
-      <button class="interactive-container-btn fs-16" id="toggle-clicker-btn" (click)="toggleWidget(currentWidget === 'clicker' ? 'date' : 'clicker')">{{ currentWidget === 'clicker' ? 'Показать таймер' : 'Показать кликер' }}</button>
     </div>
   </header>
 
@@ -113,30 +112,30 @@
       <div class="live-input-block">
         <div class="live-input-container">
           <input type="text" class="live-input" id="live-input" [(ngModel)]="liveInputText" placeholder="live input">
-          <img class="live-input-icon" src="/icons/ic-arrow-down.svg" alt="arrow right">
+          <img class="live-input-icon" src="/icons/arrow-down.svg" alt="arrow right">
         </div>
         <p class="live-text">{{ liveInputText }}</p>
       </div>
     </div>
   </section>
 
-  <section class="tour-program bg-white">
-    <div class="tour-program-content container">
+  <section class="tour-program-container bg-white">
+    <div class="tour-program container">
       <div class="content-images">
-        <img class="forward-img" src="/images/tour-program-forward.png" alt="tour program forward">
-        <img class="rearward-img" src="/images/tour-program-rearward.png" alt="tour program rearward">
+        <img class="forward-img" src="/images/tour-program/house-near-mountains.png" alt="tour program forward">
+        <img class="rearward-img" src="/images/tour-program/snowy-mountain.png" alt="tour program rearward">
       </div>
       <div class="content-text">
         <p class="super-title fs-24">о нашем походе</p>
         <h2 class="title lh-120 fs-32 extra-bold">Исследуйте все горные массивы мира вместе с нами</h2>
         <p class="title-description lh-150">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
-        <button class="tour-program-btn" id="tour-program-btn">Программа тура</button>
+        <button class="tour-program-btn" id="tour-program-btn" (click)="showToast(toastType.ERROR, 'Программа тура не найдена!')">Программа тура</button>
       </div>
     </div>
   </section>
 
-  <section class="company-offer bg-gray">
-    <div class="company-offer-content container">
+  <section class="company-offer-container bg-gray">
+    <div class="company-offer container">
       <div>
         <p class="super-title fs-24">наше предложение</p>
         <h2 class="lh-120 fs-32 extra-bold">Лучшие программы для тебя</h2>
@@ -152,14 +151,90 @@
             </div>
           }
         </div>
-        <button class="company-offer-btn" id="program-price-btn">Стоимость программ</button>
+        <button class="company-offer-btn" id="program-price-btn" (click)="showToast(toastType.INFO, 'Стоимость программ будет добавлена позже.')">Стоимость программ</button>
       </div>
       <div class="content-images">
-        <img src="/images/company-offer-left-top.png" alt="company offer left top" width="250">
-        <img src="/images/company-offer-right-top.png" alt="company offer right top" width="250">
-        <img src="/images/company-offer-left-bottom.png" alt="company offer left bottom" width="250">
-        <img src="/images/company-offer-right-bottom.png" alt="company offer right bottom" width="250">
+        <img src="/images/company-offer/near-lake.png" alt="near lake" width="250">
+        <img src="/images/company-offer/walking-in-mountain.png" alt="walking in mountain" width="250">
+        <img src="/images/company-offer/snow-trip.png" alt="snow trip" width="250">
+        <img src="/images/company-offer/near-river.png" alt="near river" width="250">
       </div>
     </div>
   </section>
+
+  <section class="popular-directions-container container">
+    <div class="title-container">
+      <p class="super-title">по версии отдыхающих</p>
+      <h2 class="lh-120 fs-32 extra-bold">Популярные направления</h2>
+    </div>
+    <div class="popular-directions">
+      @for (direction of directions; track direction.id) {
+        <div class="direction">
+          <img [src]="'/images/popular-directions/' + direction.imageName + '.png'">
+          <div class="direction-rating">
+            <div class="rating-wrapper">
+              <img src="/icons/rating-star.svg">
+              <p class="rating-value fs-14 bold">{{ direction.rating | number: "1.1-1" }}</p>
+            </div>
+          </div>
+          <div class="direction-description">
+            <div class="description-wrapper">
+              <div>
+                <p class="fs-24 lh-120 bold">{{ direction.title }}</p>
+                <p class="subtitle fs-14">{{ direction.subtitle }}</p>
+              </div>
+              <div class="price-container">
+                <p class="fs-20 bold lh-24px">{{ direction.price + " &#36;" }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+    <button class="directions-rating-btn semi-bold fs-16 lh-20px" id="directions-rating-btn">Рейтинг направлений</button>
+  </section>
+
+  <section class="travel-blog-container">
+    <div class="title-container">
+      <p class="super-title">делимся впечатлениями</p>
+      <h2 class="lh-120 fs-32 extra-bold">Блог о путешествиях</h2>
+    </div>
+    <div class="travel-blog container">
+      @for (travelBlog of travelBlogs; track travelBlog.id) {
+        <div class="blog">
+          <img [src]="'/images/travel-blog/' + travelBlog.imageName + '.png'">
+          <div class="blog-description-container">
+            <div class="blog-description-container-text">
+              <h3 class="title fs-24 bold">{{ travelBlog.title }}</h3>
+              <p class="fs-14 lh-20px">{{ travelBlog.description }}</p>
+              <div class="blog-footer">
+                <p class="date fs-14 bold lh-20px">{{ travelBlog.date }}</p>
+                <a class="read-article fs-14 bold lh-20px" href="#">читать статью</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+      <button class="travel-blog-btn fs-16 semi-bold lh-20px" id="other-materials-btn" (click)="showToast(toastType.WARN, 'Другие материалы доступны после регистрации!')">Другие материалы</button>
+    </div>
+  </section>
+
+  <div class="toasts-container">
+    @for (toast of toastService.getToasts(); track toast.id) {
+      <ng-container [ngTemplateOutlet]="toastTemplate" [ngTemplateOutletContext]="{ showingToast: toast }"></ng-container>
+    }
+  </div>
 }
+
+<ng-template #toastTemplate let-showingToast="showingToast">
+  <div class="toast-container">
+    <img src="/icons/message.svg">
+    <div>
+      <p class="fs-16 bold lh-20px">{{ showingToast.type }}</p>
+      <p class="fs-14 lh-20px">{{ showingToast.text }}</p>
+    </div>
+    <button class="close-btn" id="close-message-btn" (click)="closeMessage(showingToast)">
+      <img src="/icons/close.svg">
+    </button>
+  </div>
+</ng-template>

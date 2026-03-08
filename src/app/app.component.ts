@@ -61,19 +61,19 @@ export class AppComponent {
       id: 1,
       title: 'Опытный гид',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      iconName: 'ic-experienced-guide'
+      iconName: 'experienced-guide'
     },
     {
       id: 2,
       title: 'Безопасный поход',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      iconName: 'ic-loyal-prices'
+      iconName: 'loyal-prices'
     },
     {
       id: 3,
       title: 'Лояльные цены',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      iconName: 'ic-safe-hiking'
+      iconName: 'safe-hiking'
     }
   ];
 
@@ -159,7 +159,7 @@ export class AppComponent {
   }
 
   private saveVisitCount(): void {
-    let visitCount: number = this.localStorageService.getItem<number>(this.VISIT_COUNT_KEY) + 1;
+    let visitCount: number = (this.localStorageService.getItem<number>(this.VISIT_COUNT_KEY) || 0) + 1;
     this.localStorageService.setItem(this.VISIT_COUNT_KEY, visitCount);
   }
 
@@ -179,8 +179,7 @@ export class AppComponent {
   }
 
   showToast(toastType: ToastType, toastText: string): void {
-    const toast: IToast = { id: Date.now(), type: toastType, text: toastText };
-    this.toastService.addToast(toast);
+    this.toastService.addToast(toastType, toastText);
   }
 
   closeMessage(message: IToast): void {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IToast } from '../interfaces/IToast';
+import { ToastType } from '../enums/ToastType';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +13,12 @@ export class ToastService {
     return this.toasts;
   }
 
-  addToast(addingToast: IToast): void {
-    this.toasts.unshift(addingToast);
+  addToast(toastType: ToastType, toastText: string): void {
+    const toast: IToast = { id: Date.now(), type: toastType, text: toastText };
+    this.toasts = [toast, ...this.toasts];
 
     setTimeout(() => {
-      this.closeToast(addingToast);
+      this.closeToast(toast);
     }, 5000);
   }
 

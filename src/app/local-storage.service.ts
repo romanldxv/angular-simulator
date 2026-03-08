@@ -9,8 +9,9 @@ export class LocalStorageService {
     localStorage.setItem(itemKey, JSON.stringify(value));
   }
 
-  getItem<T>(itemKey: string): T {
-    return JSON.parse(localStorage.getItem(itemKey) ?? "Ключ не найден");
+  getItem<T>(itemKey: string): T | null {
+    const item = localStorage.getItem(itemKey);
+    return item ? JSON.parse(item) : null;
   }
 
   removeItem(itemKey: string): void {

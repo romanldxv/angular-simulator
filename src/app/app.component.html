@@ -2,14 +2,14 @@
   <div class="loading-container">
     <div class="loading-container-wrapper">
       <p class="fs-24 bold">Загружаем...</p>
-      <img class="loading-icon" src="/icons/ic-loading.svg" alt="loading icon">
+      <img class="loading-icon" src="/icons/loading.svg" alt="loading icon">
     </div>
   </div>
 } @else {
   <header class="header">
     <div class="header-wrapper container">
       <div class="company-logo">
-        <img src="/icons/ic-company.svg" alt="company logo" width="137">
+        <img src="/icons/company.svg" alt="company logo" width="137">
         <span class="company-name">{{ companyName }}</span>
       </div>
       <nav class="navigation">
@@ -112,7 +112,7 @@
       <div class="live-input-block">
         <div class="live-input-container">
           <input type="text" class="live-input" id="live-input" [(ngModel)]="liveInputText" placeholder="live input">
-          <img class="live-input-icon" src="/icons/ic-arrow-down.svg" alt="arrow right">
+          <img class="live-input-icon" src="/icons/arrow-down.svg" alt="arrow right">
         </div>
         <p class="live-text">{{ liveInputText }}</p>
       </div>
@@ -122,8 +122,8 @@
   <section class="tour-program-container bg-white">
     <div class="tour-program container">
       <div class="content-images">
-        <img class="forward-img" src="/images/tour-program/forward.png" alt="tour program forward">
-        <img class="rearward-img" src="/images/tour-program/rearward.png" alt="tour program rearward">
+        <img class="forward-img" src="/images/tour-program/house-near-mountains.png" alt="tour program forward">
+        <img class="rearward-img" src="/images/tour-program/snowy-mountain.png" alt="tour program rearward">
       </div>
       <div class="content-text">
         <p class="super-title fs-24">о нашем походе</p>
@@ -154,10 +154,10 @@
         <button class="company-offer-btn" id="program-price-btn" (click)="showToast(toastType.INFO, 'Стоимость программ будет добавлена позже.')">Стоимость программ</button>
       </div>
       <div class="content-images">
-        <img src="/images/company-offer/left-top.png" alt="company offer left top" width="250">
-        <img src="/images/company-offer/right-top.png" alt="company offer right top" width="250">
-        <img src="/images/company-offer/left-bottom.png" alt="company offer left bottom" width="250">
-        <img src="/images/company-offer/right-bottom.png" alt="company offer right bottom" width="250">
+        <img src="/images/company-offer/near-lake.png" alt="near lake" width="250">
+        <img src="/images/company-offer/walking-in-mountain.png" alt="walking in mountain" width="250">
+        <img src="/images/company-offer/snow-trip.png" alt="snow trip" width="250">
+        <img src="/images/company-offer/near-river.png" alt="near river" width="250">
       </div>
     </div>
   </section>
@@ -173,7 +173,7 @@
           <img [src]="'/images/popular-directions/' + direction.imageName + '.png'">
           <div class="direction-rating">
             <div class="rating-wrapper">
-              <img src="/icons/ic-rating-star.svg">
+              <img src="/icons/rating-star.svg">
               <p class="rating-value fs-14 bold">{{ direction.rating | number: "1.1-1" }}</p>
             </div>
           </div>
@@ -228,13 +228,13 @@
 
 <ng-template #toastTemplate let-showingToast="showingToast">
   <div class="toast-container">
-    <img src="/icons/ic-message.svg">
+    <img src="/icons/message.svg">
     <div>
       <p class="fs-16 bold lh-20px">{{ showingToast.type }}</p>
       <p class="fs-14 lh-20px">{{ showingToast.text }}</p>
     </div>
     <button class="close-btn" id="close-message-btn" (click)="closeMessage(showingToast)">
-      <img src="/icons/ic-close.svg">
+      <img src="/icons/close.svg">
     </button>
   </div>
 </ng-template>

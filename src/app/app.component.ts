@@ -25,6 +25,7 @@ export class AppComponent {
 
   toastService: ToastService = inject(ToastService);
   localStorageService: LocalStorageService = inject(LocalStorageService);
+  
   companyName: string = 'румтибет';
   currentTime: string = new Date().toLocaleString();
   isLoadingPage: boolean = true;

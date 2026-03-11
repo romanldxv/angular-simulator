@@ -1,0 +1,111 @@
+@import '../../assets/mixins';
+
+.header {
+  * {
+    color: var(--light-gray-color);
+  }
+
+  height: 100px;
+  margin: 0 auto;
+  background-color: #18121E80;
+  box-shadow: 0px 2px 4px 0px #00000040;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  &-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .company-logo {
+    display: flex;
+    flex-direction: column;
+
+    .company-name {
+      text-transform: uppercase;
+      letter-spacing: 7px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 9px;
+    }
+  }
+
+  .navigation {
+    display: flex;
+    align-items: center;
+
+    &-list {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+
+      a {
+        text-decoration: none;
+        color: var(--light-gray-color);
+        cursor: pointer;
+      }
+
+      .active-link {
+        color: var(--yellow-color);
+        text-decoration: underline;
+      }
+    }
+
+    .consultation-btn {
+      width: 157px;
+      height: 44px;
+      margin-left: 49px;
+      background-color: var(--light-gray-color);
+      color: var(--secondary-color);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 1.2%;
+    }
+  }
+
+  .interactive-container {
+    width: 375px;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    margin-top: 90px;
+
+    &-text {
+      width: 178px;
+      display: flex;
+      justify-content: end;
+      font-weight: 600;
+
+      .clicker {
+        width: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &-btn {
+          width: 20px;
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+
+          &:disabled {
+            color: #c0c0c0;
+            cursor: default;
+          }
+        }
+      }
+    }
+
+    &-btn {
+      width: 157px;
+      height: 44px;
+      @include default-btn;
+    }
+  }
+}

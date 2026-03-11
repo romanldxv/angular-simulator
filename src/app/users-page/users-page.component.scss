@@ -1,0 +1,11 @@
+.users-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-color: #000000;
+
+  p {
+    color: var(--white-color);
+  }
+}

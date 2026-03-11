@@ -5,6 +5,6 @@ import { UsersPageComponent } from './users-page/users-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'users-page', component: UsersPageComponent },
-  { path: '**', component: NotFoundPageComponent },
+  { path: 'users', component: UsersPageComponent },
+  { path: '**', component: NotFoundPageComponent }
 ];

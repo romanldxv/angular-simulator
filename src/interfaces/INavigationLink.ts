@@ -1,4 +1,4 @@
-export interface INavigationLinks {
+export interface INavigationLink {
   id: number;
   title: string;
   routerLink: string;

@@ -6,15 +6,15 @@ import { ToastService } from '../toast.service';
 
 
 @Component({
-  selector: 'app-message',
+  selector: 'app-toast',
   imports: [NgTemplateOutlet],
-  templateUrl: './message.component.html',
-  styleUrl: './message.component.scss',
+  templateUrl: './toast.component.html',
+  styleUrl: './toast.component.scss',
 })
-export class MessageComponent {
-  
-  toastService: ToastService = inject(ToastService);
+export class ToastComponent {
 
+  toastService: ToastService = inject(ToastService);
+  
   toastType: typeof ToastType = ToastType;
 
   closeMessage(message: IToast): void {

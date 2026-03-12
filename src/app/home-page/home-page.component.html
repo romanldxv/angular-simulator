@@ -171,14 +171,9 @@
     <h2 class="lh-120 fs-32 extra-bold">Делимся впечатлениями</h2>
   </div>
   <div class="gallery container">
-    <img src="/images/gallery/balloons.png">
-    <img src="/images/gallery/white-map.png">
-    <img src="/images/gallery/coast.png">
-    <img src="/images/gallery/boats-on-coast.png">
-    <img src="/images/gallery/ravine.png">
-    <img src="/images/gallery/old-map.png">
+    @for (galleryPhoto of galleryPhotos; track galleryPhoto.id) {
+      <img [src]="'/images/gallery/' + galleryPhoto.name + '.png'">
+    }
   </div>
   <button class="gallery-btn fs-16 semi-bold lh-20px" id="to-company-pinterest-btn">Наш pinterest</button>
 </section>
-
-<app-message></app-message>

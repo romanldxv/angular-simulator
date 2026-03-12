@@ -6,11 +6,12 @@ import { LocalStorageService } from './local-storage.service';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
+import { ToastComponent } from "./toast/toast.component";
 import './training';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [FormsModule, RouterOutlet, HeaderComponent, FooterComponent, ToastComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: []

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ToastService } from '../toast.service';
-import { INavigationLinks } from '../../interfaces/INavigationLinks';
+import { INavigationLink } from '../../interfaces/INavigationLink';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
@@ -18,7 +18,7 @@ export class HeaderComponent {
   currentWidget: 'clicker' | 'date' = 'date';
   clickerCount: number = 0;
 
-  navigationLinks: INavigationLinks[] = [
+  navigationLinks: INavigationLink[] = [
     { id: 1, title: "Главная", routerLink: "", testingId: "main-ref" },
     { id: 2, title: "Пользователи", routerLink: "users", testingId: "users-ref" }
   ];

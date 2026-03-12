@@ -6,13 +6,13 @@ import { ITourParticipant } from '../../interfaces/ITourParticipant';
 import { IDirection } from '../../interfaces/IDirection';
 import { IAdvatage } from '../../interfaces/IAdvantage';
 import { ITravelBlog } from '../../interfaces/ITravelBlog';
-import { MessageComponent } from "../message/message.component";
 import { ToastService } from '../toast.service';
+import { IPhoto } from '../../interfaces/IPhoto';
 
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule, DecimalPipe, MessageComponent],
+  imports: [FormsModule, DecimalPipe],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
@@ -116,6 +116,15 @@ export class HomePageComponent {
       date: '01/04/2023',
       imageName: 'india'
     }
+  ];
+
+  galleryPhotos: IPhoto[] = [
+    { id: 1, name: "balloons" },
+    { id: 2, name: "white-map" },
+    { id: 3, name: "coast" },
+    { id: 4, name: "boats-on-coast" },
+    { id: 5, name: "ravine" },
+    { id: 6, name: "old-map" }
   ];
 
 }

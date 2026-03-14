@@ -1,0 +1,40 @@
+<header class="header">
+  <div class="header-wrapper container">
+    <div class="company-logo">
+      <img src="/icons/company.svg" alt="company logo" width="137">
+      <span class="company-name">{{ companyName }}</span>
+    </div>
+    <nav class="navigation">
+      <ul class="navigation-list">
+        @for(navigationLink of navigationLinks; track navigationLink.id) {
+          <li>
+            <a
+              class="navigation-list-item"
+              [id]="navigationLink.testingId"
+              [routerLink]="navigationLink.routerLink"
+              routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              {{ navigationLink.title }}
+            </a>
+          </li>
+        }
+      </ul>
+      <button class="consultation-btn fs-16" id="consultation-btn">Консультация</button>
+    </nav>
+    <div class="interactive-container">
+      <div class="interactive-container-text">
+        @if (currentWidget === 'clicker') {
+          <div class="clicker">
+            <button class="clicker-btn" id="increase-clicker-btn" (click)="increaseCounter()">+</button>
+            <p>{{ clickerCount }}</p>
+            <button class="clicker-btn" id="decrease-clicker-btn" (click)="decreaseCounter()" [disabled]="clickerCount == 0">-</button>
+          </div>
+        } @else {
+          <p>{{ currentTime }}</p>
+        }
+      </div>
+      <button class="interactive-container-btn fs-16" id="toggle-clicker-btn" (click)="toggleWidget(currentWidget === 'clicker' ? 'date' : 'clicker')">{{ currentWidget === 'clicker' ? 'Показать таймер' : 'Показать кликер' }}</button>
+    </div>
+  </div>
+</header>

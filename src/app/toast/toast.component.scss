@@ -1,0 +1,33 @@
+.toasts-container {
+  position: fixed;
+  top: 20px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.toast-container {
+  width: 350px;
+  min-height: 70px;
+  background-color: #0F172AD9;
+  border: 1px solid #FFFFFF;
+  border-radius: 10px;
+  padding: 15px;
+  position: relative;
+  display: flex;
+  gap: 15px;
+
+  * {
+    color: #E8E9EB;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}

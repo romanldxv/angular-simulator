@@ -43,11 +43,19 @@
   font-size: 24px;
 }
 
+.fs-26 {
+  font-size: 26px;
+}
+
 .fs-32 {
   font-size: 32px;
 }
 
-.lg-20px {
+.lh-18px {
+  line-height: 18px;
+}
+
+.lh-20px {
   line-height: 20px;
 }
 
@@ -64,7 +72,7 @@
 }
 
 .bg-white {
-  background-color: #FFF;
+  background-color: #FFFFFF;
 }
 
 .bg-gray {
@@ -77,4 +85,5 @@
   --light-gray-color: #FDFDFD;
   --gray-color: #F3F5F4;
   --yellow-color: #F2BE22;
+  --white-color: #FFFFFF;
 }

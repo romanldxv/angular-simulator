@@ -58,9 +58,7 @@
       width: 157px;
       height: 44px;
       margin-left: 49px;
-      color: var(--secondary-color);
-      background-color: var(--light-gray-color);
-      @include default-btn;
+      @include header-btn;
     }
   }
 
@@ -74,11 +72,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 45px;
+      gap: 40px;
     }
 
     &-text {
-      width: 178px;
+      min-width: 178px;
       display: flex;
       justify-content: end;
       font-weight: 600;
@@ -106,9 +104,7 @@
     &-btn {
       width: 157px;
       height: 44px;
-      color: var(--secondary-color);
-      background-color: var(--light-gray-color);
-      @include default-btn;
+      @include header-btn;
     }
   }
 }

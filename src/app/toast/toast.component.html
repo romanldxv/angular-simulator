@@ -1,5 +1,5 @@
 <div class="toasts-container">
-  @for (toast of toastService.getToasts(); track toast.id) {
+  @for (toast of showingToasts$ | async; track $index) {
     <ng-container [ngTemplateOutlet]="toastTemplate" [ngTemplateOutletContext]="{ showingToast: toast }"></ng-container>
   }
 </div>

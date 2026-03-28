@@ -1,14 +1,6 @@
-@if (isLoadingPage) {
-  <div class="loading-container">
-    <div class="loading-container-wrapper">
-      <p class="fs-24 bold">Загружаем...</p>
-      <img class="loading-icon" src="/icons/loading.svg" alt="loading icon">
-    </div>
-  </div>
-} @else {
-  <app-header></app-header>
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
 
-  <app-toast></app-toast>
-}
+<app-loader></app-loader>
+<app-toast></app-toast>

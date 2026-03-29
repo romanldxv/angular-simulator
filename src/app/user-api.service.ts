@@ -1,10 +1,15 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserApiService {
   
-  
+  http: HttpClient = inject(HttpClient);
+
+  getUsers() {
+    this.http.get("https://jsonplaceholder.typicode.com/users");
+  }
 
 }

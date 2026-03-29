@@ -5,4 +5,16 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
   
+  setUsers() {
+
+  }
+
+  getUsers() {
+
+  }
+
+  loadUsers(): void {
+    
+  }
+
 }

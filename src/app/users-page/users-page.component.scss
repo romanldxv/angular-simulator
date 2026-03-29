@@ -1,9 +1,9 @@
 .users-container {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 1470px;
   background-color: var(--gray-color);
+  padding-top: 84px;
 
   .user-card {
     width: 440px;
@@ -50,10 +50,11 @@
           line-height: 13.8px;
           letter-spacing: 1.2px;
           text-transform: uppercase;
+          margin-right: 12px;
         }
 
         .separator {
-          width: 289px;
+          flex-grow: 1;
           height: 1px;
           background-color: #E2E8F0;
         }
@@ -74,6 +75,30 @@
         &-item {
           display: flex;
           justify-content: space-between;
+
+          .coordinates-container {
+            display: flex;
+            gap: 4px;
+
+            .coordinate {
+              //width: 77px;
+              height: 20px;
+              text-align: center;
+              border: 1px solid #E2E8F0;
+              background-color: #F4F7F5;
+              font-size: 12px;
+              line-height: 20px;
+              padding-inline: 6px;
+            }
+          }
+
+          .mission {
+            font-size: 13px;
+            font-style: italic;
+            max-width: 189px;
+            text-align: right;
+            color: #667C7C;
+          }
 
           .light-orange {
             color: var(--light-orange-color);

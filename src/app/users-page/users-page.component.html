@@ -1,75 +1,77 @@
 <div class="users-container">
-  <div class="user-card bg-white">
-    <div class="user-name-container">
-      <h3 class="user-name fs-26 extra-bold">Oliver Sutherland</h3>
-      <p class="username bold">@ollie_north</p>
-    </div>
-    <div class="user-information-container">
-      <div class="title-container">
-        <h4 class="title extra-bold">Контакты</h4>
-        <div class="separator"></div>
+  @for (user of users$ | async; track $index) {
+    <div class="user-card bg-white">
+      <div class="user-name-container">
+        <h3 class="user-name fs-26 extra-bold">{{ user.name }}</h3>
+        <p class="username bold">{{ user.username }}</p>
       </div>
-      <div class="data-list">
-        <div class="data-list-item">
-          <h5 class="subtitle fs-14 ">Эл. почта:</h5>
-          <p class="light-orange fs-14 bold">sutherland.oliver@gmail.com</p>
+      <div class="user-information-container">
+        <div class="title-container">
+          <h4 class="title extra-bold">Контакты</h4>
+          <div class="separator"></div>
         </div>
-        <div class="data-list-item">
-          <h5 class="subtitle fs-14 ">Телефон:</h5>
-          <p class="fs-14 bold">+14165550198</p>
+        <div class="data-list">
+          <div class="data-list-item">
+            <h5 class="subtitle fs-14 ">Эл. почта:</h5>
+            <p class="light-orange fs-14 bold">{{ user.email }}</p>
+          </div>
+          <div class="data-list-item">
+            <h5 class="subtitle fs-14 ">Телефон:</h5>
+            <p class="fs-14 bold">{{ user.phone }}</p>
+          </div>
+          <div class="data-list-item">
+            <h5 class="subtitle fs-14 ">Веб-сайт:</h5>
+            <p class="light-orange fs-14 bold">{{ user.website }}</p>
+          </div>
         </div>
-        <div class="data-list-item">
-          <h5 class="subtitle fs-14 ">Веб-сайт:</h5>
-          <p class="light-orange fs-14 bold">sutherland-dev.com</p>
+        <div class="title-container">
+          <h4 class="title extra-bold">Адрес Проживания</h4>
+          <div class="separator"></div>
         </div>
-      </div>
-      <div class="title-container">
-        <h4 class="title extra-bold">Адрес Проживания</h4>
-        <div class="separator"></div>
-      </div>
-      <div class="data-list">
-        <div class="data-list-item">
-          <h5 class="subtitle fs-14 ">Город:</h5>
-          <p class="fs-14 bold">Toronto</p>
+        <div class="data-list">
+          <div class="data-list-item">
+            <h5 class="subtitle fs-14 ">Город:</h5>
+            <p class="fs-14 bold">{{ user.address.city }}</p>
+          </div>
+          <div class="data-list-item">
+            <h5 class="subtitle fs-14 ">Улица:</h5>
+            <p class="fs-14 bold">{{ user.address.street }}</p>
+          </div>
+          <div class="data-list-item">
+            <h5 class="subtitle fs-14 ">Офис:</h5>
+            <p class="fs-14 bold">{{ user.address.suite }}</p>
+          </div>
+          <div class="data-list-item">
+            <h5 class="subtitle fs-14 ">Индекс:</h5>
+            <p class="fs-14 bold">{{ user.address.zipcode }}</p>
+          </div>
+          <div class="data-list-item">
+            <h5 class="subtitle fs-14 ">Координаты:</h5>
+            <div class="coordinates-container">
+              <div class="coordinate bold">{{ user.address.geo.lat }}</div>
+              <div class="coordinate bold">{{ user.address.geo.lng }}</div>
+            </div>
+          </div>
         </div>
-        <div class="data-list-item">
-          <h5 class="subtitle fs-14 ">Улица:</h5>
-          <p class="fs-14 bold">Bay Street 250</p>
+        <div class="title-container">
+          <h4 class="title extra-bold">Место работы</h4>
+          <div class="separator"></div>
         </div>
-        <div class="data-list-item">
-          <h5 class="subtitle fs-14 ">Офис:</h5>
-          <p class="fs-14 bold">Suite 1210</p>
-        </div>
-        <div class="data-list-item">
-          <h5 class="subtitle fs-14 ">Индекс:</h5>
-          <p class="fs-14 bold">M5H2N2</p>
-        </div>
-        <div class="data-list-item">
-          <h5 class="subtitle fs-14 ">Координаты:</h5>
-          <div class="coordinates-container">
-            <div class="coordinate bold">43.651070</div>
-            <div class="coordinate bold">-43.651070</div>
+        <div class="data-list">
+          <div class="data-list-item">
+            <h5 class="subtitle fs-14 ">Компания:</h5>
+            <p class="fs-14 bold">{{ user.company.name }}</p>
+          </div>
+          <div class="data-list-item">
+            <h5 class="subtitle fs-14 ">Миссия:</h5>
+            <p class="mission bold">{{ user.company.catchPhrase }}</p>
+          </div>
+          <div class="data-list-item">
+            <h5 class="subtitle fs-14 ">Специализация:</h5>
+            <p class="fs-14 bold">{{ user.company.bs }}</p>
           </div>
         </div>
       </div>
-      <div class="title-container">
-        <h4 class="title extra-bold">Место работы</h4>
-        <div class="separator"></div>
-      </div>
-      <div class="data-list">
-        <div class="data-list-item">
-          <h5 class="subtitle fs-14 ">Компания:</h5>
-          <p class="fs-14 bold">Borealis Systems</p>
-        </div>
-        <div class="data-list-item">
-          <h5 class="subtitle fs-14 ">Миссия:</h5>
-          <p class="mission bold">«De-centralized cross-platform security kernel»</p>
-        </div>
-        <div class="data-list-item">
-          <h5 class="subtitle fs-14 ">Специализация:</h5>
-          <p class="fs-14 bold">scale-up vertical content-delivery</p>
-        </div>
-      </div>
     </div>
-  </div>
+  }
 </div>

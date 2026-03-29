@@ -1,9 +1,13 @@
 .users-container {
   display: flex;
   justify-content: center;
-  height: 1470px;
+  flex-wrap: wrap;
+  gap: 70px;
+  row-gap: 50px;
+  min-height: 1470px;
   background-color: var(--gray-color);
   padding-top: 84px;
+  padding-bottom: 120px;
 
   .user-card {
     width: 440px;

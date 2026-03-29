@@ -9,8 +9,8 @@ export interface IUser {
     city: string;
     zipcode: string;
     geo: {
-      "lat": number;
-      "lng": number;
+      lat: number;
+      lng: number;
     };
   };
   phone: string;

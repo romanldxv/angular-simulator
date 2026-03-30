@@ -13,6 +13,6 @@ export class LoaderComponent {
 
   loaderService: LoaderService = inject(LoaderService);
 
-  loaderStatus: Observable<boolean> = this.loaderService.isLoading$;
+  isLoading$: Observable<boolean> = this.loaderService.isLoading$;
 
 }

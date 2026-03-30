@@ -16,7 +16,7 @@ export class ToastComponent {
   toastService: ToastService = inject(ToastService);
   
   toastType: typeof ToastType = ToastType;
-  showingToasts$: Observable<IToast[]> = this.toastService.toasts$;
+  toasts$: Observable<IToast[]> = this.toastService.toasts$;
 
   closeMessage(message: IToast): void {
     this.toastService.closeToast(message);

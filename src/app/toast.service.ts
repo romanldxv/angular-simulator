@@ -37,11 +37,12 @@ export class ToastService {
   }
 
   private addToast(toastType: ToastType, toastText: string): void {
-    const toast: IToast = { id: Date.now(), type: toastType, text: toastText };
-    this.toastsSubject.next([toast, ...this.getToasts()]);
+    const newToast: IToast = { id: Date.now(), type: toastType, text: toastText };
+    const currentToasts: IToast[] = this.getToasts();
+    this.toastsSubject.next([newToast, ...currentToasts]);
 
     setTimeout(() => {
-      this.closeToast(toast);
+      this.closeToast(newToast);
     }, 5000);
   }
   

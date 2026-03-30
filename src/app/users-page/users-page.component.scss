@@ -112,3 +112,14 @@
     }
   }
 }
+
+.empty-users-container {
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #B15757;
+  padding-inline: 30px;
+  color: var(--white-color);
+  border-radius: 20px;
+}

@@ -14,7 +14,7 @@ export class UsersPageComponent {
 
   private userService: UserService = inject(UserService);
 
-  users$: Observable<IUser[]> = this.userService.loadUsers();
+  users$: Observable<IUser[]> = this.userService.users$;
 
   constructor() {
     this.userService.loadUsers()

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, finalize, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, delay, finalize, Observable, of } from 'rxjs';
 import { UserApiService } from './user-api.service';
 import { IUser } from '../interfaces/IUser';
 import { LoaderService } from './loader.service';
@@ -17,7 +17,7 @@ export class UserService {
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
 
-  setUsers(newUsers: IUser[]) {
+  setUsers(newUsers: IUser[]): void {
     this.usersSubject.next(newUsers);
   }
 
@@ -33,7 +33,6 @@ export class UserService {
           this.toastService.showError('Не удалось загрузить пользователей.');
           return of([]);
         }),
-  
         finalize(() => {
           this.loaderService.hideLoader();
         })

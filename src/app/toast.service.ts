@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
 import { IToast } from '../interfaces/IToast';
 import { ToastType } from '../enums/ToastType';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
   
-  private toasts: IToast[] = [];
+  private toastsSubject: BehaviorSubject<IToast[]> = new BehaviorSubject<IToast[]>([]);
+  toasts$: Observable<IToast[]> = this.toastsSubject.asObservable();
 
   getToasts(): IToast[] {
-    return this.toasts;
+    return this.toastsSubject.getValue();
   }
 
   closeToast(closingToast: IToast): void {
-    this.toasts = this.toasts.filter((toast: IToast) => toast.id !== closingToast.id);
+    const newToasts: IToast[] = this.toastsSubject.getValue().filter((toast: IToast) => toast.id !== closingToast.id);
+    this.toastsSubject.next(newToasts);
   }
 
   showWarn(toastText: string) {
@@ -34,11 +37,12 @@ export class ToastService {
   }
 
   private addToast(toastType: ToastType, toastText: string): void {
-    const toast: IToast = { id: Date.now(), type: toastType, text: toastText };
-    this.toasts = [toast, ...this.toasts];
+    const newToast: IToast = { id: Date.now(), type: toastType, text: toastText };
+    const currentToasts: IToast[] = this.getToasts();
+    this.toastsSubject.next([newToast, ...currentToasts]);
 
     setTimeout(() => {
-      this.closeToast(toast);
+      this.closeToast(newToast);
     }, 5000);
   }
   

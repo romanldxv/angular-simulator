@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ToastType } from '../../enums/ToastType';
 import { IToast } from '../../interfaces/IToast';
 import { ToastService } from '../toast.service';
-
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-toast',
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, AsyncPipe],
   templateUrl: './toast.component.html',
   styleUrl: './toast.component.scss',
 })
@@ -16,6 +16,7 @@ export class ToastComponent {
   toastService: ToastService = inject(ToastService);
   
   toastType: typeof ToastType = ToastType;
+  toasts$: Observable<IToast[]> = this.toastService.toasts$;
 
   closeMessage(message: IToast): void {
     this.toastService.closeToast(message);

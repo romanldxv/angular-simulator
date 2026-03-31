@@ -1,3 +1,4 @@
+import './training';
 import { Component, inject } from '@angular/core';
 import { Color } from '../enums/Color';
 import { Collection } from './collection';
@@ -7,11 +8,11 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./header/header.component";
 import { FooterComponent } from "./footer/footer.component";
 import { ToastComponent } from "./toast/toast.component";
-import './training';
+import { LoaderComponent } from "./loader/loader.component";
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, RouterOutlet, HeaderComponent, FooterComponent, ToastComponent],
+  imports: [FormsModule, RouterOutlet, HeaderComponent, FooterComponent, ToastComponent, LoaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: []
@@ -20,7 +21,6 @@ export class AppComponent {
 
   localStorageService: LocalStorageService = inject(LocalStorageService);
 
-  isLoadingPage: boolean = true;
   readonly LAST_VISIT_DATE_KEY: string = 'last-visit-date';
   readonly VISIT_COUNT_KEY: string = 'visit-count';
   private products: string[] = ['apple', 'carrot', 'milk', 'bread'];
@@ -31,10 +31,6 @@ export class AppComponent {
   constructor() {
     this.saveLastVisitDate();
     this.saveVisitCount();
-
-    setTimeout(() => {
-      this.isLoadingPage = false;
-    }, 2000);
   }
 
   private isMainColor(color: Color): boolean {

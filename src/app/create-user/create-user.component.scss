@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  
+  .title {
+    text-align: center;
+  }
+  
+  .form-wrapper {
+    display: flex;
+    justify-content: center;
+  
+    .create-user-form {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      width: 400px;
+    
+      .form-field {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+    
+        input {
+          width: 200px;
+        }
+      }
+    }
+  }
+  
+  .create-user-btn {
+    margin-top: 30px;
+    width: 200px;
+    height: 30px;
+    margin-inline: auto;
+  }
+}

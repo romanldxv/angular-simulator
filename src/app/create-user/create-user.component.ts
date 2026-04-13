@@ -38,7 +38,8 @@ export class CreateUserComponent {
 
   onSubmit(): void {
     Object.values(this.createUserForm.controls).forEach((control: AbstractControl) => this.prepareForm(control));
-    const newUser: IUser = this.createUserForm.value;
+    const newUser: IUser = { id: Date.now(), ...this.createUserForm.value };
+    this.createUserForm.reset();
 
     this.userChange.emit(newUser);
   }

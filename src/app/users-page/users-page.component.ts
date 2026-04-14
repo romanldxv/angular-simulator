@@ -10,7 +10,7 @@ import { UsersFilterComponent } from "../users-filter/users-filter.component";
 
 @Component({
   selector: 'app-users-page',
-  imports: [AsyncPipe, UserCardComponent, CreateUserComponent, ReactiveFormsModule, UsersFilterComponent],
+  imports: [AsyncPipe, UserCardComponent, CreateUserComponent, UsersFilterComponent],
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
 })

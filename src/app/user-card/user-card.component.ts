@@ -16,4 +16,8 @@ export class UserCardComponent {
     this.deleteUserChange.emit(userId);
   }
 
+  fillEmptyField(field: string): string {
+    return field == '' ? 'Неизвестно' : field;
+  }
+
 }

@@ -1,15 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { Observable, startWith, tap, map, combineLatestWith } from 'rxjs';
+import { Observable, startWith, tap, map, combineLatestWith, BehaviorSubject } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { IUser } from '../../interfaces/IUser';
 import { UserCardComponent } from "../user-card/user-card.component";
 import { CreateUserComponent } from "../create-user/create-user.component";
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { UsersFilterComponent } from "../users-filter/users-filter.component";
 
 @Component({
   selector: 'app-users-page',
-  imports: [AsyncPipe, UserCardComponent, CreateUserComponent, ReactiveFormsModule],
+  imports: [AsyncPipe, UserCardComponent, CreateUserComponent, ReactiveFormsModule, UsersFilterComponent],
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
 })
@@ -17,11 +18,11 @@ export class UsersPageComponent implements OnInit {
 
   private userService: UserService = inject(UserService);
 
-  users$: Observable<IUser[]> = this.userService.users$;
   createdUser!: IUser;
-  searchUsersInput: FormControl<string> = new FormControl('', { nonNullable: true });
-  filteredUsers$: Observable<IUser[]> = this.searchUsersInput.valueChanges.pipe(
-    startWith(''),
+  users$: Observable<IUser[]> = this.userService.users$;
+  private searchingUsersSubject: BehaviorSubject<string> = new BehaviorSubject('');
+  searchedUsers$: Observable<string> = this.searchingUsersSubject.asObservable();
+  filteredUsers$: Observable<IUser[]> = this.searchedUsers$.pipe(
     combineLatestWith(this.users$),
     map(([term, users]: [string, IUser[]]) => {
       const filteredUsers: IUser[] = users.filter((user: IUser) => user.name.toLowerCase().startsWith(term.toLowerCase()));
@@ -30,7 +31,7 @@ export class UsersPageComponent implements OnInit {
   );
 
   ngOnInit(): void {
-    this.userService.loadUsers(false)
+    this.userService.loadUsers()
       .pipe(
         tap((users: IUser[]) => this.userService.setUsers(users))
       ).subscribe();
@@ -40,15 +41,12 @@ export class UsersPageComponent implements OnInit {
     this.userService.addUser(newUser);
   }
 
-  deleteUser(deletedUser: IUser): void {
-    this.userService.deleteUser(deletedUser);
+  deleteUser(userId: number): void {
+    this.userService.deleteUser(userId);
   }
 
-  refreshUsers(): void {
-    this.userService.loadUsers(true)
-    .pipe(
-      tap((users: IUser[]) => this.userService.setUsers(users))
-    ).subscribe();;
+  updateSearchingUsers(text: string): void {
+    this.searchingUsersSubject.next(text);
   }
 
 }

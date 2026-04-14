@@ -29,17 +29,13 @@ export class UserService {
     return this.usersSubject.getValue();
   }
 
-  loadUsers(isRefresh: boolean): Observable<IUser[]> {
-    this.loaderService.showLoader();
+  loadUsers(): Observable<IUser[]> {
     const localStorageUsers: IUser[] | null = this.localStorageService.getItem(this.USERS_KEY);
-    if (localStorageUsers && !isRefresh) {
-      return of(localStorageUsers).pipe(
-        finalize(() => {
-          this.loaderService.hideLoader();
-        })
-      );
+    if (localStorageUsers && localStorageUsers.length !== 0) {
+      return of(localStorageUsers);
     }
-
+    
+    this.loaderService.showLoader();
     return this.userApiService.getUsers()
       .pipe(
         tap((users: IUser[]) => this.saveUsersToStorage(users)),
@@ -58,8 +54,8 @@ export class UserService {
     this.setUsers(updatedUsers);
   }
 
-  deleteUser(deletedUser: IUser): void {
-    const updatedUsers: IUser[] = this.getUsers().filter((user: IUser) => user.id !== deletedUser.id);
+  deleteUser(userId: number): void {
+    const updatedUsers: IUser[] = this.getUsers().filter((user: IUser) => user.id !== userId);
     this.setUsers(updatedUsers);
   }
 

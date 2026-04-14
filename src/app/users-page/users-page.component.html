@@ -1,13 +1,12 @@
-<h1 class="title ">Список пользователей</h1>
-<input type="text" [formControl]="searchUsersInput">
-<app-create-user (userChange)="createUser($event)"></app-create-user>
-<div class="users-container">
-  @for (user of filteredUsers$ | async; track $index) {
-    <app-user-card [user]="user" (deleteUserChange)="deleteUser($event)"></app-user-card>
-  } @empty {
-    <div class="empty-users-container fs-26 extra-bold">Нет пользователей для отображения</div>
-  }
+<div class="wrapper">
+  <h1 class="title ">Список пользователей</h1>
+  <app-users-filter class="search-users-input" (searchUsersChange)="updateSearchingUsers($event)"></app-users-filter>
+  <app-create-user (createUserChange)="createUser($event)"></app-create-user>
+  <div class="users-container">
+    @for (user of filteredUsers$ | async; track $index) {
+      <app-user-card [user]="user" (deleteUserChange)="deleteUser($event)"></app-user-card>
+    } @empty {
+      <div class="empty-users-container fs-26 extra-bold">Нет пользователей для отображения</div>
+    }
+  </div>
 </div>
-<button class="refresh-users-btn" id="refresh-users-btn">
-  <img src="/icons/update-users.svg" width="48" height="48" (click)="refreshUsers()">
-</button>

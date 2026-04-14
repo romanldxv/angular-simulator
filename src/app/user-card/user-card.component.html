@@ -19,7 +19,7 @@
       </div>
       <div class="data-list-item">
         <h5 class="subtitle fs-14 ">Веб-сайт:</h5>
-        <p class="light-orange fs-14 bold">{{ user.website }}</p>
+        <p class="light-orange fs-14 bold">{{ user.website == '' ? 'Неизвестно' : user.website }}</p>
       </div>
     </div>
     <div class="title-container">
@@ -37,7 +37,7 @@
       </div>
       <div class="data-list-item">
         <h5 class="subtitle fs-14 ">Офис:</h5>
-        <p class="fs-14 bold">{{ user.address.suite }}</p>
+        <p class="fs-14 bold">{{ user.address.suite == '' ? 'Неизвестно' : user.address.suite }}</p>
       </div>
       <div class="data-list-item">
         <h5 class="subtitle fs-14 ">Индекс:</h5>
@@ -62,13 +62,13 @@
       </div>
       <div class="data-list-item">
         <h5 class="subtitle fs-14 ">Миссия:</h5>
-        <p class="mission bold">{{ user.company.catchPhrase }}</p>
+        <p class="mission bold">{{ user.company.catchPhrase == '' ? 'Неизвестно' : user.company.catchPhrase }}</p>
       </div>
       <div class="data-list-item">
         <h5 class="subtitle fs-14 ">Специализация:</h5>
-        <p class="fs-14 bold">{{ user.company.bs }}</p>
+        <p class="fs-14 bold">{{ user.company.bs == '' ? 'Неизвестно' : user.company.bs }}</p>
       </div>
     </div>
   </div>
-  <button class="delete-user-btn" id="delete-user-btn" (click)="handleDeleteUser(user)">Удалить</button>
+  <button class="delete-user-btn" id="delete-user-btn" (click)="handleDeleteUser(user.id)">Удалить</button>
 </div>

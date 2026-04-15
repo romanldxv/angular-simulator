@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IUser } from '../../interfaces/IUser';
 
 @Component({
@@ -10,7 +10,7 @@ import { IUser } from '../../interfaces/IUser';
 })
 export class CreateUserComponent {
 
-  @Output() onCreateUser: EventEmitter<IUser> = new EventEmitter<IUser>();
+  @Output() createUser: EventEmitter<IUser> = new EventEmitter<IUser>();
   private fb: FormBuilder = inject(FormBuilder);
 
   createUserForm: FormGroup = this.fb.group({
@@ -39,7 +39,7 @@ export class CreateUserComponent {
   onSubmit(): void {
     const newUser: IUser = { id: Date.now(), ...this.createUserForm.value };
     this.createUserForm.reset();
-    this.onCreateUser.emit(newUser);
+    this.createUser.emit(newUser);
   }
 
 }

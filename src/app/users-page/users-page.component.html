@@ -1,10 +1,10 @@
 <div class="wrapper">
   <h1 class="title ">Список пользователей</h1>
-  <app-users-filter class="search-users-input" (onFilter)="updateFilteredUsers($event)"></app-users-filter>
-  <app-create-user (onCreateUser)="createUser($event)"></app-create-user>
+  <app-users-filter class="search-users-input" (filterUsers)="onFilterUsers($event)"></app-users-filter>
+  <app-create-user (createUser)="onCreateUser($event)"></app-create-user>
   <div class="users-container">
     @for (user of filteredUsers$ | async; track $index) {
-      <app-user-card [user]="user" (onDeleteUser)="deleteUser($event)"></app-user-card>
+      <app-user-card [user]="user" (deleteUser)="onDeleteUser($event)"></app-user-card>
     } @empty {
       <div class="empty-users-container fs-26 extra-bold">Нет пользователей для отображения</div>
     }

@@ -34,15 +34,15 @@ export class UsersPageComponent implements OnInit {
       ).subscribe();
   }
 
-  createUser(newUser: IUser): void {
+  onCreateUser(newUser: IUser): void {
     this.userService.addUser(newUser);
   }
 
-  deleteUser(userId: number): void {
+  onDeleteUser(userId: number): void {
     this.userService.deleteUser(userId);
   }
 
-  updateFilteredUsers(text: string): void {
+  onFilterUsers(text: string): void {
     this.searchingUsersSubject.next(text);
   }
 

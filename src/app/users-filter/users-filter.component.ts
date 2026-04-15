@@ -12,7 +12,7 @@ import { delay, distinctUntilChanged, tap } from 'rxjs';
 export class UsersFilterComponent implements OnInit {
 
   @Output() filterUsers: EventEmitter<string> = new EventEmitter<string>();
-  destroyRef: DestroyRef = inject(DestroyRef)
+  destroyRef: DestroyRef = inject(DestroyRef);
 
   filterControl: FormControl<string> = new FormControl('', { nonNullable: true });
   

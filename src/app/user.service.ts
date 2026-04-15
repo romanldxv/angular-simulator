@@ -18,7 +18,7 @@ export class UserService {
   
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
-  readonly USERS_KEY = 'users';
+  readonly USERS_KEY: string = 'users';
 
   setUsers(newUsers: IUser[]): void {
     this.usersSubject.next(newUsers);
@@ -30,15 +30,14 @@ export class UserService {
   }
 
   loadUsers(): Observable<IUser[]> {
-    const localStorageUsers: IUser[] | null = this.localStorageService.getItem(this.USERS_KEY);
-    if (localStorageUsers && localStorageUsers.length !== 0) {
-      return of(localStorageUsers);
+    const usersFromLocalStorage: IUser[] | null = this.localStorageService.getItem(this.USERS_KEY);
+    if (usersFromLocalStorage && usersFromLocalStorage.length !== 0) {
+      return of(usersFromLocalStorage);
     }
     
     this.loaderService.showLoader();
     return this.userApiService.getUsers()
       .pipe(
-        tap((users: IUser[]) => this.saveUsersToStorage(users)),
         catchError(() => {
           this.toastService.showError('Не удалось загрузить пользователей.');
           return of([]);
@@ -57,10 +56,6 @@ export class UserService {
   deleteUser(userId: number): void {
     const updatedUsers: IUser[] = this.getUsers().filter((user: IUser) => user.id !== userId);
     this.setUsers(updatedUsers);
-  }
-
-  private saveUsersToStorage(savedUsers: IUser[]): void {
-    this.localStorageService.setItem(this.USERS_KEY, savedUsers);
   }
 
 }

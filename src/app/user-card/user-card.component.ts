@@ -10,14 +10,14 @@ import { IUser } from '../../interfaces/IUser';
 export class UserCardComponent {
 
   @Input({ required: true }) user!: IUser;
-  @Output() deleteUserChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onDeleteUser: EventEmitter<number> = new EventEmitter<number>();
 
   handleDeleteUser(userId: number): void {
-    this.deleteUserChange.emit(userId);
+    this.onDeleteUser.emit(userId);
   }
 
   fillEmptyField(field: string): string {
-    return field == '' ? 'Неизвестно' : field;
+    return field || 'Неизвестно';
   }
 
 }

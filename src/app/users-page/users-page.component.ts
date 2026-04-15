@@ -1,11 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { Observable, startWith, tap, map, combineLatestWith, BehaviorSubject } from 'rxjs';
+import { Observable, tap, map, combineLatest, BehaviorSubject } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { IUser } from '../../interfaces/IUser';
 import { UserCardComponent } from "../user-card/user-card.component";
 import { CreateUserComponent } from "../create-user/create-user.component";
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UsersFilterComponent } from "../users-filter/users-filter.component";
 
 @Component({
@@ -18,17 +17,15 @@ export class UsersPageComponent implements OnInit {
 
   private userService: UserService = inject(UserService);
 
-  createdUser!: IUser;
   users$: Observable<IUser[]> = this.userService.users$;
   private searchingUsersSubject: BehaviorSubject<string> = new BehaviorSubject('');
   searchedUsers$: Observable<string> = this.searchingUsersSubject.asObservable();
-  filteredUsers$: Observable<IUser[]> = this.searchedUsers$.pipe(
-    combineLatestWith(this.users$),
-    map(([term, users]: [string, IUser[]]) => {
-      const filteredUsers: IUser[] = users.filter((user: IUser) => user.name.toLowerCase().startsWith(term.toLowerCase()));
-      return filteredUsers;
-    })
-  );
+  filteredUsers$: Observable<IUser[]> = combineLatest([this.users$, this.searchedUsers$])
+    .pipe(
+      map(([users, term]: [IUser[], string]) => {
+        return users.filter((user: IUser) => user.name.toLowerCase().startsWith(term.toLowerCase()));
+      })
+    );
 
   ngOnInit(): void {
     this.userService.loadUsers()
@@ -45,7 +42,7 @@ export class UsersPageComponent implements OnInit {
     this.userService.deleteUser(userId);
   }
 
-  updateSearchingUsers(text: string): void {
+  updateFilteredUsers(text: string): void {
     this.searchingUsersSubject.next(text);
   }
 

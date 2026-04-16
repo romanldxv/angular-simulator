@@ -18,9 +18,8 @@ export class UsersPageComponent implements OnInit {
   private userService: UserService = inject(UserService);
 
   users$: Observable<IUser[]> = this.userService.users$;
-  private searchingUsersSubject: BehaviorSubject<string> = new BehaviorSubject('');
-  searchedUsers$: Observable<string> = this.searchingUsersSubject.asObservable();
-  filteredUsers$: Observable<IUser[]> = combineLatest([this.users$, this.searchedUsers$])
+  private filteredUsersSubject: BehaviorSubject<string> = new BehaviorSubject('');
+  filteredUsers$: Observable<IUser[]> = combineLatest([this.users$, this.filteredUsersSubject])
     .pipe(
       map(([users, term]: [IUser[], string]) => {
         return users.filter((user: IUser) => user.name.toLowerCase().startsWith(term.toLowerCase()));
@@ -43,7 +42,7 @@ export class UsersPageComponent implements OnInit {
   }
 
   onFilterUsers(text: string): void {
-    this.searchingUsersSubject.next(text);
+    this.filteredUsersSubject.next(text);
   }
 
 }

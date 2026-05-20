@@ -7,6 +7,14 @@
       </div>
       <nav class="navigation">
         <ul class="navigation-list">
+
+          <div class="toggle-color-mode">
+            <p-toggleswitch [ngModel]="isDark$ | async" (onChange)="toggleColorMode()">
+              <ng-template #handle let-checked="checked">
+                <fa-icon [icon]="faMoon" [ngClass]="[checked ? 'white-icon' : 'black-icon']"></fa-icon>
+              </ng-template>
+            </p-toggleswitch>
+          </div>
           @for(navigationLink of navigationLinks; track navigationLink.id) {
             <li>
               <a
@@ -37,7 +45,13 @@
             <p>{{ currentTime }}</p>
           }
         </div>
-        <button class="interactive-container-btn default-color-btn fs-16" id="toggle-clicker-btn" (click)="toggleWidget(currentWidget === 'clicker' ? 'date' : 'clicker')">{{ currentWidget === 'clicker' ? 'Показать таймер' : 'Показать кликер' }}</button>
+        <button 
+          class="interactive-container-btn default-color-btn fs-16" 
+          id="toggle-clicker-btn" 
+          (click)="toggleWidget(currentWidget === 'clicker' ? 'date' : 'clicker')"
+        >
+          {{ currentWidget === 'clicker' ? 'Показать таймер' : 'Показать кликер' }}
+        </button>
       </div>
     </div>
   </div>

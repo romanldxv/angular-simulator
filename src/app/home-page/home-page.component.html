@@ -58,14 +58,14 @@
     <div class="live-input-block">
       <div class="live-input-container">
         <input type="text" class="live-input" id="live-input" [(ngModel)]="liveInputText" placeholder="live input">
-        <img class="live-input-icon" src="/icons/arrow-down.svg" alt="arrow right">
+        <fa-icon [icon]="faAngleRight" size="lg" class="white-icon"></fa-icon>
       </div>
       <p class="live-text">{{ liveInputText }}</p>
     </div>
   </div>
 </section>
 
-<section class="tour-program-container bg-white">
+<section class="tour-program-container primary-section-bg">
   <div class="tour-program container">
     <div class="content-images">
       <img class="forward-img" src="/images/tour-program/house-near-mountains.png" alt="tour program forward">
@@ -80,7 +80,7 @@
   </div>
 </section>
 
-<section class="company-offer-container bg-gray">
+<section class="company-offer-container secondary-section-bg">
   <div class="company-offer container">
     <div>
       <p class="super-title fs-24">наше предложение</p>
@@ -89,7 +89,7 @@
       <div class="content-text-advantages">
         @for (advantage of advantages; track advantage.id) {
           <div class="advantage">
-            <img [src]="'/icons/advantages/' + advantage.iconName + '.svg'">
+            <fa-icon [icon]="advantage.iconName" class="{{ advantage.iconClassColor }}" size="2x"></fa-icon>
             <div>
               <h5 class="advantage-title bold">{{ advantage.title }}</h5>
               <p class="advantage-description fs-14">{{ advantage.description }}</p>
@@ -119,7 +119,7 @@
         <img [src]="'/images/popular-directions/' + direction.imageName + '.png'">
         <div class="direction-rating">
           <div class="rating-wrapper">
-            <img src="/icons/rating-star.svg">
+            <fa-icon [icon]="faStar" class="yellow-icon"></fa-icon>
             <p class="rating-value fs-14 bold">{{ direction.rating | number: "1.1-1" }}</p>
           </div>
         </div>

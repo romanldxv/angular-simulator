@@ -4,6 +4,7 @@
   border-top: 4px solid var(--light-orange-color);
   border-radius: 4px;
   box-shadow: 0px 10px 30px 0px #0000000F;
+  background-color: var(--user-card-bg-color);
   position: relative;
 
   * {
@@ -78,7 +79,7 @@
             height: 20px;
             text-align: center;
             border: 1px solid #E2E8F0;
-            background-color: #F4F7F5;
+            background-color: var(--coordinate-bg-color);
             font-size: 12px;
             line-height: 20px;
             padding-inline: 6px;

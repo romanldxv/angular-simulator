@@ -7,10 +7,12 @@ import { IDirection } from '../../interfaces/IDirection';
 import { IAdvatage } from '../../interfaces/IAdvantage';
 import { ITravelBlog } from '../../interfaces/ITravelBlog';
 import { ToastService } from '../toast.service';
+import { faAngleRight, faCompass, faShieldHalved, faStar, faTag, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'app-home-page',
-  imports: [FormsModule, DecimalPipe],
+  imports: [FormsModule, DecimalPipe, FaIconComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
@@ -22,6 +24,11 @@ export class HomePageComponent {
   selectedTourLocation!: string;
   selectedTourDate!: string;
   selectedCountTourParticipants!: number;
+  faStar: IconDefinition = faStar;
+  faAngleRight: IconDefinition = faAngleRight;
+  faCompass: IconDefinition = faCompass;
+  faShieldHalved: IconDefinition = faShieldHalved;
+  faTag: IconDefinition = faTag;
 
   tourLocations: ITourLocation[] = [
     { id: 1, title: 'Плато Лаго-Наки' },
@@ -42,19 +49,22 @@ export class HomePageComponent {
       id: 1,
       title: 'Опытный гид',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      iconName: 'experienced-guide'
+      iconName: faCompass,
+      iconClassColor: 'green-icon'
     },
     {
       id: 2,
       title: 'Безопасный поход',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      iconName: 'loyal-prices'
+      iconName: faShieldHalved,
+      iconClassColor: 'blue-icon'
     },
     {
       id: 3,
       title: 'Лояльные цены',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      iconName: 'safe-hiking'
+      iconName: faTag,
+      iconClassColor: 'yellow-icon'
     }
   ];
 

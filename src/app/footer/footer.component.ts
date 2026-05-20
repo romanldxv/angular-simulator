@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule, IconDefinition } from '@fortawesome/angular-fontawesome';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { faTelegram } from '@fortawesome/free-brands-svg-icons';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faPinterest, faSkype, faTelegram, faVk } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-footer',
@@ -11,7 +11,10 @@ import { faTelegram } from '@fortawesome/free-brands-svg-icons';
 })
 export class FooterComponent {
 
-  faCoffee: IconDefinition = faCoffee;
   faTelegram: IconDefinition = faTelegram;
+  faVk: IconDefinition = faVk;
+  faPinterest: IconDefinition = faPinterest;
+  faSkype: IconDefinition = faSkype;
+  faAngleRight: IconDefinition = faAngleRight;
 
 }

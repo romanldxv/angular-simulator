@@ -41,35 +41,34 @@
         align-items: center;
         gap: 25px;
 
-        .tour-select-block {
+        .tour-search-block {
           display: flex;
           flex-direction: column;
 
-          .tour-select {
-            @include default-input;
+          .tour-search-container {
+            width: 270px;
+            height: 52px;
+
             @include default-input-wrapper;
 
-            &-option {
-              color: black;
+            .tour-select {
+              @include default-input;
+  
+              &-option {
+                color: black;
+                margin-left: 16px;
+                margin-right: 10px;
+              }
             }
-          }
 
-          .tour-input {
-            @include default-input;
-            @include default-input-wrapper;
-
-            &::placeholder {
-              color: var(--light-gray-color);
-              line-height: 150%;
+            .tour-input {
+              @include default-input;
+  
+              &::placeholder {
+                color: var(--light-gray-color);
+                line-height: 150%;
+              }
             }
-          }
-
-          .arrow-down-icon {
-            background-image: url('/icons/arrow-down.svg');
-          }
-
-          .date-icon {
-            background-image: url('/icons/calendar.svg');
           }
         }
       
@@ -120,25 +119,13 @@
     align-items: center;
 
     .live-input-container {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       width: 270px;
       height: 52px;
-      
+
       @include default-input-wrapper;
 
       .live-input {
         @include default-input;
-
-        &-icon {
-          transform: rotate(-90deg);
-        }
-
-        &:focus {
-          outline: none;
-        }
 
         &::placeholder {
           color: var(--light-gray-color);
@@ -209,7 +196,6 @@
 }
 
 .company-offer-container {
-  background-color: var(--secondary-section-bg-color);
   height: 771px;
   padding-top: 80px;
 
@@ -284,11 +270,6 @@
 }
 
 .popular-directions-container {
-  margin-top: 20px;
-  margin-inline: auto;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
   padding-top: 80px;
   padding-bottom: 95px;
 
@@ -296,6 +277,7 @@
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    margin-inline: auto;
     margin-block: 50px;
 
     .direction {
@@ -366,15 +348,16 @@
   }
 
   .directions-rating-btn {
+    display: block;
     width: 244px;
     height: 52px;
-    align-self: center;
+    margin-inline: auto;
+
     @include default-btn;
   }
 }
 
 .travel-blog-container {
-  background-color: var(--secondary-section-bg-color);
   padding-top: 85px;
   padding-bottom: 95px;
 

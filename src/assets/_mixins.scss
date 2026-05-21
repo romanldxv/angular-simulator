@@ -8,6 +8,10 @@
   background-repeat: no-repeat;
   appearance: none;
   border: none;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 @mixin default-input-wrapper {
@@ -15,6 +19,17 @@
   border-radius: 8px;
   padding-left: 16px;
   padding-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin default-select-wrapper {
+  border: 1px solid #E1E3E4;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @mixin default-btn {

@@ -7,8 +7,9 @@ import { IDirection } from '../../interfaces/IDirection';
 import { IAdvatage } from '../../interfaces/IAdvantage';
 import { ITravelBlog } from '../../interfaces/ITravelBlog';
 import { ToastService } from '../toast.service';
-import { faAngleRight, faCompass, faShieldHalved, faStar, faTag, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleRight, faCompass, faShieldHalved, faStar, faTag, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
+import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-home-page',
@@ -26,9 +27,11 @@ export class HomePageComponent {
   selectedCountTourParticipants!: number;
   faStar: IconDefinition = faStar;
   faAngleRight: IconDefinition = faAngleRight;
+  faAngleDown: IconDefinition = faAngleDown;
+  faCalendar: IconDefinition = faCalendar;
   faCompass: IconDefinition = faCompass;
-  faShieldHalved: IconDefinition = faShieldHalved;
-  faTag: IconDefinition = faTag;
+  faShield: IconDefinition = faShieldHalved;
+  faPrice: IconDefinition = faTag;
 
   tourLocations: ITourLocation[] = [
     { id: 1, title: 'Плато Лаго-Наки' },
@@ -49,21 +52,21 @@ export class HomePageComponent {
       id: 1,
       title: 'Опытный гид',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      iconName: faCompass,
+      iconName: this.faCompass,
       iconClassColor: 'green-icon'
     },
     {
       id: 2,
       title: 'Безопасный поход',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      iconName: faShieldHalved,
+      iconName: this.faShield,
       iconClassColor: 'blue-icon'
     },
     {
       id: 3,
       title: 'Лояльные цены',
       description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-      iconName: faTag,
+      iconName: this.faPrice,
       iconClassColor: 'yellow-icon'
     }
   ];

@@ -4,45 +4,54 @@
     <h1 class="main-info-content-title lh-150">Насладись прогулкой в горах <br>с командой единомышленников</h1>
     <div class="search-tour container">
       <form class="search-tour-form" #selectTourForm="ngForm">
-        <div class="tour-select-block">
-          <select 
-            class="tour-select arrow-down-icon bold fs-16 white"
-            id="tour-location-select"
-            [(ngModel)]="selectedTourLocation"
-            name="selectTour"
-            required
-          >
-            <option disabled [value]="undefined" selected>Локация для тура</option>
-            @for (tourLocation of tourLocations; track tourLocation.id) {
-              <option class="tour-select-option">{{ tourLocation.title }}</option>
-            }
-          </select>
+        <div class="tour-search-block">
+          <div class="tour-search-container">
+            <select
+              class="tour-select arrow-down-icon bold fs-16 white"
+              id="tour-location-select"
+              [(ngModel)]="selectedTourLocation"
+              name="selectTour"
+              required
+            >
+              <option disabled [value]="undefined" selected>Локация для тура</option>
+              @for (tourLocation of tourLocations; track tourLocation.id) {
+                <option class="tour-select-option">{{ tourLocation.title }}</option>
+              }
+            </select>
+            <fa-icon [icon]="faAngleDown" size="lg" class="white-icon"></fa-icon>
+          </div>
           <label class="select-description lh-150">выберите из списка</label>
         </div>
-        <div class="tour-select-block">
-          <input 
-            class="tour-input date-icon bold fs-16 white"
-            id="tour-date-input"
-            placeholder="Дата похода"
-            name="inputTourDate"
-            [(ngModel)]="selectedTourDate"
-            required
-          >
+        <div class="tour-search-block">
+          <div class="tour-search-container">
+            <input
+              class="tour-input date-icon bold fs-16 white"
+              id="tour-date-input"
+              placeholder="Дата похода"
+              name="inputTourDate"
+              [(ngModel)]="selectedTourDate"
+              required
+            >
+            <fa-icon [icon]="faCalendar" size="lg" class="white-icon"></fa-icon>
+          </div>
           <label class="select-description lh-150">укажите диапазон</label>
         </div>
-        <div class="tour-select-block">
-          <select 
-            class="tour-select arrow-down-icon bold fs-16 white" 
-            id="tour-participants-select"
-            [(ngModel)]="selectedCountTourParticipants" 
-            name="selectParticipants"
-            required
-          >
-            <option disabled [value]="undefined" selected>Участники</option>
-            @for (tourParticipant of tourParticipants; track tourParticipant.id) {
-              <option class="tour-select-option">{{ tourParticipant.minCount + '-' + tourParticipant.maxCount + ' человек' }}</option>
-            }
-          </select>
+        <div class="tour-search-block">
+          <div class="tour-search-container">
+            <select
+              class="tour-select arrow-down-icon bold fs-16 white"
+              id="tour-participants-select"
+              [(ngModel)]="selectedCountTourParticipants"
+              name="selectParticipants"
+              required
+            >
+              <option disabled [value]="undefined" selected>Участники</option>
+              @for (tourParticipant of tourParticipants; track tourParticipant.id) {
+                <option class="tour-select-option">{{ tourParticipant.minCount + '-' + tourParticipant.maxCount + ' человек' }}</option>
+              }
+            </select>
+            <fa-icon [icon]="faAngleDown" size="lg" class="white-icon"></fa-icon>
+          </div>
           <label class="select-description lh-150">выберите из списка</label>
         </div>
         <button
@@ -108,12 +117,12 @@
   </div>
 </section>
 
-<section class="popular-directions-container container">
+<section class="popular-directions-container primary-section-bg">
   <div class="title-container">
     <p class="super-title">по версии отдыхающих</p>
     <h2 class="lh-120 fs-32 extra-bold">Популярные направления</h2>
   </div>
-  <div class="popular-directions">
+  <div class="popular-directions container">
     @for (direction of directions; track direction.id) {
       <div class="direction">
         <img [src]="'/images/popular-directions/' + direction.imageName + '.png'">
@@ -137,10 +146,15 @@
       </div>
     }
   </div>
-  <button class="directions-rating-btn semi-bold fs-16 lh-20px" id="directions-rating-btn">Рейтинг направлений</button>
+  <button 
+    class="directions-rating-btn semi-bold fs-16 lh-20px" 
+    id="directions-rating-btn"
+  >
+    Рейтинг направлений
+  </button>
 </section>
 
-<section class="travel-blog-container">
+<section class="travel-blog-container secondary-section-bg">
   <div class="title-container">
     <p class="super-title">делимся впечатлениями</p>
     <h2 class="lh-120 fs-32 extra-bold">Блог о путешествиях</h2>
@@ -165,7 +179,7 @@
   </div>
 </section>
 
-<section class="gallery-container">
+<section class="gallery-container primary-section-bg">
   <div class="title-container">
     <p class="super-title">фото-отчет</p>
     <h2 class="lh-120 fs-32 extra-bold">Делимся впечатлениями</h2>

@@ -73,7 +73,7 @@
     justify-content: right;
 
     &-wrapper {
-      width: 375px;
+      width: 650px;
       height: 75px;
       display: flex;
       justify-content: space-between;
@@ -112,5 +112,10 @@
       height: 44px;
       @include header-btn;
     }
+  }
+
+  .select-theme-btn {
+    display: flex;
+    justify-content: center;
   }
 }

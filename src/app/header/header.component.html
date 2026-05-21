@@ -7,11 +7,10 @@
       </div>
       <nav class="navigation">
         <ul class="navigation-list">
-
           <div class="toggle-color-mode">
-            <p-toggleswitch [ngModel]="isDark$ | async" (onChange)="toggleColorMode()">
+            <p-toggleswitch [ngModel]="isDarkMode$ | async" (onChange)="toggleColorMode()" id="color-mode-toggleswitch">
               <ng-template #handle let-checked="checked">
-                <fa-icon [icon]="faMoon" [ngClass]="[checked ? 'white-icon' : 'black-icon']"></fa-icon>
+                <fa-icon [icon]="checked ? faMoon : faSun" [ngClass]="[checked ? 'white-icon' : 'black-icon']"></fa-icon>
               </ng-template>
             </p-toggleswitch>
           </div>
@@ -34,6 +33,17 @@
     </div>
     <div class="interactive-container container">
       <div class="interactive-container-wrapper">
+        <div class="select-theme-btn">
+          <p-selectbutton 
+            [options]="themes" 
+            [(ngModel)]="currentNameTheme"
+            optionLabel="name"
+            optionValue="name"
+            aria-labelledby="basic"
+            (onChange)="onThemeChange($event)"
+            id="change-theme-btn"
+          />
+        </div>
         <div class="interactive-container-text">
           @if (currentWidget === 'clicker') {
             <div class="clicker">

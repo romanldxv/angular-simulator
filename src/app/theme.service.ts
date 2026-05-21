@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, Observable, tap } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { usePreset } from '@primeuix/themes';
@@ -7,6 +7,7 @@ import Aura from "@primeuix/themes/aura";
 import Nora from "@primeuix/themes/nora";
 import { ITheme } from '../interfaces/ITheme';
 import { Theme } from '../enums/Theme';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ import { Theme } from '../enums/Theme';
 export class ThemeService {
   
   private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private destroyRef: DestroyRef = inject(DestroyRef);
 
   private colorModeSubject!: BehaviorSubject<'light' | 'dark'>;
   colorMode$!: Observable<'light' | 'dark'>;
@@ -47,7 +49,8 @@ export class ThemeService {
       tap((theme: ITheme) => {
         usePreset(theme.preset);
         this.localStorageService.setItem(this.THEME_KEY, theme.name);
-      })
+      }),
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe();
   }
 
@@ -58,7 +61,6 @@ export class ThemeService {
     this.colorMode$ = this.colorModeSubject.asObservable();
 
     this.colorMode$.pipe(
-      distinctUntilChanged(),
       tap((colorMode: 'light' | 'dark') => {
         const element = document.querySelector('html')!;
 

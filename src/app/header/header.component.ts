@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ToastService } from '../toast.service';
 import { INavigationLink } from '../../interfaces/INavigationLink';
 import { RouterLink, RouterLinkActive } from "@angular/router";
-import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { ToggleSwitchChangeEvent, ToggleSwitchModule } from 'primeng/toggleswitch';
 import { FormsModule } from "@angular/forms";
 import { faMoon, IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -10,7 +10,7 @@ import { AsyncPipe, NgClass } from '@angular/common';
 import { ThemeService } from '../theme.service';
 import { map, Observable } from 'rxjs';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
-import { SelectButtonChangeEvent, SelectButtonModule, SelectButtonOptionClickEvent } from 'primeng/selectbutton';
+import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutton';
 import { ITheme } from '../../interfaces/ITheme';
 
 
@@ -59,9 +59,8 @@ export class HeaderComponent implements OnInit {
     this.toastService.showSuccess("Виджет изменён!");
   }
 
-  toggleColorMode() {
-    const newColorMode: 'light' | 'dark' = this.themeService.getColorMode() === 'light' ? 'dark' : 'light';
-    this.themeService.setColorMode(newColorMode);
+  toggleColorMode(event: ToggleSwitchChangeEvent) {
+    this.themeService.setColorMode(event.checked ? 'dark' : 'light');
   }
 
   onThemeChange(event: SelectButtonChangeEvent) {

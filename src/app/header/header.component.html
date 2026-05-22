@@ -8,7 +8,7 @@
       <nav class="navigation">
         <ul class="navigation-list">
           <div class="toggle-color-mode">
-            <p-toggleswitch [ngModel]="isDarkMode$ | async" (onChange)="toggleColorMode()" id="color-mode-toggleswitch">
+            <p-toggleswitch [ngModel]="isDarkMode$ | async" (onChange)="toggleColorMode($event)" id="color-mode-toggleswitch">
               <ng-template #handle let-checked="checked">
                 <fa-icon [icon]="checked ? faMoon : faSun" [ngClass]="[checked ? 'white-icon' : 'black-icon']"></fa-icon>
               </ng-template>

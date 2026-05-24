@@ -16,10 +16,8 @@ function getTheme(): Preset {
     { name: Theme.NORA, preset: Nora },
   ];
 
-  let savedNameTheme: string | null = localStorage.getItem('theme');
-  savedNameTheme = savedNameTheme ? JSON.parse(savedNameTheme) : 'Aura';
-
-  const savedTheme: ITheme = themes.find((theme: ITheme) => theme.name === savedNameTheme)!;
+  const savedThemeName: Theme | null = JSON.parse(localStorage.getItem('theme')!);
+  const savedTheme: ITheme = themes.find((theme: ITheme) => theme.name === savedThemeName) ?? themes[0];
   return savedTheme.preset;
 }
 

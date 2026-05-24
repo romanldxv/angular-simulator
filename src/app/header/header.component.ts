@@ -25,11 +25,7 @@ export class HeaderComponent implements OnInit {
   toastService: ToastService = inject(ToastService);
   themeService: ThemeService = inject(ThemeService);
 
-  isDarkMode$: Observable<boolean> = this.themeService.colorMode$.pipe(
-    map((theme: 'light' | 'dark') => {
-      return theme === 'light' ? false : true;
-    })
-  );
+  isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
   companyName: string = 'румтибет';
   currentTime: string = new Date().toLocaleString();
   currentWidget: 'clicker' | 'date' = 'date';
@@ -60,11 +56,11 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleColorMode(event: ToggleSwitchChangeEvent) {
-    this.themeService.setColorMode(event.checked ? 'dark' : 'light');
+    this.themeService.setColorMode(event.checked);
   }
 
   onThemeChange(event: SelectButtonChangeEvent) {
-    let newTheme: ITheme | undefined = this.themes.find((theme: ITheme) => theme.name === event.value);
+    const newTheme: ITheme | undefined = this.themes.find((theme: ITheme) => theme.name === event.value);
     this.themeService.setTheme(newTheme ?? this.themeService.getTheme());
   }
 

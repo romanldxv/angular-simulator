@@ -17,58 +17,52 @@ export class ThemeService {
   private localStorageService: LocalStorageService = inject(LocalStorageService);
   private destroyRef: DestroyRef = inject(DestroyRef);
 
-  private colorModeSubject: BehaviorSubject<'light' | 'dark'> = new BehaviorSubject<'light' | 'dark'>('light');
-  colorMode$: Observable<'light' | 'dark'> = this.colorModeSubject.asObservable();
-  private themeSubject: BehaviorSubject<ITheme> = new BehaviorSubject<ITheme>({} as ITheme);
-  theme$: Observable<ITheme> = this.themeSubject.asObservable();
+  readonly IS_DARK_MODE_KEY: string = 'is-dark-mode';
+  readonly THEME_KEY: string = 'theme';
+  
+  private isDarkModeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.initColorMode());
+  isDarkMode$: Observable<boolean> = this.isDarkModeSubject.asObservable().pipe(
+    tap((isDarkMode: boolean) => {
+      const element = document.querySelector('html')!;
+      isDarkMode ? element.classList.add('my-app-dark') : element.classList.remove('my-app-dark');
+    })
+  );
   themes: ITheme[] = [
     { name: Theme.LARA, preset: Lara },
     { name: Theme.AURA, preset: Aura },
     { name: Theme.NORA, preset: Nora }
   ];
-  readonly COLOR_MODE_KEY: string = 'color-mode';
-  readonly THEME_KEY: string = 'theme';
+  private themeSubject: BehaviorSubject<ITheme> = new BehaviorSubject<ITheme>(this.initTheme());
+  theme$: Observable<ITheme> = this.themeSubject.asObservable().pipe(
+    distinctUntilChanged(),
+    tap((theme: ITheme) => usePreset(theme.preset)),
+    takeUntilDestroyed(this.destroyRef)
+  );
 
   constructor() {
-    this.initTheme();
-    this.initColorMode();
+    this.theme$.subscribe()
   }
 
-  private initTheme(): void {
-    const savedNameTheme: string | null = this.localStorageService.getItem(this.THEME_KEY);
-    const savedTheme: ITheme = savedNameTheme ? this.themes.find((theme: ITheme) => theme.name === savedNameTheme)! : this.themes[0];
-    this.themeSubject.next(savedTheme);
-
-    this.theme$.pipe(
-      distinctUntilChanged(),
-      tap((theme: ITheme) => this.setTheme(theme)),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe();
+  private initTheme(): ITheme {
+    const savedThemeName: Theme | null = this.localStorageService.getItem(this.THEME_KEY);
+    return this.themes.find((theme: ITheme) => theme.name === savedThemeName) ?? this.themes[0];
   }
 
-  private initColorMode(): void {
-    const savedColorMode: 'light' | 'dark' | null = this.localStorageService.getItem(this.COLOR_MODE_KEY);
-    this.colorModeSubject.next(savedColorMode ?? 'light');
-
-    this.colorMode$.pipe(
-      tap((colorMode: 'light' | 'dark') => this.setColorMode(colorMode))
-    ).subscribe();
+  private initColorMode(): boolean {
+    return this.localStorageService.getItem(this.IS_DARK_MODE_KEY) ?? false;
   }
 
-  setColorMode(newColorMode: 'light' | 'dark') {
-    this.colorModeSubject.next(newColorMode);
-    const element = document.querySelector('html')!;
-    newColorMode === 'light' ? element.classList.remove('my-app-dark') : element.classList.add('my-app-dark');
-    this.localStorageService.setItem(this.COLOR_MODE_KEY, newColorMode);
+  setColorMode(isDarkMode: boolean): void {
+    this.isDarkModeSubject.next(isDarkMode);
+    this.localStorageService.setItem(this.IS_DARK_MODE_KEY, isDarkMode);
   }
 
-  getColorMode(): 'light' | 'dark' {
-    return this.colorModeSubject.getValue();
+  getColorMode(): boolean {
+    return this.isDarkModeSubject.getValue();
   }
 
-  setTheme(newTheme: ITheme) {
+  setTheme(newTheme: ITheme): void {
     this.themeSubject.next(newTheme);
-    usePreset(newTheme.preset);
     this.localStorageService.setItem(this.THEME_KEY, newTheme.name);
   }
 

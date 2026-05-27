@@ -19,7 +19,13 @@ export class ThemeService {
 
   readonly IS_DARK_MODE_KEY: string = 'is-dark-mode';
   readonly THEME_KEY: string = 'theme';
-  
+
+  themes: ITheme[] = [
+    { name: Theme.LARA, preset: Lara },
+    { name: Theme.AURA, preset: Aura },
+    { name: Theme.NORA, preset: Nora }
+  ];
+
   private isDarkModeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.initColorMode());
   isDarkMode$: Observable<boolean> = this.isDarkModeSubject.asObservable().pipe(
     tap((isDarkMode: boolean) => {
@@ -27,20 +33,17 @@ export class ThemeService {
       isDarkMode ? element.classList.add('my-app-dark') : element.classList.remove('my-app-dark');
     })
   );
-  themes: ITheme[] = [
-    { name: Theme.LARA, preset: Lara },
-    { name: Theme.AURA, preset: Aura },
-    { name: Theme.NORA, preset: Nora }
-  ];
+
   private themeSubject: BehaviorSubject<ITheme> = new BehaviorSubject<ITheme>(this.initTheme());
   theme$: Observable<ITheme> = this.themeSubject.asObservable().pipe(
     distinctUntilChanged(),
     tap((theme: ITheme) => usePreset(theme.preset)),
-    takeUntilDestroyed(this.destroyRef)
   );
 
   constructor() {
-    this.theme$.subscribe()
+    this.theme$.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe()
   }
 
   private initTheme(): ITheme {

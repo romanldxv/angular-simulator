@@ -1,4 +1,4 @@
-import { DestroyRef, inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, distinctUntilChanged, Observable, tap } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { usePreset } from '@primeuix/themes';
@@ -7,7 +7,6 @@ import Aura from "@primeuix/themes/aura";
 import Nora from "@primeuix/themes/nora";
 import { ITheme } from '../interfaces/ITheme';
 import { Theme } from '../enums/Theme';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +14,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class ThemeService {
   
   private localStorageService: LocalStorageService = inject(LocalStorageService);
-  private destroyRef: DestroyRef = inject(DestroyRef);
 
   readonly IS_DARK_MODE_KEY: string = 'is-dark-mode';
   readonly THEME_KEY: string = 'theme';
@@ -39,12 +37,6 @@ export class ThemeService {
     distinctUntilChanged(),
     tap((theme: ITheme) => usePreset(theme.preset)),
   );
-
-  constructor() {
-    this.theme$.pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe()
-  }
 
   private initTheme(): ITheme {
     const savedThemeName: Theme | null = this.localStorageService.getItem(this.THEME_KEY);

@@ -17,7 +17,7 @@ function getTheme(): Preset {
   ];
 
   const themeFromStorage: string | null = localStorage.getItem('theme');
-  const savedThemeName: Theme = themeFromStorage ? JSON.parse(themeFromStorage) : Theme.LARA;
+  const savedThemeName: Theme = themeFromStorage ? themeFromStorage as Theme : Theme.LARA;
   const savedTheme: ITheme = themes.find((theme: ITheme) => theme.name === savedThemeName) ?? themes[0];
   return savedTheme.preset;
 }

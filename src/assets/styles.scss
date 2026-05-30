@@ -71,21 +71,72 @@
   line-height: 150%;
 }
 
-.bg-white {
-  background-color: #FFFFFF;
+.primary-section-bg {
+  background-color: var(--primary-section-bg-color);
 }
 
-.bg-gray {
-  background-color: var(--gray-color);
+.secondary-section-bg {
+  background-color: var(--secondary-section-bg-color);
+}
+
+.white-icon svg path {
+  color: var(--white-color);
+}
+
+.black-icon svg path {
+  color: var(--black-color);
+}
+
+.yellow-icon svg path {
+  color: var(--yellow-color);
+}
+
+.green-icon svg path {
+  color: #45766A;
+}
+
+.blue-icon svg path {
+  color: #6276AA;
+}
+
+.my-app-dark {
+  --primary-color: #e0e0e0 !important;
+  --secondary-color: #358682 !important;
+  --thirdary-color: #72d1cc !important;
+  --primary-section-bg-color: var(--black-color) !important;
+  --secondary-section-bg-color: #202020 !important;
+  --primary-bg-color: var(--black-color) !important;
+  --header-bg-color: rgb(20, 20, 20) !important;
+  --blog-bg-color: #5e5e5e !important;
+  --btn-bg-color: #5e5e5e !important;
+  --header-btn-color: #233d3c !important;
+  --user-card-bg-color: #252525 !important;
+  --coordinate-bg-color: #5e5e5e !important;
+  --newslater-bg-color: #5e5e5e !important;
 }
 
 :root {
   --primary-color: #18121E;
   --secondary-color: #1A3E3E;
   --thirdary-color: #1D3939;
+  --primary-section-bg-color: var(--white-color);
+  --secondary-section-bg-color: #F3F5F4;
+  --primary-bg-color: var(--white-color);
+  --header-bg-color: #47525b;
+  --blog-bg-color: #FDFDFD;
+  --btn-bg-color: #FDFDFD;
+  --header-btn-color: #1A3E3E;
+  --header-btn-bg-color: #FDFDFD;
+  --user-card-bg-color: #FDFDFD;
+  --coordinate-bg-color: #FDFDFD;
+  --btn-disabled-bg-color: #c0c0c0;
+  --newslater-bg-color: #FDFDFD;
+  --input-placeholder-color: #18121E;
+  --copyright-bg-color: #18121E;
   --gray-color: #F3F5F4;
   --yellow-color: #F2BE22;
   --white-color: #FFFFFF;
+  --black-color: #000000;
   --light-gray-color: #FDFDFD;
   --light-orange-color: #D4A373;
   --light-green-color: #667C7C;

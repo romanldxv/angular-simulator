@@ -2,26 +2,52 @@ import { Component, inject } from '@angular/core';
 import { ToastService } from '../toast.service';
 import { INavigationLink } from '../../interfaces/INavigationLink';
 import { RouterLink, RouterLinkActive } from "@angular/router";
+import { ToggleSwitchChangeEvent, ToggleSwitchModule } from 'primeng/toggleswitch';
+import { FormsModule } from "@angular/forms";
+import { faMoon, IconDefinition } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AsyncPipe, NgClass } from '@angular/common';
+import { ThemeService } from '../theme.service';
+import { Observable } from 'rxjs';
+import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutton';
+import { ITheme } from '../../interfaces/ITheme';
+
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [
+    RouterLink, 
+    RouterLinkActive, 
+    ToggleSwitchModule, 
+    FormsModule, 
+    FontAwesomeModule, 
+    NgClass, 
+    AsyncPipe, 
+    SelectButtonModule
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
 
   toastService: ToastService = inject(ToastService);
+  themeService: ThemeService = inject(ThemeService);
 
+  isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
+  theme$: Observable<ITheme> = this.themeService.theme$;
   companyName: string = 'румтибет';
   currentTime: string = new Date().toLocaleString();
   currentWidget: 'clicker' | 'date' = 'date';
   clickerCount: number = 0;
+  faSun: IconDefinition = faSun;
+  faMoon: IconDefinition = faMoon;
 
   navigationLinks: INavigationLink[] = [
     { id: 1, title: "Главная", routerLink: "", testingId: "main-ref" },
     { id: 2, title: "Пользователи", routerLink: "users", testingId: "users-ref" }
   ];
+  themes: ITheme[] = this.themeService.themes;
 
   constructor() {
     setInterval(() => {
@@ -32,6 +58,15 @@ export class HeaderComponent {
   toggleWidget(widget: 'clicker' | 'date'): void {
     this.currentWidget = widget;
     this.toastService.showSuccess("Виджет изменён!");
+  }
+
+  toggleColorMode(event: ToggleSwitchChangeEvent) {
+    this.themeService.setColorMode(event.checked);
+  }
+
+  onThemeChange(event: SelectButtonChangeEvent) {
+    const newTheme: ITheme | undefined = this.themes.find((theme: ITheme) => theme.name === event.value);
+    this.themeService.setTheme(newTheme ?? this.themeService.getTheme());
   }
 
   increaseCounter(): void {
@@ -45,3 +80,5 @@ export class HeaderComponent {
   }
 
 }
+
+

@@ -13,6 +13,7 @@
     padding-left: 100px;
     margin-inline: auto;
     transform: translateY(-98px);
+    background-color: var(--newslater-bg-color);
 
     &-title {
       width: 380px;
@@ -34,7 +35,7 @@
         border: none;
 
         &::placeholder {
-          color: var(--primary-color);
+          color: var(--input-placeholder-color);
         }
       }
 
@@ -88,17 +89,12 @@
       .list-element {
         position: relative;
         text-decoration: none;
-        width: 310px;
-
-        img {
-          position: absolute;
-          top: 4px;
-          left: 2px;
-        }
+        width: 325px;
+        display: flex;
 
         p {
           display: inline-block;
-          margin-left: 18px;
+          margin-left: 12px;
         }
       }
       
@@ -115,7 +111,7 @@
   .copyright-container {
     display: flex;
     justify-content: center;
-    background-color: var(--primary-color);
+    background-color: var(--copyright-bg-color);
     margin-top: 80px;
     height: 66px;
 

@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { ITheme } from '../interfaces/ITheme';
 import { Preset } from '@primeuix/themes/types';
 import { Theme } from '../enums/Theme';
+import { provideHttpClient } from '@angular/common/http';
 import Lara from "@primeuix/themes/lara";
 import Aura from "@primeuix/themes/aura";
 import Nora from "@primeuix/themes/nora";
@@ -34,6 +35,7 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: '.my-app-dark'
         }
       }
-    })
+    }),
+    provideHttpClient()
   ]
 };

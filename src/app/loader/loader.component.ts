@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { LoaderService } from '../loader.service';
+import { LoaderService } from '../services/loader.service';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 

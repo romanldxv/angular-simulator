@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ToastService } from '../toast.service';
+import { ToastService } from '../services/toast.service';
 import { INavigationLink } from '../../interfaces/INavigationLink';
 import { RouterLink, RouterLinkActive } from "@angular/router";
 import { ToggleSwitchChangeEvent, ToggleSwitchModule } from 'primeng/toggleswitch';
@@ -7,7 +7,7 @@ import { FormsModule } from "@angular/forms";
 import { faMoon, IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AsyncPipe, NgClass } from '@angular/common';
-import { ThemeService } from '../theme.service';
+import { ThemeService } from '../services/theme.service';
 import { Observable } from 'rxjs';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
 import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutton';

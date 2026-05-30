@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
 import { Observable, tap, map, combineLatest, BehaviorSubject } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { IUser } from '../../interfaces/IUser';

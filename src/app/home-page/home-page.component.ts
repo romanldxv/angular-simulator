@@ -6,7 +6,7 @@ import { ITourParticipant } from '../../interfaces/ITourParticipant';
 import { IDirection } from '../../interfaces/IDirection';
 import { IAdvatage } from '../../interfaces/IAdvantage';
 import { ITravelBlog } from '../../interfaces/ITravelBlog';
-import { ToastService } from '../toast.service';
+import { ToastService } from '../services/toast.service';
 import { faAngleDown, faAngleRight, faCompass, faShieldHalved, faStar, faTag, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';

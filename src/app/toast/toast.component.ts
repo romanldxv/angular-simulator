@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import { ToastType } from '../../enums/ToastType';
 import { IToast } from '../../interfaces/IToast';
-import { ToastService } from '../toast.service';
+import { ToastService } from '../services/toast.service';
 import { Observable } from 'rxjs';
 
 @Component({

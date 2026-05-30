@@ -5,8 +5,8 @@ import { usePreset } from '@primeuix/themes';
 import Lara from "@primeuix/themes/lara";
 import Aura from "@primeuix/themes/aura";
 import Nora from "@primeuix/themes/nora";
-import { ITheme } from '../interfaces/ITheme';
-import { Theme } from '../enums/Theme';
+import { ITheme } from '../../interfaces/ITheme';
+import { Theme } from '../../enums/Theme';
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { IToast } from '../interfaces/IToast';
-import { ToastType } from '../enums/ToastType';
+import { IToast } from '../../interfaces/IToast';
+import { ToastType } from '../../enums/ToastType';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({

@@ -15,6 +15,15 @@
   width: 1180px;
 }
 
+.centered {
+  margin-inline: auto;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
 .bold {
   font-weight: 700;
 }

@@ -11,13 +11,11 @@ export class PluralPipe implements PipeTransform {
     
     if (number == 0 || remainder == 0 || remainder >= 5 || twoDigitNumbers.includes(number)) {
       return `${number} ${pluralWord}`;
-    }  
-    else if (remainder == 1) {
+    } else if (remainder == 1) {
       return `${number} ${singularWord}`;
-    }  
-    else {
+    } else {
       return `${number} ${wordBetweenForms}`;
-    }  
+    }
   }
 
 }

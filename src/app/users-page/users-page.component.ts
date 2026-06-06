@@ -6,7 +6,7 @@ import { IUser } from '../../interfaces/IUser';
 import { UserCardComponent } from "../user-card/user-card.component";
 import { CreateUserComponent } from "../create-user/create-user.component";
 import { UsersFilterComponent } from "../users-filter/users-filter.component";
-import { PluralPipe } from '../pipes/word-form.pipe';
+import { PluralPipe } from '../pipes/plural.pipe';
 
 @Component({
   selector: 'app-users-page',

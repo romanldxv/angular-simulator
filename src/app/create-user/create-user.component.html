@@ -64,7 +64,7 @@
       <ng-container formGroupName="company">
         <div class="form-field">
           <label class="fs-16">Company name: </label>
-          <input type="text" formControlName="name" id="company-name-input">
+          <input type="text" formControlName="name" id="company-name-input" hoverGradientBorder>
         </div>
   
         <div class="form-field">
@@ -80,11 +80,12 @@
     </form>
   </div>
   <button
-    class="create-user-btn" 
+    class="create-user-btn gradient-border" 
     type="button" 
     (click)="onSubmit()" 
     [disabled]="createUserForm.invalid"
     id="create-user-btn"
+    hoverBold
   >
     Добавить
   </button>

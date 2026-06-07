@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { IUser } from '../../interfaces/IUser';
 import { UpperCasePipe } from '@angular/common';
 import { PhonePipe } from '../pipes/phone.pipe';

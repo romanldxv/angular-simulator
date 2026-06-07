@@ -5,6 +5,7 @@ import { PhonePipe } from '../pipes/phone.pipe';
 import { PhoneMode } from '../../enums/PhoneMode';
 import { HoverBoldDirective } from '../directives/hover-bold.directive';
 import { HoverGradientBorderDirective } from '../directives/hover-gradient-border.directive';
+import { IGradientConfiguration } from '../../interfaces/IGradientConfiguration';
 
 @Component({
   selector: 'app-user-card',
@@ -18,6 +19,11 @@ export class UserCardComponent {
   @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
 
   phoneMode: typeof PhoneMode = PhoneMode;
+  gradientConfiguration: IGradientConfiguration = { 
+    delay: 500, 
+    colors: [], 
+    thickness: 7 
+  };
 
   handleDeleteUser(userId: number): void {
     this.deleteUser.emit(userId);

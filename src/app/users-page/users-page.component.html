@@ -3,7 +3,7 @@
   <app-create-user (createUser)="onCreateUser($event)"></app-create-user>
   <app-users-filter class="search-users-input" (filterUsers)="onFilterUsers($event)"></app-users-filter>
   <div class="centered flex-center">
-    <p class="fs-32 semi-bold users-amount-text">{{ userService.getUsers().length| plural: 'пользователь' : 'пользователя' : 'пользователей' }}</p>
+    <p class="fs-32 semi-bold users-amount-text">{{ userService.getUsers().length | plural: 'пользователь' : 'пользователя' : 'пользователей' }}</p>
   </div>
   <div class="users-container">
     @for (user of filteredUsers$ | async; track $index) {

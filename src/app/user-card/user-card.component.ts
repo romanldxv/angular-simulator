@@ -21,7 +21,6 @@ export class UserCardComponent {
   phoneMode: typeof PhoneMode = PhoneMode;
   gradientConfiguration: IGradientConfiguration = { 
     delay: 500, 
-    colors: [], 
     thickness: 7 
   };
 

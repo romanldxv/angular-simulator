@@ -1,4 +1,4 @@
-import { DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Input, OnInit, Renderer2 } from '@angular/core';
+import { DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { IGradientConfiguration } from '../../interfaces/IGradientConfiguration';
 import { Subject, switchMap, takeUntil, tap, timer } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -6,7 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Directive({
   selector: '[hoverGradientBorder]',
 })
-export class HoverGradientBorderDirective implements OnInit {
+export class HoverGradientBorderDirective implements OnDestroy {
 
   @Input() gradientConfiguration: IGradientConfiguration = {
     delay: 1000,
@@ -19,38 +19,31 @@ export class HoverGradientBorderDirective implements OnInit {
 
   private renderer: Renderer2 = inject(Renderer2);
   private elementRef: ElementRef = inject(ElementRef);
-  private destroyRef: DestroyRef = inject(DestroyRef);
   
-  private enterSubject: Subject<void> = new Subject<void>();
-  private leaveSubject: Subject<void> = new Subject<void>();
+  private timerId!: number;
+  private isHover: boolean = false;
 
   @HostListener('mouseenter')
   onEnter() {
-    this.enterSubject.next();
+    this.isHover = true;
+    this.timerId = setTimeout(() => {
+      if (this.isHover) {
+        this.renderer.addClass(this.elementRef.nativeElement, 'gradient-border');
+      }
+    }, this.gradientConfiguration.delay);
   }
 
   @HostListener('mouseleave')
   onLeave() {
-    this.leaveSubject.next();
+    this.isHover = false;
+    clearTimeout(this.timerId);
+    this.renderer.removeClass(this.elementRef.nativeElement, 'gradient-border');
   }
 
-  ngOnInit(): void {
-    this.enterSubject.pipe(
-      switchMap(() =>
-        timer(this.gradientConfiguration.delay!).pipe(
-          takeUntil(this.leaveSubject),
-          tap(() => {
-            this.renderer.addClass(this.elementRef.nativeElement, 'gradient-border');
-          })
-        )
-      ),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe();
-
-    this.leaveSubject.pipe(
-      tap(() => this.renderer.removeClass(this.elementRef.nativeElement, 'gradient-border')),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe();
+  ngOnDestroy(): void {
+    if (this.timerId) {
+      clearTimeout(this.timerId);
+    }
   }
 
 }

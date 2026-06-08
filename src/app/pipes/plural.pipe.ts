@@ -10,7 +10,7 @@ export class PluralPipe implements PipeTransform {
     const twoDigitNumbers: number[] = [11, 12, 13, 14, 15, 16, 17, 18, 19];
     
     if (number == 0 || remainder == 0 || remainder >= 5 || twoDigitNumbers.includes(number)) {
-      return `${ number } ${ pluralWord}`;
+      return `${ number } ${ pluralWord }`;
     } else if (remainder == 1) {
       return `${ number } ${ singularWord }`;
     } else {

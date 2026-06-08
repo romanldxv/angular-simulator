@@ -1,7 +1,5 @@
-import { DestroyRef, Directive, ElementRef, HostBinding, HostListener, inject, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, inject, Input, OnDestroy, Renderer2 } from '@angular/core';
 import { IGradientConfiguration } from '../../interfaces/IGradientConfiguration';
-import { Subject, switchMap, takeUntil, tap, timer } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
   selector: '[hoverGradientBorder]',

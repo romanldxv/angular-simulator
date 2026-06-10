@@ -1,6 +1,6 @@
-<div class="user-card bg-white">
+<div class="user-card bg-white" hoverGradientBorder [gradientConfiguration]="gradientConfiguration">
   <div class="user-name-container">
-    <h3 class="user-name fs-26 extra-bold">{{ user.name }}</h3>
+    <h3 class="user-name fs-26 extra-bold">{{ user.name | uppercase }}</h3>
     <p class="username bold">{{ user.username }}</p>
   </div>
 
@@ -17,7 +17,7 @@
       </div>
       <div class="data-list-item">
         <h5 class="subtitle fs-14">Телефон:</h5>
-        <p class="fs-14 bold">{{ user.phone }}</p>
+        <p class="fs-14 bold">{{ user.phone | phone: phoneMode.MASKED }}</p>
       </div>
       <div class="data-list-item">
         <h5 class="subtitle fs-14">Веб-сайт:</h5>
@@ -76,5 +76,12 @@
       </div>
     </div>
   </div>
-  <button class="delete-user-btn" id="delete-user-btn" (click)="handleDeleteUser(user.id)">Удалить</button>
+  <button 
+    class="delete-user-btn" 
+    id="delete-user-btn" 
+    (click)="handleDeleteUser(user.id)"
+    hoverBold
+  >
+    Удалить
+  </button>
 </div>

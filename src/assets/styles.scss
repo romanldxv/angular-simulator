@@ -15,6 +15,15 @@
   width: 1180px;
 }
 
+.centered {
+  margin-inline: auto;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
 .bold {
   font-weight: 700;
 }
@@ -97,6 +106,25 @@
 
 .blue-icon svg path {
   color: #6276AA;
+}
+
+.gradient-border {
+  outline: none;
+  border: var(--border-thickness) solid;
+  border-image: linear-gradient(var(--angle), var(--gradient-colors)) 1;
+  animation: 10s rotate linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
 
 .my-app-dark {

@@ -10,6 +10,7 @@ import Lara from "@primeuix/themes/lara";
 import Aura from "@primeuix/themes/aura";
 import Nora from "@primeuix/themes/nora";
 import { logInterceptor } from './interceptors/log.interceptor';
+import { errorInterceptor } from './interceptors/error.interceptor';
 
 function getTheme(): Preset {
   const themes: ITheme[] = [
@@ -37,6 +38,6 @@ export const appConfig: ApplicationConfig = {
         }
       }
     }),
-    provideHttpClient(withInterceptors([logInterceptor]))
+    provideHttpClient(withInterceptors([logInterceptor, errorInterceptor]))
   ]
 };

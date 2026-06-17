@@ -5,10 +5,12 @@ import { routes } from './app.routes';
 import { ITheme } from '../interfaces/ITheme';
 import { Preset } from '@primeuix/themes/types';
 import { Theme } from '../enums/Theme';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import Lara from "@primeuix/themes/lara";
 import Aura from "@primeuix/themes/aura";
 import Nora from "@primeuix/themes/nora";
+import { logInterceptor } from './interceptors/log.interceptor';
+import { errorInterceptor } from './interceptors/error.interceptor';
 
 function getTheme(): Preset {
   const themes: ITheme[] = [
@@ -36,6 +38,6 @@ export const appConfig: ApplicationConfig = {
         }
       }
     }),
-    provideHttpClient()
+    provideHttpClient(withInterceptors([logInterceptor, errorInterceptor]))
   ]
 };

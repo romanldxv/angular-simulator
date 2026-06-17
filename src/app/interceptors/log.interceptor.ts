@@ -6,12 +6,7 @@ export const logInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: H
   let responseStatus: number = 0;
   return next(req).pipe(
     tap(
-      (event: HttpEvent<any>) => {
-        if (event.type === HttpEventType.Response)
-        {
-          responseStatus = event.status;
-        } 
-      },
+      (event: HttpEvent<any>) => event.type === HttpEventType.Response ? responseStatus = event.status : responseStatus,
       (error: HttpErrorResponse) => responseStatus = error.status
     ),
     finalize(() => {

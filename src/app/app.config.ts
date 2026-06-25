@@ -11,6 +11,7 @@ import Aura from "@primeuix/themes/aura";
 import Nora from "@primeuix/themes/nora";
 import { logInterceptor } from './interceptors/log.interceptor';
 import { errorInterceptor } from './interceptors/error.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 function getTheme(): Preset {
   const themes: ITheme[] = [
@@ -38,6 +39,7 @@ export const appConfig: ApplicationConfig = {
         }
       }
     }),
-    provideHttpClient(withInterceptors([logInterceptor, errorInterceptor]))
+    provideHttpClient(withInterceptors([logInterceptor, errorInterceptor])),
+    provideAnimationsAsync()
   ]
 };

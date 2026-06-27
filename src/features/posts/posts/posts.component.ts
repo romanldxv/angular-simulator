@@ -1,15 +1,16 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { TableModule, TablePageEvent } from 'primeng/table';
 import { SkeletonModule } from 'primeng/skeleton';
 import { PostService } from '../post.service';
-import { finalize, Observable, tap } from 'rxjs';
+import { finalize, Observable, tap, catchError, of } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { IPost } from '../../../interfaces/IPost';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { MenuItem } from 'primeng/api';
 import { Router } from '@angular/router';
-import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PostEditDialogComponent } from '../post-edit-dialog/post-edit-dialog.component';
+import { ToastService } from '../../../app/services/toast.service';
 
 @Component({
   selector: 'app-posts',
@@ -22,6 +23,7 @@ export class PostsComponent implements OnInit {
 
   postService: PostService = inject(PostService);
   dialogService: DialogService = inject(DialogService);
+  private toastService: ToastService = inject(ToastService);
 
   private router: Router = inject(Router);
 
@@ -46,6 +48,10 @@ export class PostsComponent implements OnInit {
           this.postService.setPosts(posts);
           this.totalRecords = this.postService.total;
         }),
+        catchError(() => {
+          this.toastService.showError('Неудалось загрузить посты');
+          return of([]);
+        }),
         finalize(() => this.isLoading = false)
       ).subscribe();
   }
@@ -57,7 +63,11 @@ export class PostsComponent implements OnInit {
   deletePost(postId: number): void {
     this.postService.deletePost(postId)
       .pipe(
-        tap(() => this.totalRecords = this.postService.total)
+        tap(() => this.totalRecords = this.postService.total),
+        catchError(() => {
+          this.toastService.showError('Неудалось удалить пост');
+          return of();
+        })
       ).subscribe();
   }
 
@@ -81,10 +91,12 @@ export class PostsComponent implements OnInit {
         this.postService.setPosts(posts);
         this.totalRecords = this.postService.total;
       }),
+      catchError(() => {
+        this.toastService.showError('Неудалось загрузить посты');
+        return of([]);
+      }),
       finalize(() => this.isLoading = false)
     ).subscribe();
-    console.log(`first: ${event.first} rows: ${event.rows}`)
-    console.log(`current page: ${this.currentPage}`)
   }
 
 }

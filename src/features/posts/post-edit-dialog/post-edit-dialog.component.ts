@@ -2,7 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PostService } from '../post.service';
-import { tap } from 'rxjs';
+import { tap, catchError, of } from 'rxjs';
+import { ToastService } from '../../../app/services/toast.service';
 
 @Component({
   selector: 'app-post-edit-dialog',
@@ -13,6 +14,7 @@ import { tap } from 'rxjs';
 export class PostEditDialogComponent implements OnInit {
 
   private postService: PostService = inject(PostService);
+  private toastService: ToastService = inject(ToastService);
   private fb: FormBuilder = inject(FormBuilder);
 
   private ref: DynamicDialogRef | undefined;
@@ -42,7 +44,11 @@ export class PostEditDialogComponent implements OnInit {
     const updatedViews: number = Number(this.editPostForm.controls['views'].value);
     this.postService.updatePost(this.config.data, updatedTitle, updatedTags, updatedViews)
       .pipe(
-        tap(() => this.ref?.close())
+        tap(() => this.ref?.close()),
+        catchError(() => {
+          this.toastService.showError('Неудалось изменить пост');
+          return of();
+        })
       ).subscribe();
   }
 

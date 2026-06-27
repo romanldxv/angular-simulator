@@ -21,11 +21,7 @@ export class PostService {
     return this.postApiService.getPosts(limit, skip)
       .pipe(
         tap((postResponse: IPostResponse) => this.total = postResponse.total),
-        map((postResponse: IPostResponse) => postResponse.posts),
-        catchError(() => {
-          this.toastService.showError('Неудалось загрузить посты');
-          return of([]);
-        })
+        map((postResponse: IPostResponse) => postResponse.posts)
       );
   }
 
@@ -44,7 +40,7 @@ export class PostService {
           this.toastService.showError('Неудалось найти пост');
           return of();
         })
-    );
+      );
   }
 
   addPost(newPost: IPost): Observable<IPost> {
@@ -53,10 +49,6 @@ export class PostService {
         tap((addedPost: IPost) => {
           const posts = this.getPosts();
           this.setPosts([...posts, addedPost]);
-        }),
-        catchError(() => {
-          this.toastService.showError('Неудалось добавить пост');
-          return of();
         })
       );
   }
@@ -67,10 +59,6 @@ export class PostService {
         tap((updatedPost: IPost) => {
           const posts = this.getPosts();
           this.setPosts(posts.map((post: IPost) => post.id === updatedPost.id ? updatedPost : post));
-        }),
-        catchError(() => {
-          this.toastService.showError('Неудалось изменить пост');
-          return of(post);
         })
       );
   }
@@ -83,10 +71,6 @@ export class PostService {
             .filter((post: IPost) => post.id !== postId)
           );
           this.total -= 1;
-        }),
-        catchError(() => {
-          this.toastService.showError('Неудалось удалить пост');
-          return of();
         })
       );
   }

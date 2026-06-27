@@ -47,7 +47,7 @@ export class PostService {
     return this.postApiService.addPost(newPost)
       .pipe(
         tap((addedPost: IPost) => {
-          const posts = this.getPosts();
+          const posts: IPost[] = this.getPosts();
           this.setPosts([...posts, addedPost]);
         })
       );
@@ -57,7 +57,7 @@ export class PostService {
     return this.postApiService.updatePost(post, title, tags, views)
       .pipe(
         tap((updatedPost: IPost) => {
-          const posts = this.getPosts();
+          const posts: IPost[] = this.getPosts();
           this.setPosts(posts.map((post: IPost) => post.id === updatedPost.id ? updatedPost : post));
         })
       );
@@ -67,8 +67,9 @@ export class PostService {
     return this.postApiService.deletePost(postId)
       .pipe(
         tap(() => {
-          this.setPosts(this.getPosts()
-            .filter((post: IPost) => post.id !== postId)
+          const posts: IPost[] = this.getPosts();
+          this.setPosts(
+            posts.filter((post: IPost) => post.id !== postId)
           );
           this.total -= 1;
         })

@@ -24,7 +24,6 @@ export class PostsComponent implements OnInit {
   postService: PostService = inject(PostService);
   dialogService: DialogService = inject(DialogService);
   private toastService: ToastService = inject(ToastService);
-
   private router: Router = inject(Router);
 
   posts$: Observable<IPost[]> = this.postService.posts$;

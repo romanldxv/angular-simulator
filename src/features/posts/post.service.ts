@@ -31,6 +31,20 @@ export class PostService {
     return this.postsSubject.getValue();
   }
 
+  getPostById(postId: number): Observable<IPost> {
+    return this.postApiService.getPostById(postId);
+  }
+
+  updatePost(post: IPost, title: string, tags: string[], views: number): Observable<IPost> {
+    return this.postApiService.updatePost(post, title, tags, views)
+      .pipe(
+        tap((updatedPost: IPost) => {
+          const posts = this.getPosts();
+          this.setPosts(posts.map((post: IPost) => post.id === updatedPost.id ? updatedPost : post));
+        })
+      )
+  }
+
   deletePost(postId: number): Observable<IPost> {
     return this.postApiService.deletePost(postId)
       .pipe(
@@ -39,7 +53,7 @@ export class PostService {
             .filter((post: IPost) => post.id !== postId)
           );
           this.total -= 1;
-        }),
+        })
       )
   }
 

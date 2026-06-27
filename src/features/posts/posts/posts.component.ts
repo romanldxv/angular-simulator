@@ -1,24 +1,28 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { TableModule, TablePageEvent } from 'primeng/table';
 import { SkeletonModule } from 'primeng/skeleton';
 import { PostService } from '../post.service';
-import { finalize, map, Observable, tap } from 'rxjs';
+import { finalize, Observable, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { IPost } from '../../../interfaces/IPost';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { MenuItem } from 'primeng/api';
-import { IPostResponse } from '../../../interfaces/IPostResponse';
 import { Router } from '@angular/router';
+import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { PostEditDialogComponent } from '../post-edit-dialog/post-edit-dialog.component';
 
 @Component({
   selector: 'app-posts',
   imports: [TableModule, SkeletonModule, AsyncPipe, ContextMenuModule],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
+  standalone: true
 })
 export class PostsComponent implements OnInit {
 
   postService: PostService = inject(PostService);
+  dialogService: DialogService = inject(DialogService);
+
   private router: Router = inject(Router);
 
   posts$: Observable<IPost[]> = this.postService.posts$;
@@ -28,9 +32,10 @@ export class PostsComponent implements OnInit {
   currentPage: number = 1;
   rowsOnPage: number = 10;
   totalRecords!: number;
+  ref: DynamicDialogRef | undefined;
   actionsForPost: MenuItem[] = [
     { label: 'View', command: () => this.viewPage(this.selectedPost?.id!) },
-    { label: 'Edit', command: () => this.test() },
+    { label: 'Edit', command: () => this.onEditPost() },
     { label: 'Delete', command: () => this.deletePost(this.selectedPost?.id!) }
   ];
 
@@ -56,9 +61,13 @@ export class PostsComponent implements OnInit {
       ).subscribe();
   }
 
-  test(post?: IPost) {
-    console.log(this.selectedPost)
-    console.log("2")
+  onEditPost() {
+    this.ref = this.dialogService.open(PostEditDialogComponent, { 
+      data: this.selectedPost,
+      header: 'Edit post',
+      modal: true,
+      closable: true
+    })!;
   }
 
   onPageChange(event: TablePageEvent): void {

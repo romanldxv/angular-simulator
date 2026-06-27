@@ -12,6 +12,7 @@ import Nora from "@primeuix/themes/nora";
 import { logInterceptor } from './interceptors/log.interceptor';
 import { errorInterceptor } from './interceptors/error.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { DialogService } from 'primeng/dynamicdialog';
 
 function getTheme(): Preset {
   const themes: ITheme[] = [
@@ -39,6 +40,7 @@ export const appConfig: ApplicationConfig = {
         }
       }
     }),
+    DialogService,
     provideHttpClient(withInterceptors([logInterceptor, errorInterceptor])),
     provideAnimationsAsync()
   ]

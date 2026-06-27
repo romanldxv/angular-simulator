@@ -1,1 +1,56 @@
-<p>post-detail works!</p>
+<div class="flex-center">
+  <div class="post-card bg-white">
+    <div class="post-title-container">
+      <h3 class="post-title fs-26 extra-bold">{{ post.title }}</h3>
+      <p class="post-body bold">{{ post.body }}</p>
+    </div>
+  
+    <div class="post-information-container">
+      <div class="title-container">
+        <h4 class="title extra-bold">Реакции</h4>
+        <div class="separator"></div>
+      </div>
+  
+      <div class="data-list">
+        <div class="data-list-item">
+          <h5 class="subtitle fs-14">Likes:</h5>
+          <p class="light-orange fs-14 bold">{{ post.reactions.likes }}</p>
+        </div>
+        <div class="data-list-item">
+          <h5 class="subtitle fs-14">Dislakes:</h5>
+          <p class="fs-14 bold">{{ post.reactions.dislikes }}</p>
+        </div>
+      </div>
+  
+      <div class="title-container">
+        <h4 class="title extra-bold">Прочее</h4>
+        <div class="separator"></div>
+      </div>
+  
+      <div class="data-list">
+        <div class="data-list-item">
+          <h5 class="subtitle fs-14">Id:</h5>
+          <p class="fs-14 bold">{{ post.id }}</p>
+        </div>
+        <div class="data-list-item">
+          <h5 class="subtitle fs-14">Tags:</h5>
+          <p class="fs-14 bold">{{ post.tags }}</p>
+        </div>
+        <div class="data-list-item">
+          <h5 class="subtitle fs-14">Views:</h5>
+          <p class="fs-14 bold">{{ post.views}}</p>
+        </div>
+        <div class="data-list-item">
+          <h5 class="subtitle fs-14">User id:</h5>
+          <p class="fs-14 bold">{{ post.userId }}</p>
+        </div>
+    <!-- <button
+      class="delete-user-btn"
+      id="delete-user-btn"
+      (click)="handleDeleteUser(user.id)"
+      hoverBold
+    >
+      Удалить
+    </button> -->
+  </div>
+</div>

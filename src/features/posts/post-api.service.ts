@@ -15,6 +15,18 @@ export class PostApiService {
     return this.http.get<IPostResponse>(`https://dummyjson.com/posts?limit=${ limit }&skip=${ skip }`);
   }
 
+  getPostById(postId: number): Observable<IPost> {
+    return this.http.get<IPost>(`https://dummyjson.com/posts/${ postId }`);
+  }
+
+  updatePost(post: IPost, title: string, tags: string[], views: number): Observable<IPost> {
+    return this.http.patch<IPost>(
+      `https://dummyjson.com/posts/${ post.id }`,
+      { ...post, title: title, tags: tags, views: views },
+      { headers: { 'Content-Type': 'application/json' } }
+    )
+  }
+
   deletePost(postId: number): Observable<IPost> {
     return this.http.delete<IPost>(`https://dummyjson.com/posts/${ postId }`)
   }

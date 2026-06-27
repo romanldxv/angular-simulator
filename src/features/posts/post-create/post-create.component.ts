@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IPost } from '../../../interfaces/IPost';
 import { PostService } from '../post.service';
-import { finalize } from 'rxjs';
+import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -32,7 +32,7 @@ export class PostCreateComponent {
     const newPost: IPost = { ...this.createPostForm.value, userId: 5 };
     this.postService.addPost(newPost)
       .pipe(
-        finalize(() => this.router.navigate(['/posts']))
+        tap(() => this.router.navigate(['/posts']))
       ).subscribe();
   }
 

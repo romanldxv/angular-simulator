@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { PostApiService } from './post-api.service';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { IPostResponse } from '../../interfaces/IPostResponse';
 import { IPost } from '../../interfaces/IPost';
+import { ToastService } from '../../app/services/toast.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,7 @@ import { IPost } from '../../interfaces/IPost';
 export class PostService {
   
   private postApiService: PostApiService = inject(PostApiService);
+  private toastService: ToastService = inject(ToastService);
 
   private postsSubject: BehaviorSubject<IPost[]> = new BehaviorSubject<IPost[]>([]);
   posts$: Observable<IPost[]> = this.postsSubject.asObservable();
@@ -19,7 +21,11 @@ export class PostService {
     return this.postApiService.getPosts(limit, skip)
       .pipe(
         tap((postResponse: IPostResponse) => this.total = postResponse.total),
-        map((postResponse: IPostResponse) => postResponse.posts)
+        map((postResponse: IPostResponse) => postResponse.posts),
+        catchError(() => {
+          this.toastService.showError('Неудалось загрузить посты');
+          return of([]);
+        })
       );
   }
 
@@ -32,7 +38,13 @@ export class PostService {
   }
 
   getPostById(postId: number): Observable<IPost> {
-    return this.postApiService.getPostById(postId);
+    return this.postApiService.getPostById(postId)
+      .pipe(
+        catchError(() => {
+          this.toastService.showError('Неудалось найти пост');
+          return of();
+        })
+    );
   }
 
   addPost(newPost: IPost): Observable<IPost> {
@@ -41,6 +53,10 @@ export class PostService {
         tap((addedPost: IPost) => {
           const posts = this.getPosts();
           this.setPosts([...posts, addedPost]);
+        }),
+        catchError(() => {
+          this.toastService.showError('Неудалось добавить пост');
+          return of();
         })
       );
   }
@@ -51,6 +67,10 @@ export class PostService {
         tap((updatedPost: IPost) => {
           const posts = this.getPosts();
           this.setPosts(posts.map((post: IPost) => post.id === updatedPost.id ? updatedPost : post));
+        }),
+        catchError(() => {
+          this.toastService.showError('Неудалось изменить пост');
+          return of(post);
         })
       );
   }
@@ -63,6 +83,10 @@ export class PostService {
             .filter((post: IPost) => post.id !== postId)
           );
           this.total -= 1;
+        }),
+        catchError(() => {
+          this.toastService.showError('Неудалось удалить пост');
+          return of();
         })
       );
   }

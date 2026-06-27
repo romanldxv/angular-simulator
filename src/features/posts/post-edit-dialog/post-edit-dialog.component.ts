@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { PostService } from '../post.service';
-import { finalize } from 'rxjs';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-post-edit-dialog',
@@ -42,7 +42,7 @@ export class PostEditDialogComponent implements OnInit {
     const updatedViews: number = Number(this.editPostForm.controls['views'].value);
     this.postService.updatePost(this.config.data, updatedTitle, updatedTags, updatedViews)
       .pipe(
-        finalize(() => this.ref?.close())
+        tap(() => this.ref?.close())
       ).subscribe();
   }
 

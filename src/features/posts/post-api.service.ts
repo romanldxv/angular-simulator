@@ -11,17 +11,19 @@ export class PostApiService {
   
   private http: HttpClient = inject(HttpClient);
 
+  private apiURL = 'https://dummyjson.com/posts';
+
   getPosts(limit: number, skip: number): Observable<IPostResponse> {
-    return this.http.get<IPostResponse>(`https://dummyjson.com/posts?limit=${ limit }&skip=${ skip }`);
+    return this.http.get<IPostResponse>(`${ this.apiURL }?limit=${ limit }&skip=${ skip }`);
   }
 
   getPostById(postId: number): Observable<IPost> {
-    return this.http.get<IPost>(`https://dummyjson.com/posts/${ postId }`);
+    return this.http.get<IPost>(`${ this.apiURL }/${ postId }`);
   }
 
   addPost(newPost: IPost): Observable<IPost> {
     return this.http.post<IPost>(
-      'https://dummyjson.com/posts/add', 
+      `${ this.apiURL }/add`, 
       newPost, 
       { headers: { 'Content-Type': 'application/json' } }
     );
@@ -29,14 +31,14 @@ export class PostApiService {
 
   updatePost(post: IPost, title: string, tags: string[], views: number): Observable<IPost> {
     return this.http.patch<IPost>(
-      `https://dummyjson.com/posts/${ post.id }`,
+      `${ this.apiURL }/${ post.id }`,
       { ...post, title: title, tags: tags, views: views },
       { headers: { 'Content-Type': 'application/json' } }
     );
   }
 
   deletePost(postId: number): Observable<IPost> {
-    return this.http.delete<IPost>(`https://dummyjson.com/posts/${ postId }`);
+    return this.http.delete<IPost>(`${ this.apiURL }/${ postId }`);
   }
 
 }

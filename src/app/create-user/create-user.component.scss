@@ -1,8 +1,9 @@
-.container {
+.form-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 120px;
   
   .title {
     text-align: center;
@@ -11,8 +12,9 @@
   .form-wrapper {
     display: flex;
     justify-content: center;
+    padding-bottom: 120px;
   
-    .create-user-form {
+    .create-post-form {
       display: flex;
       flex-direction: column;
       row-gap: 20px;
@@ -31,7 +33,7 @@
     }
   }
   
-  .create-user-btn {
+  .create-post-btn {
     margin-top: 30px;
     width: 200px;
     height: 30px;

@@ -19,16 +19,24 @@ export class PostApiService {
     return this.http.get<IPost>(`https://dummyjson.com/posts/${ postId }`);
   }
 
+  addPost(newPost: IPost): Observable<IPost> {
+    return this.http.post<IPost>(
+      'https://dummyjson.com/posts/add', 
+      newPost, 
+      { headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
   updatePost(post: IPost, title: string, tags: string[], views: number): Observable<IPost> {
     return this.http.patch<IPost>(
       `https://dummyjson.com/posts/${ post.id }`,
       { ...post, title: title, tags: tags, views: views },
       { headers: { 'Content-Type': 'application/json' } }
-    )
+    );
   }
 
   deletePost(postId: number): Observable<IPost> {
-    return this.http.delete<IPost>(`https://dummyjson.com/posts/${ postId }`)
+    return this.http.delete<IPost>(`https://dummyjson.com/posts/${ postId }`);
   }
 
 }

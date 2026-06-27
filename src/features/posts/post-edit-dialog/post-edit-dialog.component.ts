@@ -19,7 +19,7 @@ export class PostEditDialogComponent implements OnInit {
   private config!: DynamicDialogConfig;
   editPostForm: FormGroup = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-    tags: [[]],
+    tags: [[], [Validators.required]],
     views: ['', [Validators.required]],
   });
 

@@ -35,7 +35,7 @@ export class PostEditDialogComponent implements OnInit {
       title: this.config.data.title,
       tags: this.config.data.tags,
       views: this.config.data.views
-    })
+    });
   }
 
   onSave(): void {

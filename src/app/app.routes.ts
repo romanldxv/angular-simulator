@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
 import { postResolver } from '../features/posts/post.resolver';
-import "@angular/compiler";
 
 export const routes: Routes = [
   { 

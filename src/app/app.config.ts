@@ -11,6 +11,9 @@ import Aura from "@primeuix/themes/aura";
 import Nora from "@primeuix/themes/nora";
 import { logInterceptor } from './interceptors/log.interceptor';
 import { errorInterceptor } from './interceptors/error.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { DialogService } from 'primeng/dynamicdialog';
+import { loadInterceptor } from '../features/posts/load.interceptor';
 
 function getTheme(): Preset {
   const themes: ITheme[] = [
@@ -38,6 +41,8 @@ export const appConfig: ApplicationConfig = {
         }
       }
     }),
-    provideHttpClient(withInterceptors([logInterceptor, errorInterceptor]))
+    DialogService,
+    provideHttpClient(withInterceptors([logInterceptor, loadInterceptor, errorInterceptor])),
+    provideAnimationsAsync()
   ]
 };

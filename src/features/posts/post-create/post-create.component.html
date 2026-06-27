@@ -1,0 +1,47 @@
+<div class="form-container">
+  <h3 class="title fs-26 bold">Добавление нового поста</h3>
+  <div class="form-wrapper">
+    <form class="create-post-form" [formGroup]="createPostForm">
+      <div class="form-field">
+        <label class="fs-16">Title: </label>
+        <input type="text" formControlName="title" id="title-input">
+      </div>
+  
+      <div class="form-field">
+        <label class="fs-16">Body: </label>
+        <input type="text" formControlName="body" id="body-input">
+      </div>
+  
+      <div class="form-field">
+        <label class="fs-16">Tags: </label>
+        <input type="text" formControlName="tags" id="tags-input">
+      </div>
+  
+      <ng-container formGroupName="reactions">
+        <div class="form-field">
+          <label class="fs-16">Likes: </label>
+          <input type="number" formControlName="likes" id="reactions-likes-input">
+        </div>
+
+        <div class="form-field">
+          <label class="fs-16">Dislikes: </label>
+          <input type="number" formControlName="dislikes" id="reactions-dislikes-input">
+        </div>
+      </ng-container>
+
+      <div class="form-field">
+        <label class="fs-16">Views: </label>
+        <input type="number" formControlName="views" id="views-input">
+      </div>
+    </form>
+  </div>
+  <button
+    class="create-post-btn" 
+    type="button" 
+    (click)="onSubmit()" 
+    [disabled]="createPostForm.invalid"
+    id="create-post-btn"
+  >
+    Создать
+  </button>
+</div>

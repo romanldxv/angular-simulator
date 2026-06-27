@@ -1,0 +1,69 @@
+<div class="flex-center centered wrapper">
+  @if(isLoading) {
+    <p-table
+      [value]="[1, 2, 3]"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      showGridlines 
+    >
+      <ng-template #header>
+        <tr>
+          <th>Title</th>
+          <th>Tags</th>
+          <th>Views</th>
+        </tr>
+      </ng-template>
+  
+      <ng-template #body let-post>
+        <tr>
+          <td>
+            <p-skeleton/>
+          </td>
+          <td>
+            <p-skeleton />
+          </td>
+          <td>
+            <p-skeleton/>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  } @else {
+    <p-table 
+      [value]="(posts$ | async) ?? []" 
+      [tableStyle]="{ 'min-width': '50rem' }"
+      [contextMenu]="cm"
+      [(contextMenuSelection)]="selectedPost"
+      dataKey="id"
+      selectionMode="single"
+      showGridlines 
+      paginator="true"
+      [first]="first"
+      [rows]="rowsOnPage"
+      [totalRecords]="totalRecords"
+      [rowsPerPageOptions]="[5, 10, 20]"
+      [lazy]="true"
+      [showCurrentPageReport]="true"
+      [currentPageReportTemplate]="`Showing ${ first + 1 } to ${ rowsOnPage } of ${ totalRecords } entries`"
+      (onPage)="onPageChange($event)"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Title</th>
+          <th>Tags</th>
+          <th>Views</th>
+        </tr>
+      </ng-template>
+
+  
+      <ng-template pTemplate="body" let-post>
+        <tr (dblclick)="viewPage(post.id)" [pContextMenuRow]="post">
+          <td>{{ post.title }}</td>
+          <td>{{ post.tags }}</td>
+          <td>{{ post.views }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  }
+</div>
+
+<p-contextMenu #cm [model]="actionsForPost" [triggerEvent]="'click'" (onHide)="selectedPost = null"></p-contextMenu>

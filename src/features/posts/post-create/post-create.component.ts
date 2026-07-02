@@ -2,9 +2,10 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IPost } from '../../../interfaces/IPost';
 import { PostService } from '../post.service';
-import { tap, catchError, of } from 'rxjs';
+import { tap, catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastService } from '../../../app/services/toast.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-create',
@@ -30,14 +31,18 @@ export class PostCreateComponent {
     views: ['', [Validators.required]],
   });
 
-  onSubmit(): void {
+  createPost(): void {
+    if (this.createPostForm.invalid) {
+      return;
+    }
+    
     const newPost: IPost = { ...this.createPostForm.value, userId: 5 };
     this.postService.addPost(newPost)
       .pipe(
         tap(() => this.router.navigate(['/posts'])),
-        catchError(() => {
+        catchError((error: HttpErrorResponse) => {
           this.toastService.showError('Неудалось добавить пост');
-          return of();
+          return throwError(() => error);
         })
       ).subscribe();
   }

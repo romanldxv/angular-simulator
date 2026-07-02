@@ -1,9 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { PostApiService } from './post-api.service';
-import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { IPostResponse } from '../../interfaces/IPostResponse';
 import { IPost } from '../../interfaces/IPost';
-import { ToastService } from '../../app/services/toast.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +10,6 @@ import { ToastService } from '../../app/services/toast.service';
 export class PostService {
   
   private postApiService: PostApiService = inject(PostApiService);
-  private toastService: ToastService = inject(ToastService);
 
   private postsSubject: BehaviorSubject<IPost[]> = new BehaviorSubject<IPost[]>([]);
   posts$: Observable<IPost[]> = this.postsSubject.asObservable();
@@ -34,13 +32,7 @@ export class PostService {
   }
 
   getPostById(postId: number): Observable<IPost> {
-    return this.postApiService.getPostById(postId)
-      .pipe(
-        catchError(() => {
-          this.toastService.showError('Неудалось найти пост');
-          return of();
-        })
-      );
+    return this.postApiService.getPostById(postId);
   }
 
   addPost(newPost: IPost): Observable<IPost> {
@@ -49,16 +41,18 @@ export class PostService {
         tap((addedPost: IPost) => {
           const posts: IPost[] = this.getPosts();
           this.setPosts([...posts, addedPost]);
+          this.total++;
         })
       );
   }
 
-  updatePost(post: IPost, title: string, tags: string[], views: number): Observable<IPost> {
-    return this.postApiService.updatePost(post, title, tags, views)
+  updatePost(post: IPost): Observable<IPost> {
+    return this.postApiService.updatePost(post)
       .pipe(
         tap((updatedPost: IPost) => {
           const posts: IPost[] = this.getPosts();
-          this.setPosts(posts.map((post: IPost) => post.id === updatedPost.id ? updatedPost : post));
+          const updatedPosts: IPost[] = posts.map((post: IPost) => post.id === updatedPost.id ? updatedPost : post);
+          this.setPosts(updatedPosts);
         })
       );
   }
@@ -68,10 +62,9 @@ export class PostService {
       .pipe(
         tap(() => {
           const posts: IPost[] = this.getPosts();
-          this.setPosts(
-            posts.filter((post: IPost) => post.id !== postId)
-          );
-          this.total -= 1;
+          const updatedPosts: IPost[] = posts.filter((post: IPost) => post.id !== postId);
+          this.setPosts(updatedPosts);
+          this.total--;
         })
       );
   }

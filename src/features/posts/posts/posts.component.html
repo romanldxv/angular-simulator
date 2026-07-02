@@ -43,7 +43,7 @@
       [rowsPerPageOptions]="[5, 10, 20]"
       [lazy]="true"
       [showCurrentPageReport]="true"
-      [currentPageReportTemplate]="`Showing ${ first + 1 } to ${ rowsOnPage } of ${ totalRecords } entries`"
+      [currentPageReportTemplate]="`Showing ${ first + 1 } to ${ last } of ${ totalRecords } entries`"
       (onPage)="onPageChange($event)"
     >
       <ng-template pTemplate="header">
@@ -66,4 +66,4 @@
   }
 </div>
 
-<p-contextMenu #cm [model]="actionsForPost" [triggerEvent]="'click'" (onHide)="selectedPost = null"></p-contextMenu>
+<p-contextMenu #cm [model]="contextMenuItems" [triggerEvent]="'click'" (onHide)="selectedPost = null"></p-contextMenu>

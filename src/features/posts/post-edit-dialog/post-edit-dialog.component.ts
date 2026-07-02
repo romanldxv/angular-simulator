@@ -1,9 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { PostService } from '../post.service';
-import { tap, catchError, of } from 'rxjs';
-import { ToastService } from '../../../app/services/toast.service';
+import { IPost } from '../../../interfaces/IPost';
 
 @Component({
   selector: 'app-post-edit-dialog',
@@ -13,25 +11,18 @@ import { ToastService } from '../../../app/services/toast.service';
 })
 export class PostEditDialogComponent implements OnInit {
 
-  private postService: PostService = inject(PostService);
-  private toastService: ToastService = inject(ToastService);
   private fb: FormBuilder = inject(FormBuilder);
+  private ref: DynamicDialogRef = inject(DynamicDialogRef);
+  private config: DynamicDialogConfig = inject(DynamicDialogConfig);
 
-  private ref: DynamicDialogRef | undefined;
-  private config!: DynamicDialogConfig;
   editPostForm: FormGroup = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
     tags: [[], [Validators.required]],
-    views: ['', [Validators.required]],
+    views: [0, [Validators.required]],
   });
-
-  constructor(ref: DynamicDialogRef, config: DynamicDialogConfig) {
-    this.ref = ref;
-    this.config = config;
-  }
   
   ngOnInit(): void {
-    this.editPostForm.setValue({
+    this.editPostForm.patchValue({
       title: this.config.data.title,
       tags: this.config.data.tags,
       views: this.config.data.views
@@ -39,17 +30,14 @@ export class PostEditDialogComponent implements OnInit {
   }
 
   onSave(): void {
-    const updatedTitle: string = this.editPostForm.controls['title'].value;
-    const updatedTags: string[] = this.editPostForm.controls['tags'].value;
-    const updatedViews: number = Number(this.editPostForm.controls['views'].value);
-    this.postService.updatePost(this.config.data, updatedTitle, updatedTags, updatedViews)
-      .pipe(
-        tap(() => this.ref?.close()),
-        catchError(() => {
-          this.toastService.showError('Неудалось изменить пост');
-          return of();
-        })
-      ).subscribe();
+    if (this.editPostForm.invalid) {
+      return;
+    }
+
+    const tags: string[] = Array.isArray(this.editPostForm.value.tags) ? this.editPostForm.value.tags : this.editPostForm.value.tags.split(',');
+    const updatedTags: string[] = tags.filter((tag: string) => tag !== '');
+    const updatedPost: IPost = { ...this.config.data, ...this.editPostForm.value, tags: updatedTags};
+    this.ref.close(updatedPost);
   }
 
 }

@@ -1,0 +1,42 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 120px;
+  
+  .title {
+    text-align: center;
+  }
+  
+  .form-wrapper {
+    display: flex;
+    justify-content: center;
+  
+    .create-post-form {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      width: 400px;
+    
+      .form-field {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+    
+        input {
+          width: 200px;
+        }
+      }
+    }
+  }
+  
+  .create-post-btn {
+    margin-top: 30px;
+    width: 200px;
+    height: 30px;
+    margin-inline: auto;
+  }
+}

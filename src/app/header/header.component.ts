@@ -44,7 +44,7 @@ export class HeaderComponent {
   faMoon: IconDefinition = faMoon;
 
   navigationLinks: INavigationLink[] = [
-    { id: 1, title: "Главная", routerLink: "", testingId: "main-ref" },
+    { id: 1, title: "Главная", routerLink: "home", testingId: "main-ref" },
     { id: 2, title: "Пользователи", routerLink: "users", testingId: "users-ref" }
   ];
   themes: ITheme[] = this.themeService.themes;

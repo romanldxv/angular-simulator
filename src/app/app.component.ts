@@ -4,15 +4,13 @@ import { Color } from '../enums/Color';
 import { Collection } from './collection';
 import { FormsModule } from '@angular/forms';
 import { LocalStorageService } from './services/local-storage.service';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "./header/header.component";
-import { FooterComponent } from "./footer/footer.component";
 import { ToastComponent } from "./toast/toast.component";
 import { LoaderComponent } from "./loader/loader.component";
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, RouterOutlet, HeaderComponent, FooterComponent, ToastComponent, LoaderComponent],
+  imports: [FormsModule, ToastComponent, LoaderComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: []

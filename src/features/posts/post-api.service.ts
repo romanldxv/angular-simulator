@@ -23,7 +23,9 @@ export class PostApiService {
 
   addPost(newPost: IPost): Observable<IPost> {
     return this.http.post<IPost>(
-      `${ this.API_URL }/add`, newPost);
+      `${ this.API_URL }/add`, 
+      newPost
+    );
   }
 
   updatePost(post: IPost): Observable<IPost> {

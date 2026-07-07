@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+  align-items: center;
+
+  .form-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+  
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+    
+      .form-field {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+    
+        input {
+          width: 200px;
+        }
+      }
+    }
+  }
+}

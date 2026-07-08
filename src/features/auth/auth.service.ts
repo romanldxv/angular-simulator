@@ -53,8 +53,11 @@ export class AuthService {
     return this.tokens;
   }
 
-  refreshTokens(refreshToken: string) {
-    this.authApiService.refreshTokens(refreshToken);
+  refreshTokens(refreshToken: string): Observable<IToken> {
+    return this.authApiService.refreshTokens(refreshToken)
+      .pipe(
+        tap((tokens: IToken) => this.saveToken(tokens))
+      );
   }
 
   setUser(newUser: IUser): void {

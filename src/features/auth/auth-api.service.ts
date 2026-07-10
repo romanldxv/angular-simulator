@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IAuth } from './IAuth';
-import { IUser } from './IUser';
+import { IAuthResponse } from './IAuthResponse';
+import { IAuthUser } from './IAuthUser';
 import { IToken } from './IToken';
 
 @Injectable({
@@ -14,15 +14,15 @@ export class AuthApiService {
 
   private readonly API_URL: string = 'https://dummyjson.com/auth';
 
-  loginUser(login: string, password: string): Observable<IAuth> {
-    return this.http.post<IAuth>(
+  loginUser(login: string, password: string): Observable<IAuthResponse> {
+    return this.http.post<IAuthResponse>(
       `${ this.API_URL }/login`,
       { username: login, password: password }
     );
   }
 
-  getUser(): Observable<IUser> {
-    return this.http.get<IUser>(`${ this.API_URL }/me`);
+  getUser(): Observable<IAuthUser> {
+    return this.http.get<IAuthUser>(`${ this.API_URL }/me`);
   }
 
   refreshTokens(refreshToken: string): Observable<IToken> {

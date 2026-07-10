@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { IUser } from './IUser';
+import { IAuthUser } from './IAuthUser';
 import { catchError, map, of, switchMap } from 'rxjs';
 
 export const authGuard: CanActivateFn = () => {
@@ -9,7 +9,7 @@ export const authGuard: CanActivateFn = () => {
   const authService: AuthService = inject(AuthService);
 
   return authService.user$.pipe(
-    switchMap((user: IUser | null) => {
+    switchMap((user: IAuthUser | null) => {
       if (user) {
         return of(true);
       } else {

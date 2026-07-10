@@ -17,15 +17,12 @@ export class AuthApiService {
   loginUser(login: string, password: string): Observable<IAuth> {
     return this.http.post<IAuth>(
       `${ this.API_URL }/login`,
-      { username: login, password: password }
+      { username: login, password: password, expiresInMins: 1 }
     );
   }
 
-  getUser(accessToken: string): Observable<IUser> {
-    return this.http.get<IUser>(
-      `${ this.API_URL }/me`,
-      { headers: { Authorization: `Bearer ${ accessToken }` } }
-    );
+  getUser(): Observable<IUser> {
+    return this.http.get<IUser>(`${ this.API_URL }/me`);
   }
 
   refreshTokens(refreshToken: string): Observable<IToken> {

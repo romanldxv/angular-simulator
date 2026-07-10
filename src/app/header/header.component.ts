@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
 import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutton';
 import { ITheme } from '../../interfaces/ITheme';
+import { AuthService } from '../../features/auth/auth.service';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class HeaderComponent {
 
   toastService: ToastService = inject(ToastService);
   themeService: ThemeService = inject(ThemeService);
+  private authService: AuthService = inject(AuthService);
 
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
   theme$: Observable<ITheme> = this.themeService.theme$;
@@ -44,7 +46,7 @@ export class HeaderComponent {
   faMoon: IconDefinition = faMoon;
 
   navigationLinks: INavigationLink[] = [
-    { id: 1, title: "Главная", routerLink: "home", testingId: "main-ref" },
+    { id: 1, title: "Главная", routerLink: "", testingId: "main-ref" },
     { id: 2, title: "Пользователи", routerLink: "users", testingId: "users-ref" }
   ];
   themes: ITheme[] = this.themeService.themes;
@@ -67,6 +69,10 @@ export class HeaderComponent {
   onThemeChange(event: SelectButtonChangeEvent) {
     const newTheme: ITheme | undefined = this.themes.find((theme: ITheme) => theme.name === event.value);
     this.themeService.setTheme(newTheme ?? this.themeService.getTheme());
+  }
+
+  onLogout(): void {
+    this.authService.logout();
   }
 
   increaseCounter(): void {

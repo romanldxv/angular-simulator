@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from '../auth.service';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, of, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastService } from '../../../app/services/toast.service';
@@ -32,10 +32,14 @@ export class LoginComponent {
 
     this.authService.loginUser(this.authForm.value.login, this.authForm.value.password)
       .pipe(
-        tap(() => this.router.navigate(['/home'])),
+        tap(() => this.router.navigate([''])),
         catchError((error: HttpErrorResponse) => {
-          this.toastService.showError('Неудалось войти');
-          return throwError(() => error);
+          if (error.status === 400) {
+            this.toastService.showError('Неверный логин или пароль');
+          } else {
+            this.toastService.showError('Неудалось войти');
+          }
+          return of();
         })
       ).subscribe();
   }

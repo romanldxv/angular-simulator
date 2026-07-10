@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { APP_INITIALIZER, ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { PrimeNG, providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
@@ -13,6 +13,8 @@ import { logInterceptor } from './interceptors/log.interceptor';
 import { errorInterceptor } from './interceptors/error.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DialogService } from 'primeng/dynamicdialog';
+import { tokenInterceptor } from '../features/auth/token.interceptor';
+import { AuthService } from '../features/auth/auth.service';
 
 function getTheme(): Preset {
   const themes: ITheme[] = [
@@ -41,7 +43,14 @@ export const appConfig: ApplicationConfig = {
       }
     }),
     DialogService,
-    provideHttpClient(withInterceptors([logInterceptor, errorInterceptor])),
-    provideAnimationsAsync()
+    AuthService,
+    provideHttpClient(withInterceptors([logInterceptor, tokenInterceptor, errorInterceptor])),
+    provideAnimationsAsync(),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authService: AuthService) => () => authService.initAuth(),
+      deps: [AuthService],
+      multi: true
+    }
   ]
 };

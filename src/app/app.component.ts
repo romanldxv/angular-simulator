@@ -1,5 +1,5 @@
 import './training';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Color } from '../enums/Color';
 import { Collection } from './collection';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { LocalStorageService } from './services/local-storage.service';
 import { ToastComponent } from "./toast/toast.component";
 import { LoaderComponent } from "./loader/loader.component";
 import { RouterOutlet } from '@angular/router';
+import { AuthService } from '../features/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,10 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss',
   providers: []
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  localStorageService: LocalStorageService = inject(LocalStorageService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private authService: AuthService = inject(AuthService);
 
   readonly LAST_VISIT_DATE_KEY: string = 'last-visit-date';
   readonly VISIT_COUNT_KEY: string = 'visit-count';
@@ -29,6 +31,10 @@ export class AppComponent {
   constructor() {
     this.saveLastVisitDate();
     this.saveVisitCount();
+  }
+
+  ngOnInit(): void {
+    //this.authService.initAuth();
   }
 
   private isMainColor(color: Color): boolean {

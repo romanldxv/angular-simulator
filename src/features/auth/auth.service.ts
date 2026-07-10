@@ -1,10 +1,11 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, OnInit } from '@angular/core';
 import { AuthApiService } from './auth-api.service';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 import { IAuth } from './IAuth';
 import { IUser } from './IUser';
 import { LocalStorageService } from '../../app/services/local-storage.service';
 import { IToken } from './IToken';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,50 +14,40 @@ export class AuthService {
   
   private authApiService: AuthApiService = inject(AuthApiService);
   private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private router: Router = inject(Router);
 
+  isRefresh: boolean = false;
   private userSubject: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null);
   user$: Observable<IUser | null> = this.userSubject.asObservable();
-  private tokens: IToken | null = null;
   private readonly TOKENS_KEY: string = 'tokens';
+  private tokens: IToken | null = this.localStorageService.getItem(this.TOKENS_KEY);
 
   loginUser(login: string, password: string): Observable<IUser> {
-    const tokensFromLocalStorage: IToken | null = this.localStorageService.getItem(this.TOKENS_KEY);
-
-    if (tokensFromLocalStorage) {
-      return this.authApiService.getUser(tokensFromLocalStorage.accessToken)
-        .pipe(
-          tap((user: IUser) => {
-            console.log(`get user: ${user}`)
-            console.log(`get user: ${tokensFromLocalStorage}`)
-            this.setUser(user);
-            this.tokens = tokensFromLocalStorage;
-          })
-        );
-      } else {
-        return this.authApiService.loginUser(login, password)
-        .pipe(
-          tap((auth: IAuth) => {
-            console.log(`login user: ${auth}`)
-            this.setUser(auth);
-            this.saveToken({ accessToken: auth.accessToken, refreshToken: auth.refreshToken });
-          })
-        );
-    }
+    return this.authApiService.loginUser(login, password)
+      .pipe(
+        tap((auth: IAuth) => {
+          this.setUser(auth);
+          this.saveTokens({ accessToken: auth.accessToken, refreshToken: auth.refreshToken });
+        })
+      );
   }
 
-  saveToken(newTokens: IToken): void {
+  saveTokens(newTokens: IToken): void {
     this.tokens = newTokens;
     this.localStorageService.setItem(this.TOKENS_KEY, this.tokens);
   }
 
   getTokens(): IToken | null {
+    if (!this.tokens) {
+      this.tokens = this.localStorageService.getItem(this.TOKENS_KEY);
+    }
     return this.tokens;
   }
 
-  refreshTokens(refreshToken: string): Observable<IToken> {
-    return this.authApiService.refreshTokens(refreshToken)
+  refreshTokens(): Observable<IToken> {
+    return this.authApiService.refreshTokens(this.tokens!.refreshToken)
       .pipe(
-        tap((tokens: IToken) => this.saveToken(tokens))
+        tap((tokens: IToken) => this.saveTokens(tokens))
       );
   }
 
@@ -64,10 +55,34 @@ export class AuthService {
     this.userSubject.next(newUser);
   }
 
+  getUser(): Observable<IUser> {
+    return this.authApiService.getUser()
+      .pipe(
+        tap((user: IUser) => {
+          this.setUser(user);
+        })
+      );
+  }
+
   logout(): void {
     this.localStorageService.removeItem(this.TOKENS_KEY);
     this.userSubject.next(null);
     this.tokens = null;
+    this.router.navigate(['/login']);
+  }
+
+  initAuth(): Observable<IUser | null> {
+    if (this.tokens) {
+      return this.authApiService.getUser()
+        .pipe(
+          tap((user: IUser) => this.setUser(user)),
+          catchError(() => {
+            this.logout();
+            return of();
+          })
+        );
+    }
+    return of(null);
   }
 
 }

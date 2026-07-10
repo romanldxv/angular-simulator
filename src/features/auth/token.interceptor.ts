@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
-import { catchError, switchMap, throwError } from 'rxjs';
+import { catchError, finalize, of, switchMap, tap, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { IToken } from './IToken';
 import { AuthService } from './auth.service';
@@ -11,32 +11,47 @@ export const tokenInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, n
 
   const tokens: IToken | null = authService.getTokens();
   let newReq: HttpRequest<unknown> = req;
-
-  function setAccessToken(newToken: string): HttpRequest<unknown> {
+  console.log(tokens);
+  
+  function addAccessToken(newToken: string): HttpRequest<unknown> {
     return req.clone({ 
       setHeaders: { Authorization: `Bearer ${ newToken }` } 
     });
   }
-
-  if (tokens && !(req.url.includes('/login') || req.url.includes('/refresh'))) {
-    setAccessToken(tokens.accessToken);
+  
+  if (!tokens) {
+    return next(req);
   }
 
-  return next(newReq)
+  if (authService.isRefresh) {
+    return next(req)
+      .pipe(
+        catchError(() => {
+          authService.isRefresh = false;
+          authService.logout();
+          return of();
+        })
+      );
+  }
+
+  return next(addAccessToken(tokens!.accessToken))
     .pipe(
+      tap(() => console.log('отправляю запрос..')),
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          return authService.refreshTokens(tokens!.refreshToken)
-            .pipe(
-              switchMap((tokens: IToken) => {
-                setAccessToken(tokens.accessToken);
-                return next(newReq);
-              }),
-              catchError((error: HttpErrorResponse) => {
-                authService.logout();
-                return throwError(() => error);
-              })
-            );
+          if (!authService.isRefresh) {
+            authService.isRefresh = true;
+            return authService.refreshTokens()
+              .pipe(
+                switchMap((tokens: IToken) => {
+                  const newReq = addAccessToken(tokens.accessToken);
+                  return next(newReq);
+                }),
+                finalize(() => authService.isRefresh = false)
+              );
+          }
+          const newReq = addAccessToken(tokens!.accessToken);
+          return next(newReq);
         } else {
           toastService.showError('Не удалось выполнить запрос');
           return throwError(() => error);

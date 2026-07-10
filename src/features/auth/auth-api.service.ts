@@ -17,7 +17,7 @@ export class AuthApiService {
   loginUser(login: string, password: string): Observable<IAuth> {
     return this.http.post<IAuth>(
       `${ this.API_URL }/login`,
-      { username: login, password: password, expiresInMins: 1 }
+      { username: login, password: password }
     );
   }
 

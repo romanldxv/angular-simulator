@@ -16,10 +16,9 @@ import { AuthService } from '../features/auth/auth.service';
   styleUrl: './app.component.scss',
   providers: []
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   private localStorageService: LocalStorageService = inject(LocalStorageService);
-  private authService: AuthService = inject(AuthService);
 
   readonly LAST_VISIT_DATE_KEY: string = 'last-visit-date';
   readonly VISIT_COUNT_KEY: string = 'visit-count';
@@ -31,10 +30,6 @@ export class AppComponent implements OnInit {
   constructor() {
     this.saveLastVisitDate();
     this.saveVisitCount();
-  }
-
-  ngOnInit(): void {
-    //this.authService.initAuth();
   }
 
   private isMainColor(color: Color): boolean {

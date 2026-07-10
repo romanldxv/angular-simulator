@@ -10,8 +10,6 @@ export const tokenInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, n
   const toastService: ToastService = inject(ToastService);
 
   const tokens: IToken | null = authService.getTokens();
-  let newReq: HttpRequest<unknown> = req;
-  console.log(tokens);
   
   function addAccessToken(newToken: string): HttpRequest<unknown> {
     return req.clone({ 
@@ -34,9 +32,10 @@ export const tokenInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, n
       );
   }
 
-  return next(addAccessToken(tokens!.accessToken))
+  const newReq: HttpRequest<unknown> = addAccessToken(tokens!.accessToken);
+
+  return next(newReq)
     .pipe(
-      tap(() => console.log('отправляю запрос..')),
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           if (!authService.isRefresh) {
@@ -44,13 +43,13 @@ export const tokenInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, n
             return authService.refreshTokens()
               .pipe(
                 switchMap((tokens: IToken) => {
-                  const newReq = addAccessToken(tokens.accessToken);
+                  const newReq: HttpRequest<unknown> = addAccessToken(tokens.accessToken);
                   return next(newReq);
                 }),
                 finalize(() => authService.isRefresh = false)
               );
           }
-          const newReq = addAccessToken(tokens!.accessToken);
+          const newReq: HttpRequest<unknown> = addAccessToken(tokens!.accessToken);
           return next(newReq);
         } else {
           toastService.showError('Не удалось выполнить запрос');

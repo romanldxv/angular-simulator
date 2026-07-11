@@ -16,7 +16,6 @@ export class AuthService {
   private localStorageService: LocalStorageService = inject(LocalStorageService);
   private router: Router = inject(Router);
 
-  isRefresh: boolean = false;
   private userSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
   user$: Observable<IAuthUser | null> = this.userSubject.asObservable();
   private readonly TOKENS_KEY: string = 'tokens';
@@ -38,10 +37,7 @@ export class AuthService {
   }
 
   getTokens(): IToken | null {
-    if (!this.tokens) {
-      this.tokens = this.localStorageService.getItem(this.TOKENS_KEY);
-    }
-    return this.tokens;
+    return this.localStorageService.getItem(this.TOKENS_KEY);
   }
 
   refreshTokens(): Observable<IToken> {

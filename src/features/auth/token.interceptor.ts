@@ -5,12 +5,12 @@ import { IToken } from './IToken';
 import { AuthService } from './auth.service';
 import { ToastService } from '../../app/services/toast.service';
 
-let isRefresh: boolean = false;
 
 export const tokenInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const authService: AuthService = inject(AuthService);
   const toastService: ToastService = inject(ToastService);
-
+  
+  let isRefresh: boolean = false;
   const tokens: IToken | null = authService.getTokens();
   
   function addAccessToken(newToken: string): HttpRequest<unknown> {

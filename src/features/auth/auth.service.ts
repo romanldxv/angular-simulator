@@ -19,7 +19,6 @@ export class AuthService {
   private userSubject: BehaviorSubject<IAuthUser | null> = new BehaviorSubject<IAuthUser | null>(null);
   user$: Observable<IAuthUser | null> = this.userSubject.asObservable();
   private readonly TOKENS_KEY: string = 'tokens';
-  private tokens: IToken | null = this.localStorageService.getItem(this.TOKENS_KEY);
 
   loginUser(login: string, password: string): Observable<IAuthUser> {
     return this.authApiService.loginUser(login, password)
@@ -32,8 +31,7 @@ export class AuthService {
   }
 
   saveTokens(newTokens: IToken): void {
-    this.tokens = newTokens;
-    this.localStorageService.setItem(this.TOKENS_KEY, this.tokens);
+    this.localStorageService.setItem(this.TOKENS_KEY, newTokens);
   }
 
   getTokens(): IToken | null {
@@ -41,7 +39,8 @@ export class AuthService {
   }
 
   refreshTokens(): Observable<IToken> {
-    return this.authApiService.refreshTokens(this.tokens!.refreshToken)
+    const tokens: IToken | null = this.localStorageService.getItem(this.TOKENS_KEY);
+    return this.authApiService.refreshTokens(tokens!.refreshToken)
       .pipe(
         tap((tokens: IToken) => this.saveTokens(tokens))
       );
@@ -63,12 +62,12 @@ export class AuthService {
   logout(): void {
     this.localStorageService.removeItem(this.TOKENS_KEY);
     this.userSubject.next(null);
-    this.tokens = null;
     this.router.navigate(['/login']);
   }
 
   initAuth(): Observable<IAuthUser | null> {
-    if (this.tokens) {
+    const tokens: IToken | null = this.localStorageService.getItem(this.TOKENS_KEY);
+    if (tokens) {
       return this.authApiService.getUser()
         .pipe(
           tap((user: IAuthUser) => this.setUser(user)),

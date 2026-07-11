@@ -1,25 +1,24 @@
 import './training';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Color } from '../enums/Color';
 import { Collection } from './collection';
 import { FormsModule } from '@angular/forms';
 import { LocalStorageService } from './services/local-storage.service';
-import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "./header/header.component";
-import { FooterComponent } from "./footer/footer.component";
 import { ToastComponent } from "./toast/toast.component";
 import { LoaderComponent } from "./loader/loader.component";
+import { RouterOutlet } from '@angular/router';
+import { AuthService } from '../features/auth/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule, RouterOutlet, HeaderComponent, FooterComponent, ToastComponent, LoaderComponent],
+  imports: [FormsModule, ToastComponent, LoaderComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: []
 })
 export class AppComponent {
 
-  localStorageService: LocalStorageService = inject(LocalStorageService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
 
   readonly LAST_VISIT_DATE_KEY: string = 'last-visit-date';
   readonly VISIT_COUNT_KEY: string = 'visit-count';

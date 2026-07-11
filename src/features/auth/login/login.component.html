@@ -1,0 +1,16 @@
+<div class="wrapper">
+  <div class="from-wrapper">
+    <form class="auth-form" [formGroup]="authForm">
+      <div class="form-field">
+        <label class="fs-16">Login: </label>
+        <input type="text" formControlName="login" id="login-input">
+      </div>
+    
+      <div class="form-field">
+        <label class="fs-16">Password: </label>
+        <input type="text" formControlName="password" id="password-input">
+      </div>
+    </form>
+    <button pButton class="centered" [disabled]="authForm.invalid" (click)="onSubmit()">Войти</button>
+  </div>
+</div>

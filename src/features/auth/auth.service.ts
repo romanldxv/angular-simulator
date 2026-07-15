@@ -1,6 +1,6 @@
 import { inject, Injectable, OnInit } from '@angular/core';
 import { AuthApiService } from './auth-api.service';
-import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, switchMap, tap } from 'rxjs';
 import { IAuthResponse } from './IAuthResponse';
 import { IAuthUser } from './IAuthUser';
 import { LocalStorageService } from '../../app/services/local-storage.service';
@@ -24,8 +24,10 @@ export class AuthService {
     return this.authApiService.loginUser(login, password)
       .pipe(
         tap((auth: IAuthResponse) => {
-          this.setUser(auth);
           this.saveTokens({ accessToken: auth.accessToken, refreshToken: auth.refreshToken });
+        }),
+        switchMap(() => {
+          return this.getUser();
         })
       );
   }

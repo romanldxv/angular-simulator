@@ -11,6 +11,8 @@ export const adminGuard: CanActivateFn = () => {
 
   return authService.user$.pipe(
     first(),
-    map((user: IAuthUser | null) => user?.role === UserRole.ADMIN ? true : router.parseUrl('/404'))
+    map((user: IAuthUser | null) =>
+      user?.role === UserRole.ADMIN ? true : router.parseUrl('/404'),
+    ),
   );
 };

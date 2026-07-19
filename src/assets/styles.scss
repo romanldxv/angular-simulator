@@ -101,11 +101,11 @@
 }
 
 .green-icon svg path {
-  color: #45766A;
+  color: #45766a;
 }
 
 .blue-icon svg path {
-  color: #6276AA;
+  color: #6276aa;
 }
 
 .gradient-border {
@@ -122,7 +122,7 @@
 }
 
 @property --angle {
-  syntax: "<angle>";
+  syntax: '<angle>';
   initial-value: 0deg;
   inherits: false;
 }
@@ -144,28 +144,28 @@
 }
 
 :root {
-  --primary-color: #18121E;
-  --secondary-color: #1A3E3E;
-  --thirdary-color: #1D3939;
+  --primary-color: #18121e;
+  --secondary-color: #1a3e3e;
+  --thirdary-color: #1d3939;
   --primary-section-bg-color: var(--white-color);
-  --secondary-section-bg-color: #F3F5F4;
+  --secondary-section-bg-color: #f3f5f4;
   --primary-bg-color: var(--white-color);
   --header-bg-color: #47525b;
-  --blog-bg-color: #FDFDFD;
-  --btn-bg-color: #FDFDFD;
-  --header-btn-color: #1A3E3E;
-  --header-btn-bg-color: #FDFDFD;
-  --user-card-bg-color: #FDFDFD;
-  --coordinate-bg-color: #FDFDFD;
+  --blog-bg-color: #fdfdfd;
+  --btn-bg-color: #fdfdfd;
+  --header-btn-color: #1a3e3e;
+  --header-btn-bg-color: #fdfdfd;
+  --user-card-bg-color: #fdfdfd;
+  --coordinate-bg-color: #fdfdfd;
   --btn-disabled-bg-color: #c0c0c0;
-  --newslater-bg-color: #FDFDFD;
-  --input-placeholder-color: #18121E;
-  --copyright-bg-color: #18121E;
-  --gray-color: #F3F5F4;
-  --yellow-color: #F2BE22;
-  --white-color: #FFFFFF;
+  --newslater-bg-color: #fdfdfd;
+  --input-placeholder-color: #18121e;
+  --copyright-bg-color: #18121e;
+  --gray-color: #f3f5f4;
+  --yellow-color: #f2be22;
+  --white-color: #ffffff;
   --black-color: #000000;
-  --light-gray-color: #FDFDFD;
-  --light-orange-color: #D4A373;
-  --light-green-color: #667C7C;
+  --light-gray-color: #fdfdfd;
+  --light-orange-color: #d4a373;
+  --light-green-color: #667c7c;
 }

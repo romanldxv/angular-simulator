@@ -1,7 +1,9 @@
 <section class="main-info">
   <div class="banner"></div>
   <div class="main-info-content">
-    <h1 class="main-info-content-title lh-150">Насладись прогулкой в горах <br>с командой единомышленников</h1>
+    <h1 class="main-info-content-title lh-150">
+      Насладись прогулкой в горах <br />с командой единомышленников
+    </h1>
     <div class="search-tour container">
       <form class="search-tour-form" #selectTourForm="ngForm">
         <div class="tour-search-block">
@@ -13,12 +15,20 @@
               name="selectTour"
               required
             >
-              <option disabled [value]="undefined" selected>Локация для тура</option>
+              <option disabled [value]="undefined" selected>
+                Локация для тура
+              </option>
               @for (tourLocation of tourLocations; track tourLocation.id) {
-                <option class="tour-select-option">{{ tourLocation.title }}</option>
+                <option class="tour-select-option">
+                  {{ tourLocation.title }}
+                </option>
               }
             </select>
-            <fa-icon [icon]="faAngleDown" size="lg" class="white-icon"></fa-icon>
+            <fa-icon
+              [icon]="faAngleDown"
+              size="lg"
+              class="white-icon"
+            ></fa-icon>
           </div>
           <label class="select-description lh-150">выберите из списка</label>
         </div>
@@ -31,7 +41,7 @@
               name="inputTourDate"
               [(ngModel)]="selectedTourDate"
               required
-            >
+            />
             <fa-icon [icon]="faCalendar" size="lg" class="white-icon"></fa-icon>
           </div>
           <label class="select-description lh-150">укажите диапазон</label>
@@ -46,11 +56,25 @@
               required
             >
               <option disabled [value]="undefined" selected>Участники</option>
-              @for (tourParticipant of tourParticipants; track tourParticipant.id) {
-                <option class="tour-select-option">{{ tourParticipant.minCount + '-' + tourParticipant.maxCount + ' человек' }}</option>
+              @for (
+                tourParticipant of tourParticipants;
+                track tourParticipant.id
+              ) {
+                <option class="tour-select-option">
+                  {{
+                    tourParticipant.minCount +
+                      '-' +
+                      tourParticipant.maxCount +
+                      ' человек'
+                  }}
+                </option>
               }
             </select>
-            <fa-icon [icon]="faAngleDown" size="lg" class="white-icon"></fa-icon>
+            <fa-icon
+              [icon]="faAngleDown"
+              size="lg"
+              class="white-icon"
+            ></fa-icon>
           </div>
           <label class="select-description lh-150">выберите из списка</label>
         </div>
@@ -66,7 +90,13 @@
     </div>
     <div class="live-input-block">
       <div class="live-input-container">
-        <input type="text" class="live-input" id="live-input" [(ngModel)]="liveInputText" placeholder="live input">
+        <input
+          type="text"
+          class="live-input"
+          id="live-input"
+          [(ngModel)]="liveInputText"
+          placeholder="live input"
+        />
         <fa-icon [icon]="faAngleRight" size="lg" class="white-icon"></fa-icon>
       </div>
       <p class="live-text">{{ liveInputText }}</p>
@@ -77,14 +107,36 @@
 <section class="tour-program-container primary-section-bg">
   <div class="tour-program container">
     <div class="content-images">
-      <img class="forward-img" src="/images/tour-program/house-near-mountains.png" alt="tour program forward">
-      <img class="rearward-img" src="/images/tour-program/snowy-mountain.png" alt="tour program rearward">
+      <img
+        class="forward-img"
+        src="/images/tour-program/house-near-mountains.png"
+        alt="tour program forward"
+      />
+      <img
+        class="rearward-img"
+        src="/images/tour-program/snowy-mountain.png"
+        alt="tour program rearward"
+      />
     </div>
     <div class="content-text">
       <p class="super-title fs-24">о нашем походе</p>
-      <h2 class="title lh-120 fs-32 extra-bold">Исследуйте все горные массивы мира вместе с нами</h2>
-      <p class="title-description lh-150">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической латинской литературе.</p>
-      <button class="tour-program-btn" id="tour-program-btn" (click)="toastService.showError('Программа тура не найдена!')">Программа тура</button>
+      <h2 class="title lh-120 fs-32 extra-bold">
+        Исследуйте все горные массивы мира вместе с нами
+      </h2>
+      <p class="title-description lh-150">
+        Его корни уходят в один фрагмент классической латыни 45 года н.э., то
+        есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни
+        из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных
+        слов в Lorem Ipsum, "consectetur"и занялся его поисками в классической
+        латинской литературе.
+      </p>
+      <button
+        class="tour-program-btn"
+        id="tour-program-btn"
+        (click)="toastService.showError('Программа тура не найдена!')"
+      >
+        Программа тура
+      </button>
     </div>
   </div>
 </section>
@@ -94,25 +146,59 @@
     <div>
       <p class="super-title fs-24">наше предложение</p>
       <h2 class="lh-120 fs-32 extra-bold">Лучшие программы для тебя</h2>
-      <p class="title-description lh-150">Его корни уходят в один фрагмент классической латыни 45 года н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа.</p>
+      <p class="title-description lh-150">
+        Его корни уходят в один фрагмент классической латыни 45 года н.э., то
+        есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни
+        из колледжа.
+      </p>
       <div class="content-text-advantages">
         @for (advantage of advantages; track advantage.id) {
           <div class="advantage">
-            <fa-icon [icon]="advantage.iconName" class="{{ advantage.iconClassColor }}" size="2x"></fa-icon>
+            <fa-icon
+              [icon]="advantage.iconName"
+              class="{{ advantage.iconClassColor }}"
+              size="2x"
+            ></fa-icon>
             <div>
               <h5 class="advantage-title bold">{{ advantage.title }}</h5>
-              <p class="advantage-description fs-14">{{ advantage.description }}</p>
+              <p class="advantage-description fs-14">
+                {{ advantage.description }}
+              </p>
             </div>
           </div>
         }
       </div>
-      <button class="company-offer-btn" id="program-price-btn" (click)="toastService.showInfo('Стоимость программ будет добавлена позже.')">Стоимость программ</button>
+      <button
+        class="company-offer-btn"
+        id="program-price-btn"
+        (click)="
+          toastService.showInfo('Стоимость программ будет добавлена позже.')
+        "
+      >
+        Стоимость программ
+      </button>
     </div>
     <div class="content-images">
-      <img src="/images/company-offer/near-lake.png" alt="near lake" width="250">
-      <img src="/images/company-offer/walking-in-mountain.png" alt="walking in mountain" width="250">
-      <img src="/images/company-offer/snow-trip.png" alt="snow trip" width="250">
-      <img src="/images/company-offer/near-river.png" alt="near river" width="250">
+      <img
+        src="/images/company-offer/near-lake.png"
+        alt="near lake"
+        width="250"
+      />
+      <img
+        src="/images/company-offer/walking-in-mountain.png"
+        alt="walking in mountain"
+        width="250"
+      />
+      <img
+        src="/images/company-offer/snow-trip.png"
+        alt="snow trip"
+        width="250"
+      />
+      <img
+        src="/images/company-offer/near-river.png"
+        alt="near river"
+        width="250"
+      />
     </div>
   </div>
 </section>
@@ -125,11 +211,15 @@
   <div class="popular-directions container">
     @for (direction of directions; track direction.id) {
       <div class="direction">
-        <img [src]="'/images/popular-directions/' + direction.imageName + '.png'">
+        <img
+          [src]="'/images/popular-directions/' + direction.imageName + '.png'"
+        />
         <div class="direction-rating">
           <div class="rating-wrapper">
             <fa-icon [icon]="faStar" class="yellow-icon"></fa-icon>
-            <p class="rating-value fs-14 bold">{{ direction.rating | number: "1.1-1" }}</p>
+            <p class="rating-value fs-14 bold">
+              {{ direction.rating | number: '1.1-1' }}
+            </p>
           </div>
         </div>
         <div class="direction-description">
@@ -139,15 +229,15 @@
               <p class="subtitle fs-14">{{ direction.subtitle }}</p>
             </div>
             <div class="price-container">
-              <p class="fs-20 bold lh-24px">{{ direction.price + " &#36;" }}</p>
+              <p class="fs-20 bold lh-24px">{{ direction.price + ' &#36;' }}</p>
             </div>
           </div>
         </div>
       </div>
     }
   </div>
-  <button 
-    class="directions-rating-btn semi-bold fs-16 lh-20px" 
+  <button
+    class="directions-rating-btn semi-bold fs-16 lh-20px"
     id="directions-rating-btn"
   >
     Рейтинг направлений
@@ -162,20 +252,30 @@
   <div class="travel-blog container">
     @for (travelBlog of travelBlogs; track travelBlog.id) {
       <div class="blog">
-        <img [src]="'/images/travel-blog/' + travelBlog.imageName + '.png'">
+        <img [src]="'/images/travel-blog/' + travelBlog.imageName + '.png'" />
         <div class="blog-description-container">
           <div class="blog-description-container-text">
             <h3 class="title fs-24 bold">{{ travelBlog.title }}</h3>
             <p class="fs-14 lh-20px">{{ travelBlog.description }}</p>
             <div class="blog-footer">
               <p class="date fs-14 bold lh-20px">{{ travelBlog.date }}</p>
-              <a class="read-article fs-14 bold lh-20px" href="#">читать статью</a>
+              <a class="read-article fs-14 bold lh-20px" href="#"
+                >читать статью</a
+              >
             </div>
           </div>
         </div>
       </div>
     }
-    <button class="travel-blog-btn fs-16 semi-bold lh-20px" id="other-materials-btn" (click)="toastService.showWarn('Другие материалы доступны после регистрации!')">Другие материалы</button>
+    <button
+      class="travel-blog-btn fs-16 semi-bold lh-20px"
+      id="other-materials-btn"
+      (click)="
+        toastService.showWarn('Другие материалы доступны после регистрации!')
+      "
+    >
+      Другие материалы
+    </button>
   </div>
 </section>
 
@@ -185,12 +285,17 @@
     <h2 class="lh-120 fs-32 extra-bold">Делимся впечатлениями</h2>
   </div>
   <div class="gallery container">
-    <img src="/images/gallery/balloons.png">
-    <img src="/images/gallery/boats-on-coast.png">
-    <img src="/images/gallery/coast.png">
-    <img src="/images/gallery/old-map.png">
-    <img src="/images/gallery/ravine.png">
-    <img src="/images/gallery/white-map.png">
+    <img src="/images/gallery/balloons.png" />
+    <img src="/images/gallery/boats-on-coast.png" />
+    <img src="/images/gallery/coast.png" />
+    <img src="/images/gallery/old-map.png" />
+    <img src="/images/gallery/ravine.png" />
+    <img src="/images/gallery/white-map.png" />
   </div>
-  <button class="gallery-btn fs-16 semi-bold lh-20px" id="to-company-pinterest-btn">Наш pinterest</button>
+  <button
+    class="gallery-btn fs-16 semi-bold lh-20px"
+    id="to-company-pinterest-btn"
+  >
+    Наш pinterest
+  </button>
 </section>

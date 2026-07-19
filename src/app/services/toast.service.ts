@@ -7,8 +7,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ToastService {
-  
-  private toastsSubject: BehaviorSubject<IToast[]> = new BehaviorSubject<IToast[]>([]);
+  private toastsSubject: BehaviorSubject<IToast[]> = new BehaviorSubject<
+    IToast[]
+  >([]);
   toasts$: Observable<IToast[]> = this.toastsSubject.asObservable();
 
   getToasts(): IToast[] {
@@ -16,7 +17,9 @@ export class ToastService {
   }
 
   closeToast(closingToast: IToast): void {
-    const newToasts: IToast[] = this.toastsSubject.getValue().filter((toast: IToast) => toast.id !== closingToast.id);
+    const newToasts: IToast[] = this.toastsSubject
+      .getValue()
+      .filter((toast: IToast) => toast.id !== closingToast.id);
     this.toastsSubject.next(newToasts);
   }
 
@@ -37,7 +40,11 @@ export class ToastService {
   }
 
   private addToast(toastType: ToastType, toastText: string): void {
-    const newToast: IToast = { id: Date.now(), type: toastType, text: toastText };
+    const newToast: IToast = {
+      id: Date.now(),
+      type: toastType,
+      text: toastText,
+    };
     const currentToasts: IToast[] = this.getToasts();
     this.toastsSubject.next([newToast, ...currentToasts]);
 
@@ -45,5 +52,4 @@ export class ToastService {
       this.closeToast(newToast);
     }, 5000);
   }
-  
 }

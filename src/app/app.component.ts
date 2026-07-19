@@ -4,8 +4,8 @@ import { Color } from '../enums/Color';
 import { Collection } from './collection';
 import { FormsModule } from '@angular/forms';
 import { LocalStorageService } from './services/local-storage.service';
-import { ToastComponent } from "./toast/toast.component";
-import { LoaderComponent } from "./loader/loader.component";
+import { ToastComponent } from './toast/toast.component';
+import { LoaderComponent } from './loader/loader.component';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from '../features/auth/auth.service';
 
@@ -14,11 +14,11 @@ import { AuthService } from '../features/auth/auth.service';
   imports: [FormsModule, ToastComponent, LoaderComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  providers: []
+  providers: [],
 })
 export class AppComponent {
-
-  private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private localStorageService: LocalStorageService =
+    inject(LocalStorageService);
 
   readonly LAST_VISIT_DATE_KEY: string = 'last-visit-date';
   readonly VISIT_COUNT_KEY: string = 'visit-count';
@@ -43,8 +43,8 @@ export class AppComponent {
   }
 
   private saveVisitCount(): void {
-    let visitCount: number = (this.localStorageService.getItem<number>(this.VISIT_COUNT_KEY) || 0) + 1;
+    let visitCount: number =
+      (this.localStorageService.getItem<number>(this.VISIT_COUNT_KEY) || 0) + 1;
     this.localStorageService.setItem(this.VISIT_COUNT_KEY, visitCount);
   }
-
 }

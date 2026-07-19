@@ -4,7 +4,7 @@
   padding-bottom: 120px;
   display: flex;
   flex-direction: column;
-  
+
   .title {
     margin-bottom: 80px;
     text-align: center;
@@ -12,7 +12,7 @@
     line-height: 30px;
     color: var(--thirdary-color);
   }
-  
+
   .search-users-input {
     margin-inline: auto;
   }
@@ -20,7 +20,7 @@
   .users-amount-text {
     margin-block: 30px;
   }
-  
+
   .users-container {
     display: flex;
     justify-content: center;
@@ -30,13 +30,13 @@
     min-height: 1470px;
     padding-top: 50px;
   }
-  
+
   .empty-users-container {
     height: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #B15757;
+    background-color: #b15757;
     padding-inline: 30px;
     color: var(--white-color);
     border-radius: 20px;

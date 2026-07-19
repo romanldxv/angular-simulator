@@ -1,4 +1,8 @@
-<div class="user-card bg-white" hoverGradientBorder [gradientConfiguration]="gradientConfiguration">
+<div
+  class="user-card bg-white"
+  hoverGradientBorder
+  [gradientConfiguration]="gradientConfiguration"
+>
   <div class="user-name-container">
     <h3 class="user-name fs-26 extra-bold">{{ user.name | uppercase }}</h3>
     <p class="username bold">{{ user.username }}</p>
@@ -21,7 +25,9 @@
       </div>
       <div class="data-list-item">
         <h5 class="subtitle fs-14">Веб-сайт:</h5>
-        <p class="light-orange fs-14 bold">{{ fillEmptyField(user.website) }}</p>
+        <p class="light-orange fs-14 bold">
+          {{ fillEmptyField(user.website) }}
+        </p>
       </div>
     </div>
 
@@ -60,7 +66,7 @@
       <h4 class="title extra-bold">Место работы</h4>
       <div class="separator"></div>
     </div>
-    
+
     <div class="data-list">
       <div class="data-list-item">
         <h5 class="subtitle fs-14">Компания:</h5>
@@ -68,7 +74,9 @@
       </div>
       <div class="data-list-item">
         <h5 class="subtitle fs-14">Миссия:</h5>
-        <p class="mission bold">{{ fillEmptyField(user.company.catchPhrase) }}</p>
+        <p class="mission bold">
+          {{ fillEmptyField(user.company.catchPhrase) }}
+        </p>
       </div>
       <div class="data-list-item">
         <h5 class="subtitle fs-14">Специализация:</h5>
@@ -76,9 +84,9 @@
       </div>
     </div>
   </div>
-  <button 
-    class="delete-user-btn" 
-    id="delete-user-btn" 
+  <button
+    class="delete-user-btn"
+    id="delete-user-btn"
     (click)="handleDeleteUser(user.id)"
     hoverBold
   >

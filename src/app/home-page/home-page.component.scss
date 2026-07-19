@@ -25,7 +25,7 @@
     }
 
     .search-tour {
-      background-color: #FFFFFF33;
+      background-color: #ffffff33;
       backdrop-filter: blur(6px);
       border-radius: 10px;
       height: 161px;
@@ -53,7 +53,7 @@
 
             .tour-select {
               @include default-input;
-  
+
               &-option {
                 color: black;
                 margin-left: 16px;
@@ -63,7 +63,7 @@
 
             .tour-input {
               @include default-input;
-  
+
               &::placeholder {
                 color: var(--light-gray-color);
                 line-height: 150%;
@@ -71,7 +71,7 @@
             }
           }
         }
-      
+
         .select-description {
           font-size: 14px;
           font-weight: 400;
@@ -210,7 +210,7 @@
     gap: 90px;
     margin: 0 auto;
     height: 591px;
-    transition: transform .5s;
+    transition: transform 0.5s;
 
     .title-description {
       height: 81px;
@@ -291,7 +291,7 @@
         width: 65px;
         height: 32px;
         border-radius: 4px;
-        background-color: #FDFDFD66;
+        background-color: #fdfdfd66;
         backdrop-filter: blur(4px);
         padding: 4px 8px;
 
@@ -308,7 +308,7 @@
       }
 
       .direction-description {
-        background-color: #FFFFFF33;
+        background-color: #ffffff33;
         backdrop-filter: blur(6px);
         position: absolute;
         bottom: 0;
@@ -319,7 +319,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
         * {
           color: var(--light-gray-color);
         }
@@ -332,10 +332,10 @@
           .subtitle {
             line-height: 18px;
           }
-  
+
           .price-container {
             border-radius: 4px;
-            background-color: #FFFFFF4D;
+            background-color: #ffffff4d;
             width: 86px;
             height: 40px;
             display: flex;
@@ -393,7 +393,7 @@
         width: 294px;
         height: 280px;
         padding-block: 16px;
-        
+
         &-text {
           position: relative;
           height: 248px;
@@ -402,18 +402,18 @@
             line-height: 32px;
             margin-bottom: 24px;
           }
-  
+
           .blog-footer {
             position: absolute;
             bottom: 0;
             display: flex;
             justify-content: space-between;
             width: 294px;
-  
+
             .date {
               color: var(--yellow-color);
             }
-  
+
             .read-article {
               color: var(--secondary-color);
               text-decoration: none;

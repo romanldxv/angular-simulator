@@ -1,9 +1,9 @@
 <div class="flex-center centered wrapper">
-  @if(isLoading) {
+  @if (isLoading) {
     <p-table
       [value]="[1, 2, 3]"
       [tableStyle]="{ 'min-width': '50rem' }"
-      showGridlines 
+      showGridlines
     >
       <ng-template #header>
         <tr>
@@ -12,30 +12,30 @@
           <th>Views</th>
         </tr>
       </ng-template>
-  
+
       <ng-template #body let-post>
         <tr>
           <td>
-            <p-skeleton/>
+            <p-skeleton />
           </td>
           <td>
             <p-skeleton />
           </td>
           <td>
-            <p-skeleton/>
+            <p-skeleton />
           </td>
         </tr>
       </ng-template>
     </p-table>
   } @else {
-    <p-table 
-      [value]="(posts$ | async) ?? []" 
+    <p-table
+      [value]="(posts$ | async) ?? []"
       [tableStyle]="{ 'min-width': '50rem' }"
       [contextMenu]="cm"
       [(contextMenuSelection)]="selectedPost"
       dataKey="id"
       selectionMode="single"
-      showGridlines 
+      showGridlines
       paginator="true"
       [first]="first"
       [rows]="rowsOnPage"
@@ -43,7 +43,7 @@
       [rowsPerPageOptions]="[5, 10, 20]"
       [lazy]="true"
       [showCurrentPageReport]="true"
-      [currentPageReportTemplate]="`Showing ${ first + 1 } to ${ last } of ${ totalRecords } entries`"
+      [currentPageReportTemplate]="`Showing ${first + 1} to ${last} of ${totalRecords} entries`"
       (onPage)="onPageChange($event)"
     >
       <ng-template pTemplate="header">
@@ -54,7 +54,6 @@
         </tr>
       </ng-template>
 
-  
       <ng-template pTemplate="body" let-post>
         <tr (dblclick)="viewPage(post.id)" [pContextMenuRow]="post">
           <td>{{ post.title }}</td>
@@ -66,4 +65,9 @@
   }
 </div>
 
-<p-contextMenu #cm [model]="contextMenuItems" [triggerEvent]="'click'" (onHide)="selectedPost = null"></p-contextMenu>
+<p-contextMenu
+  #cm
+  [model]="contextMenuItems"
+  [triggerEvent]="'click'"
+  (onHide)="selectedPost = null"
+></p-contextMenu>

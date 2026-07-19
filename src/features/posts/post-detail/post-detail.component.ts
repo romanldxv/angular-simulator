@@ -7,10 +7,9 @@ import { IPost } from '../../../interfaces/IPost';
   imports: [],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss',
-  standalone: true
+  standalone: true,
 })
 export class PostDetailComponent implements OnInit {
-
   private route: ActivatedRoute = inject(ActivatedRoute);
 
   post!: IPost;
@@ -19,5 +18,4 @@ export class PostDetailComponent implements OnInit {
     const postId: string | null = this.route.snapshot.paramMap.get('id');
     this.post = this.route.snapshot.data['post'];
   }
-
 }

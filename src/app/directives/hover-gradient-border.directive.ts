@@ -1,23 +1,33 @@
-import { Directive, ElementRef, HostBinding, HostListener, inject, Input, OnDestroy, Renderer2 } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostBinding,
+  HostListener,
+  inject,
+  Input,
+  OnDestroy,
+  Renderer2,
+} from '@angular/core';
 import { IGradientConfiguration } from '../../interfaces/IGradientConfiguration';
 
 @Directive({
   selector: '[hoverGradientBorder]',
 })
 export class HoverGradientBorderDirective implements OnDestroy {
-
   @Input() gradientConfiguration: IGradientConfiguration = {
     delay: 1000,
     colors: ['#FF0000', 'green', '#FFF000'],
-    thickness: 5
+    thickness: 5,
   };
 
-  @HostBinding('style.--border-thickness') borderThickness: string = `${ this.gradientConfiguration.thickness }px`;
-  @HostBinding('style.--gradient-colors') gradientColors: string = this.gradientConfiguration.colors!.join(', ');
+  @HostBinding('style.--border-thickness') borderThickness: string =
+    `${this.gradientConfiguration.thickness}px`;
+  @HostBinding('style.--gradient-colors') gradientColors: string =
+    this.gradientConfiguration.colors!.join(', ');
 
   private renderer: Renderer2 = inject(Renderer2);
   private elementRef: ElementRef = inject(ElementRef);
-  
+
   private timerId!: number;
   private isHover: boolean = false;
 
@@ -26,7 +36,10 @@ export class HoverGradientBorderDirective implements OnDestroy {
     this.isHover = true;
     this.timerId = setTimeout(() => {
       if (this.isHover) {
-        this.renderer.addClass(this.elementRef.nativeElement, 'gradient-border');
+        this.renderer.addClass(
+          this.elementRef.nativeElement,
+          'gradient-border',
+        );
       }
     }, this.gradientConfiguration.delay);
   }
@@ -43,5 +56,4 @@ export class HoverGradientBorderDirective implements OnDestroy {
       clearTimeout(this.timerId);
     }
   }
-
 }

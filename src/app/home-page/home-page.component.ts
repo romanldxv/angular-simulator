@@ -7,8 +7,16 @@ import { IDirection } from '../../interfaces/IDirection';
 import { IAdvatage } from '../../interfaces/IAdvantage';
 import { ITravelBlog } from '../../interfaces/ITravelBlog';
 import { ToastService } from '../services/toast.service';
-import { faAngleDown, faAngleRight, faCompass, faShieldHalved, faStar, faTag, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { FaIconComponent } from "@fortawesome/angular-fontawesome";
+import {
+  faAngleDown,
+  faAngleRight,
+  faCompass,
+  faShieldHalved,
+  faStar,
+  faTag,
+  IconDefinition,
+} from '@fortawesome/free-solid-svg-icons';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
@@ -18,7 +26,6 @@ import { faCalendar } from '@fortawesome/free-regular-svg-icons';
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
-
   toastService: ToastService = inject(ToastService);
 
   liveInputText!: string;
@@ -38,37 +45,40 @@ export class HomePageComponent {
     { id: 2, title: 'Ущелье Руфабго' },
     { id: 3, title: 'Гора Фишт' },
     { id: 4, title: 'Гора Чегет' },
-    { id: 5, title: 'Софийские озера' }
+    { id: 5, title: 'Софийские озера' },
   ];
 
   tourParticipants: ITourParticipant[] = [
     { id: 1, minCount: 4, maxCount: 6 },
     { id: 2, minCount: 6, maxCount: 10 },
-    { id: 3, minCount: 10, maxCount: 18 }
+    { id: 3, minCount: 10, maxCount: 18 },
   ];
 
   advantages: IAdvatage[] = [
     {
       id: 1,
       title: 'Опытный гид',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       iconName: this.faCompass,
-      iconClassColor: 'green-icon'
+      iconClassColor: 'green-icon',
     },
     {
       id: 2,
       title: 'Безопасный поход',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       iconName: this.faShield,
-      iconClassColor: 'blue-icon'
+      iconClassColor: 'blue-icon',
     },
     {
       id: 3,
       title: 'Лояльные цены',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       iconName: this.faPrice,
-      iconClassColor: 'yellow-icon'
-    }
+      iconClassColor: 'yellow-icon',
+    },
   ];
 
   directions: IDirection[] = [
@@ -78,7 +88,7 @@ export class HomePageComponent {
       subtitle: 'романтическое приключение',
       rating: 4.9,
       price: 480,
-      imageName: 'lake-near-mountains'
+      imageName: 'lake-near-mountains',
     },
     {
       id: 2,
@@ -86,7 +96,7 @@ export class HomePageComponent {
       subtitle: 'в компании друзей',
       rating: 4.5,
       price: 500,
-      imageName: 'night-in-mountains'
+      imageName: 'night-in-mountains',
     },
     {
       id: 3,
@@ -94,39 +104,41 @@ export class HomePageComponent {
       subtitle: 'для тех, кто забоится о себе',
       rating: 5.0,
       price: 230,
-      imageName: 'stretching-in-mountains'
-    }
+      imageName: 'stretching-in-mountains',
+    },
   ];
 
   travelBlogs: ITravelBlog[] = [
     {
       id: 1,
       title: 'Красивая Италия, какая она в реальности?',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
       date: '01/04/2023',
-      imageName: 'beautiful-italy'
+      imageName: 'beautiful-italy',
     },
     {
       id: 2,
       title: 'Долой сомнения! Весь мир открыт для вас!',
-      description: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
       date: '01/04/2023',
-      imageName: 'world-open'
+      imageName: 'world-open',
     },
     {
       id: 3,
       title: 'Как подготовиться к путешествию в одиночку? ',
-      description: 'Для современного мира базовый вектор развития предполагает.',
+      description:
+        'Для современного мира базовый вектор развития предполагает.',
       date: '01/04/2023',
-      imageName: 'traveling-alone'
+      imageName: 'traveling-alone',
     },
     {
       id: 4,
       title: 'Индия ... летим?',
       description: 'Для современного мира базовый.',
       date: '01/04/2023',
-      imageName: 'india'
-    }
+      imageName: 'india',
+    },
   ];
-
 }

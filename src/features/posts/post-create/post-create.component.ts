@@ -1,5 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { IPost } from '../../../interfaces/IPost';
 import { PostService } from '../post.service';
 import { tap, catchError, throwError } from 'rxjs';
@@ -14,7 +19,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './post-create.component.scss',
 })
 export class PostCreateComponent {
-
   private postService: PostService = inject(PostService);
   private toastService: ToastService = inject(ToastService);
   private router: Router = inject(Router);
@@ -26,7 +30,7 @@ export class PostCreateComponent {
     tags: [[], [Validators.required]],
     reactions: this.fb.group({
       likes: ['', [Validators.required]],
-      dislikes: ['', [Validators.required]]
+      dislikes: ['', [Validators.required]],
     }),
     views: ['', [Validators.required]],
   });
@@ -35,16 +39,17 @@ export class PostCreateComponent {
     if (this.createPostForm.invalid) {
       return;
     }
-    
+
     const newPost: IPost = { ...this.createPostForm.value, userId: 5 };
-    this.postService.addPost(newPost)
+    this.postService
+      .addPost(newPost)
       .pipe(
         tap(() => this.router.navigate(['/posts'])),
         catchError((error: HttpErrorResponse) => {
           this.toastService.showError('Неудалось добавить пост');
           return throwError(() => error);
-        })
-      ).subscribe();
+        }),
+      )
+      .subscribe();
   }
-
 }

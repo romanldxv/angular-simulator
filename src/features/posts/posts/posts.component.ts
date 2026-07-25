@@ -2,7 +2,15 @@ import { Component, inject, OnInit } from '@angular/core';
 import { TableModule, TablePageEvent } from 'primeng/table';
 import { SkeletonModule } from 'primeng/skeleton';
 import { PostService } from '../post.service';
-import { finalize, Observable, tap, catchError, throwError, take, switchMap } from 'rxjs';
+import {
+  finalize,
+  Observable,
+  tap,
+  catchError,
+  throwError,
+  take,
+  switchMap,
+} from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { IPost } from '../../../interfaces/IPost';
 import { ContextMenuModule } from 'primeng/contextmenu';
@@ -19,10 +27,9 @@ import { LoaderService } from '../../../app/services/loader.service';
   imports: [TableModule, SkeletonModule, AsyncPipe, ContextMenuModule],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.scss',
-  standalone: true
+  standalone: true,
 })
 export class PostsComponent implements OnInit {
-
   private postService: PostService = inject(PostService);
   private dialogService: DialogService = inject(DialogService);
   private toastService: ToastService = inject(ToastService);
@@ -41,11 +48,12 @@ export class PostsComponent implements OnInit {
   contextMenuItems: MenuItem[] = [
     { label: 'View', command: () => this.viewPage(this.selectedPost?.id!) },
     { label: 'Edit', command: () => this.onEditPost() },
-    { label: 'Delete', command: () => this.deletePost(this.selectedPost?.id!) }
+    { label: 'Delete', command: () => this.deletePost(this.selectedPost?.id!) },
   ];
 
   ngOnInit(): void {
-    this.postService.loadPosts()
+    this.postService
+      .loadPosts()
       .pipe(
         tap((posts: IPost[]) => {
           this.postService.setPosts(posts);
@@ -55,42 +63,48 @@ export class PostsComponent implements OnInit {
           this.toastService.showError('Неудалось загрузить посты');
           return throwError(() => error);
         }),
-        finalize(() => this.isLoading = false)
-      ).subscribe();
+        finalize(() => (this.isLoading = false)),
+      )
+      .subscribe();
   }
 
   viewPage(postId: number): void {
-    this.router.navigate([`/posts/${ postId }`]);
+    this.router.navigate([`/posts/${postId}`]);
   }
 
   deletePost(postId: number): void {
     this.loaderService.showLoader();
-    this.postService.deletePost(postId)
+    this.postService
+      .deletePost(postId)
       .pipe(
-        tap(() => this.totalRecords = this.postService.total),
+        tap(() => (this.totalRecords = this.postService.total)),
         catchError((error: HttpErrorResponse) => {
           this.toastService.showError('Неудалось удалить пост');
           return throwError(() => error);
         }),
-        finalize(() => this.loaderService.hideLoader())
-      ).subscribe();
+        finalize(() => this.loaderService.hideLoader()),
+      )
+      .subscribe();
   }
 
   onEditPost(): void {
-    this.dialogService.open(PostEditDialogComponent, { 
-      data: this.selectedPost,
-      header: 'Edit post',
-      closable: true
-    })?.onClose.pipe(
-      tap(() => this.loaderService.showLoader()),
-      take(1),
-      switchMap((post: IPost) => this.postService.updatePost(post)),
-      catchError((error: HttpErrorResponse) => {
-        this.toastService.showError('Неудалось изменить пост');
-        return throwError(() => error);
-      }),
-      finalize(() => this.loaderService.hideLoader())
-    ).subscribe();
+    this.dialogService
+      .open(PostEditDialogComponent, {
+        data: this.selectedPost,
+        header: 'Edit post',
+        closable: true,
+      })
+      ?.onClose.pipe(
+        tap(() => this.loaderService.showLoader()),
+        take(1),
+        switchMap((post: IPost) => this.postService.updatePost(post)),
+        catchError((error: HttpErrorResponse) => {
+          this.toastService.showError('Неудалось изменить пост');
+          return throwError(() => error);
+        }),
+        finalize(() => this.loaderService.hideLoader()),
+      )
+      .subscribe();
   }
 
   onPageChange(event: TablePageEvent): void {
@@ -100,17 +114,19 @@ export class PostsComponent implements OnInit {
     this.rowsOnPage = event.rows;
     this.last = this.first + this.rowsOnPage;
 
-    this.postService.loadPosts(event.rows, event.first).pipe(
-      tap((posts: IPost[]) => {
-        this.postService.setPosts(posts);
-        this.totalRecords = this.postService.total;
-      }),
-      catchError((error: HttpErrorResponse) => {
-        this.toastService.showError('Неудалось загрузить посты');
-        return throwError(() => error);
-      }),
-      finalize(() => this.isLoading = false)
-    ).subscribe();
+    this.postService
+      .loadPosts(event.rows, event.first)
+      .pipe(
+        tap((posts: IPost[]) => {
+          this.postService.setPosts(posts);
+          this.totalRecords = this.postService.total;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          this.toastService.showError('Неудалось загрузить посты');
+          return throwError(() => error);
+        }),
+        finalize(() => (this.isLoading = false)),
+      )
+      .subscribe();
   }
-
 }

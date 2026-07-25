@@ -8,19 +8,19 @@ import { IPost } from '../../interfaces/IPost';
   providedIn: 'root',
 })
 export class PostService {
-  
   private postApiService: PostApiService = inject(PostApiService);
 
-  private postsSubject: BehaviorSubject<IPost[]> = new BehaviorSubject<IPost[]>([]);
+  private postsSubject: BehaviorSubject<IPost[]> = new BehaviorSubject<IPost[]>(
+    [],
+  );
   posts$: Observable<IPost[]> = this.postsSubject.asObservable();
   total!: number;
 
   loadPosts(limit: number = 0, skip: number = 0): Observable<IPost[]> {
-    return this.postApiService.getPosts(limit, skip)
-      .pipe(
-        tap((postResponse: IPostResponse) => this.total = postResponse.total),
-        map((postResponse: IPostResponse) => postResponse.posts)
-      );
+    return this.postApiService.getPosts(limit, skip).pipe(
+      tap((postResponse: IPostResponse) => (this.total = postResponse.total)),
+      map((postResponse: IPostResponse) => postResponse.posts),
+    );
   }
 
   setPosts(newPosts: IPost[]): void {
@@ -36,37 +36,37 @@ export class PostService {
   }
 
   addPost(newPost: IPost): Observable<IPost> {
-    return this.postApiService.addPost(newPost)
-      .pipe(
-        tap((addedPost: IPost) => {
-          const posts: IPost[] = this.getPosts();
-          this.setPosts([...posts, addedPost]);
-          this.total++;
-        })
-      );
+    return this.postApiService.addPost(newPost).pipe(
+      tap((addedPost: IPost) => {
+        const posts: IPost[] = this.getPosts();
+        this.setPosts([...posts, addedPost]);
+        this.total++;
+      }),
+    );
   }
 
   updatePost(post: IPost): Observable<IPost> {
-    return this.postApiService.updatePost(post)
-      .pipe(
-        tap((updatedPost: IPost) => {
-          const posts: IPost[] = this.getPosts();
-          const updatedPosts: IPost[] = posts.map((post: IPost) => post.id === updatedPost.id ? updatedPost : post);
-          this.setPosts(updatedPosts);
-        })
-      );
+    return this.postApiService.updatePost(post).pipe(
+      tap((updatedPost: IPost) => {
+        const posts: IPost[] = this.getPosts();
+        const updatedPosts: IPost[] = posts.map((post: IPost) =>
+          post.id === updatedPost.id ? updatedPost : post,
+        );
+        this.setPosts(updatedPosts);
+      }),
+    );
   }
 
   deletePost(postId: number): Observable<IPost> {
-    return this.postApiService.deletePost(postId)
-      .pipe(
-        tap(() => {
-          const posts: IPost[] = this.getPosts();
-          const updatedPosts: IPost[] = posts.filter((post: IPost) => post.id !== postId);
-          this.setPosts(updatedPosts);
-          this.total--;
-        })
-      );
+    return this.postApiService.deletePost(postId).pipe(
+      tap(() => {
+        const posts: IPost[] = this.getPosts();
+        const updatedPosts: IPost[] = posts.filter(
+          (post: IPost) => post.id !== postId,
+        );
+        this.setPosts(updatedPosts);
+        this.total--;
+      }),
+    );
   }
-
 }

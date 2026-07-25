@@ -8,7 +8,7 @@
     display: flex;
     gap: 64px;
     height: 196px;
-    box-shadow: 0px 0px 15px 0px #18121E1F;
+    box-shadow: 0px 0px 15px 0px #18121e1f;
     padding-top: 40px;
     padding-left: 100px;
     margin-inline: auto;
@@ -85,7 +85,7 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      
+
       .list-element {
         position: relative;
         text-decoration: none;
@@ -97,7 +97,7 @@
           margin-left: 12px;
         }
       }
-      
+
       * {
         color: var(--light-gray-color);
       }

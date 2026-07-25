@@ -9,19 +9,23 @@ import { IGradientConfiguration } from '../../interfaces/IGradientConfiguration'
 
 @Component({
   selector: 'app-user-card',
-  imports: [UpperCasePipe, PhonePipe, HoverBoldDirective, HoverGradientBorderDirective],
+  imports: [
+    UpperCasePipe,
+    PhonePipe,
+    HoverBoldDirective,
+    HoverGradientBorderDirective,
+  ],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss',
 })
 export class UserCardComponent {
-
   @Input({ required: true }) user!: IUser;
   @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
 
   phoneMode: typeof PhoneMode = PhoneMode;
-  gradientConfiguration: IGradientConfiguration = { 
-    delay: 500, 
-    thickness: 7 
+  gradientConfiguration: IGradientConfiguration = {
+    delay: 500,
+    thickness: 7,
   };
 
   handleDeleteUser(userId: number): void {
@@ -31,5 +35,4 @@ export class UserCardComponent {
   fillEmptyField(field: string): string {
     return field || 'Неизвестно';
   }
-
 }

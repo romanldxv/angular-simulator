@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LocalStorageService {
-  
   setItem<T>(itemKey: string, value: T): void {
-    const item: string = typeof value === 'string' ? value : JSON.stringify(value);
+    const item: string =
+      typeof value === 'string' ? value : JSON.stringify(value);
     localStorage.setItem(itemKey, item);
   }
 
@@ -30,5 +30,4 @@ export class LocalStorageService {
   clearStorage(): void {
     localStorage.clear();
   }
-
 }

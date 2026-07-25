@@ -1,7 +1,7 @@
-import { IPost } from "./IPost";
+import { IPost } from './IPost';
 
 export interface IPostResponse {
-  posts: IPost[],
+  posts: IPost[];
   total: number;
   skip: number;
   limit: number;

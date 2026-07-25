@@ -1,5 +1,4 @@
 export class Collection<T> {
-
   items: T[] = [];
 
   constructor(items: T[]) {
@@ -17,7 +16,7 @@ export class Collection<T> {
   deleteAll(): void {
     this.items = [];
   }
-  
+
   delete(index: number): void {
     this.items.splice(index, 1);
   }
@@ -25,5 +24,4 @@ export class Collection<T> {
   setItem(index: number, item: T): void {
     this.items[index] = item;
   }
-  
 }

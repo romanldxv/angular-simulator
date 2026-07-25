@@ -8,36 +8,41 @@ let users: IUser[] = [
     name: 'Alex',
     surname: 'Novikov',
     city: 'Moscow',
-    age: 25
+    age: 25,
   },
   {
     name: 'Roman',
     surname: 'Shaymardanov',
     city: 'Chelyabinsk',
-    age: 19
+    age: 19,
   },
   {
     name: 'Nikita',
     surname: 'Ivanov',
     city: 'Moscow',
-    age: 23
+    age: 23,
   },
   {
     name: 'Alice',
     surname: 'Brown',
     city: 'London',
-    age: 45
-  }
+    age: 45,
+  },
 ];
 
-const filteredUsers: IUser[] = users.filter((user: IUser) => user.city === 'Moscow');
+const filteredUsers: IUser[] = users.filter(
+  (user: IUser) => user.city === 'Moscow',
+);
 
 // Функции
 function sum(firstNumber: number, secondNumber: number): number {
   return firstNumber + secondNumber;
 }
 
-function formatText(text: string, textFormat: 'uppercase' | 'lowercase' | 'capitalize'): string {
+function formatText(
+  text: string,
+  textFormat: 'uppercase' | 'lowercase' | 'capitalize',
+): string {
   if (textFormat === 'uppercase') {
     return text.toUpperCase();
   } else if (textFormat === 'lowercase') {
@@ -53,14 +58,14 @@ function deleteSymbol(string: string, symbol: string): string {
 
 // Интерфейсы
 interface IUser {
-  name: string,
-  surname: string,
-  age: number,
-  city: string,
-  email?: string
+  name: string;
+  surname: string;
+  age: number;
+  city: string;
+  email?: string;
 }
 
 interface IAdmin extends IUser {
-  post: string,
-  isFullAccess: boolean
+  post: string;
+  isFullAccess: boolean;
 }

@@ -4,41 +4,49 @@
     <form class="create-post-form" [formGroup]="createPostForm">
       <div class="form-field">
         <label class="fs-16">Title: </label>
-        <input type="text" formControlName="title" id="title-input">
+        <input type="text" formControlName="title" id="title-input" />
       </div>
-  
+
       <div class="form-field">
         <label class="fs-16">Body: </label>
-        <input type="text" formControlName="body" id="body-input">
+        <input type="text" formControlName="body" id="body-input" />
       </div>
-  
+
       <div class="form-field">
         <label class="fs-16">Tags: </label>
-        <input type="text" formControlName="tags" id="tags-input">
+        <input type="text" formControlName="tags" id="tags-input" />
       </div>
-  
+
       <ng-container formGroupName="reactions">
         <div class="form-field">
           <label class="fs-16">Likes: </label>
-          <input type="number" formControlName="likes" id="reactions-likes-input">
+          <input
+            type="number"
+            formControlName="likes"
+            id="reactions-likes-input"
+          />
         </div>
 
         <div class="form-field">
           <label class="fs-16">Dislikes: </label>
-          <input type="number" formControlName="dislikes" id="reactions-dislikes-input">
+          <input
+            type="number"
+            formControlName="dislikes"
+            id="reactions-dislikes-input"
+          />
         </div>
       </ng-container>
 
       <div class="form-field">
         <label class="fs-16">Views: </label>
-        <input type="number" formControlName="views" id="views-input">
+        <input type="number" formControlName="views" id="views-input" />
       </div>
     </form>
   </div>
   <button
-    class="create-post-btn" 
-    type="button" 
-    (click)="createPost()" 
+    class="create-post-btn"
+    type="button"
+    (click)="createPost()"
     [disabled]="createPostForm.invalid"
     id="create-post-btn"
   >

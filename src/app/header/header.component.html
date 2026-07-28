@@ -7,21 +7,22 @@
       </div>
       <nav class="navigation">
         <ul class="navigation-list">
-          <div class="toggle-color-mode">
-            <p-toggleswitch
-              [ngModel]="isDarkMode$ | async"
-              (onChange)="toggleColorMode($event)"
-              id="color-mode-toggleswitch"
-              [disabled]="!enableTheming"
-            >
-              <ng-template #handle let-checked="checked">
-                <fa-icon
-                  [icon]="checked ? faMoon : faSun"
-                  [ngClass]="[checked ? 'white-icon' : 'black-icon']"
-                ></fa-icon>
-              </ng-template>
-            </p-toggleswitch>
-          </div>
+          @if (enableTheming) {
+            <div class="toggle-color-mode">
+              <p-toggleswitch
+                [ngModel]="isDarkMode$ | async"
+                (onChange)="toggleColorMode($event)"
+                id="color-mode-toggleswitch"
+              >
+                <ng-template #handle let-checked="checked">
+                  <fa-icon
+                    [icon]="checked ? faMoon : faSun"
+                    [ngClass]="[checked ? 'white-icon' : 'black-icon']"
+                  ></fa-icon>
+                </ng-template>
+              </p-toggleswitch>
+            </div>
+          }
           @for (navigationLink of navigationLinks; track navigationLink.id) {
             <li>
               <a
@@ -57,18 +58,19 @@
         <p>{{ lastVisitData | date }}</p>
       </div>
       <div class="interactive-container-wrapper">
-        <div class="select-theme-btn">
-          <p-selectbutton
-            [disabled]="!enableTheming"
-            [options]="themes"
-            [ngModel]="theme$ | async"
-            optionLabel="name"
-            optionValue="name"
-            aria-labelledby="basic"
-            (onChange)="onThemeChange($event)"
-            id="change-theme-btn"
-          />
-        </div>
+        @if (enableTheming) {
+          <div class="select-theme-btn">
+            <p-selectbutton
+              [options]="themes"
+              [ngModel]="theme$ | async"
+              optionLabel="name"
+              optionValue="name"
+              aria-labelledby="basic"
+              (onChange)="onThemeChange($event)"
+              id="change-theme-btn"
+            />
+          </div>
+        }
         <div class="interactive-container-text">
           @if (currentWidget === 'clicker') {
             <div class="clicker">

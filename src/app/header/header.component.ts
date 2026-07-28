@@ -9,7 +9,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { faMoon, IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AsyncPipe, NgClass } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
 import { ThemeService } from '../services/theme.service';
 import { Observable } from 'rxjs';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +19,9 @@ import {
 } from 'primeng/selectbutton';
 import { ITheme } from '../../interfaces/ITheme';
 import { AuthService } from '../../features/auth/auth.service';
+import { LocalStorageService } from '../services/local-storage.service';
+import { APP_CONFIGURATION } from '../app-configuration.token';
+import { IAppConfiguration } from '../../interfaces/IAppConfiguration';
 
 @Component({
   selector: 'app-header',
@@ -31,23 +34,29 @@ import { AuthService } from '../../features/auth/auth.service';
     NgClass,
     AsyncPipe,
     SelectButtonModule,
+    DatePipe
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+
   toastService: ToastService = inject(ToastService);
   themeService: ThemeService = inject(ThemeService);
   private authService: AuthService = inject(AuthService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
+  private appConfig: IAppConfiguration = inject(APP_CONFIGURATION);
 
   isDarkMode$: Observable<boolean> = this.themeService.isDarkMode$;
   theme$: Observable<ITheme> = this.themeService.theme$;
-  companyName: string = 'румтибет';
+  companyName: string = this.appConfig.companyName;
   currentTime: string = new Date().toLocaleString();
+  lastVisitData: string = this.localStorageService.getItem('last-visit-date') ?? 'нет';
   currentWidget: 'clicker' | 'date' = 'date';
   clickerCount: number = 0;
   faSun: IconDefinition = faSun;
   faMoon: IconDefinition = faMoon;
+  enableTheming: boolean = this.appConfig.enableTheming;
 
   navigationLinks: INavigationLink[] = [
     { id: 1, title: 'Главная', routerLink: '', testingId: 'main-ref' },
@@ -95,4 +104,5 @@ export class HeaderComponent {
       this.clickerCount--;
     }
   }
+  
 }

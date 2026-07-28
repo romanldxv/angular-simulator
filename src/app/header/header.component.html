@@ -12,6 +12,7 @@
               [ngModel]="isDarkMode$ | async"
               (onChange)="toggleColorMode($event)"
               id="color-mode-toggleswitch"
+              [disabled]="!enableTheming"
             >
               <ng-template #handle let-checked="checked">
                 <fa-icon
@@ -51,9 +52,14 @@
       </nav>
     </div>
     <div class="interactive-container container">
+      <div>
+        <p>Дата последнего входа: </p>
+        <p>{{ lastVisitData | date }}</p>
+      </div>
       <div class="interactive-container-wrapper">
         <div class="select-theme-btn">
           <p-selectbutton
+            [disabled]="!enableTheming"
             [options]="themes"
             [ngModel]="theme$ | async"
             optionLabel="name"

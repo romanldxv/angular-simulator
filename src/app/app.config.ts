@@ -1,6 +1,7 @@
 import {
   APP_INITIALIZER,
   ApplicationConfig,
+  LOCALE_ID,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
 } from '@angular/core';
@@ -20,6 +21,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { DialogService } from 'primeng/dynamicdialog';
 import { tokenInterceptor } from '../features/auth/token.interceptor';
 import { AuthService } from '../features/auth/auth.service';
+import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
+import { APP_CONFIGURATION } from './app-configuration.token';
 
 function getTheme(): Preset {
   const themes: ITheme[] = [
@@ -62,5 +65,22 @@ export const appConfig: ApplicationConfig = {
       deps: [AuthService],
       multi: true,
     },
+    {
+      provide: DATE_PIPE_DEFAULT_OPTIONS,
+      useValue: { 
+        dateFormat: 'short', 
+        timezone: '+0530' 
+      }
+    },
+    {
+      provide: APP_CONFIGURATION,
+      useValue: {
+        companyName: 'румтибет',
+        enableLogs: true,
+        enableNotifications: true,
+        enableTheming: false,
+        sessionTimeout: 20
+      }
+    }
   ],
 };

@@ -30,6 +30,7 @@ import { LoaderService } from '../../../app/services/loader.service';
   standalone: true,
 })
 export class PostsComponent implements OnInit {
+
   private postService: PostService = inject(PostService);
   private dialogService: DialogService = inject(DialogService);
   private toastService: ToastService = inject(ToastService);
@@ -69,7 +70,7 @@ export class PostsComponent implements OnInit {
   }
 
   viewPage(postId: number): void {
-    this.router.navigate([`/posts/${postId}`]);
+    this.router.navigate([`/posts/${ postId }`]);
   }
 
   deletePost(postId: number): void {
@@ -129,4 +130,5 @@ export class PostsComponent implements OnInit {
       )
       .subscribe();
   }
+
 }

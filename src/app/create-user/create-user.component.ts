@@ -20,6 +20,7 @@ import { HoverGradientBorderDirective } from '../directives/hover-gradient-borde
   styleUrl: './create-user.component.scss',
 })
 export class CreateUserComponent {
+
   @Output() createUser: EventEmitter<IUser> = new EventEmitter<IUser>();
   private fb: FormBuilder = inject(FormBuilder);
 
@@ -70,4 +71,5 @@ export class CreateUserComponent {
     this.createUserForm.reset();
     this.createUser.emit(newUser);
   }
+
 }

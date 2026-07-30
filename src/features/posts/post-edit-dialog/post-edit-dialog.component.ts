@@ -15,6 +15,7 @@ import { IPost } from '../../../interfaces/IPost';
   styleUrl: './post-edit-dialog.component.scss',
 })
 export class PostEditDialogComponent implements OnInit {
+
   private fb: FormBuilder = inject(FormBuilder);
   private ref: DynamicDialogRef = inject(DynamicDialogRef);
   private config: DynamicDialogConfig = inject(DynamicDialogConfig);
@@ -52,4 +53,5 @@ export class PostEditDialogComponent implements OnInit {
     };
     this.ref.close(updatedPost);
   }
+
 }

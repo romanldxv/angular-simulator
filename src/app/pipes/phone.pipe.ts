@@ -5,6 +5,7 @@ import { PhoneMode } from '../../enums/PhoneMode';
   name: 'phone',
 })
 export class PhonePipe implements PipeTransform {
+
   transform(phone: string, mode: PhoneMode): string {
     const clearPhone: string = phone.includes('x')
       ? phone.slice(0, phone.lastIndexOf('x')).replace(/\D/g, '')
@@ -25,20 +26,21 @@ export class PhonePipe implements PipeTransform {
       cityCode = clearPhone.slice(2, 5);
       number = clearPhone.slice(5);
     } else {
-      return `+${clearPhone}`;
+      return `+${ clearPhone }`;
     }
 
     switch (mode) {
       case 'compact':
-        return `+${clearPhone}`;
+        return `+${ clearPhone }`;
       case 'international':
-        return `+${countryCode} ${cityCode} ${number.slice(0, 3)} ${number.slice(3, 5)} ${number.slice(-2)}`;
+        return `+${ countryCode } ${ cityCode } ${ number.slice(0, 3) } ${ number.slice(3, 5) } ${ number.slice(-2) }`;
       case 'national':
-        return `${cityCode} ${number.slice(0, 3)} ${number.slice(3, 5)} ${number.slice(-2)}`;
+        return `${ cityCode } ${ number.slice(0, 3) } ${ number.slice(3, 5) } ${ number.slice(-2) }`;
       case 'masked':
-        return `+${countryCode} ${cityCode} *** ** ${number.slice(-2)}`;
+        return `+${ countryCode } ${ cityCode } *** ** ${ number.slice(-2) }`;
       default:
         return phone;
     }
   }
+
 }

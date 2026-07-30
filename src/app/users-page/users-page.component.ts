@@ -21,6 +21,7 @@ import { PluralPipe } from '../pipes/plural.pipe';
   styleUrl: './users-page.component.scss',
 })
 export class UsersPageComponent implements OnInit {
+
   userService: UserService = inject(UserService);
 
   users$: Observable<IUser[]> = this.userService.users$;
@@ -56,4 +57,5 @@ export class UsersPageComponent implements OnInit {
   onFilterUsers(text: string): void {
     this.filteredUsersSubject.next(text);
   }
+
 }

@@ -35,7 +35,7 @@ export const logInterceptor: HttpInterceptorFn = (
         url: ${ req.url }\n
         status request: ${ responseStatus }\n
         response time: ${ Date.now() - startedTime } ms\n
-      `);
+es      `);
     }),
   );
 };

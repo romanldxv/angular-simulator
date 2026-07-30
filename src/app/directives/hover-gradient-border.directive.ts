@@ -14,6 +14,7 @@ import { IGradientConfiguration } from '../../interfaces/IGradientConfiguration'
   selector: '[hoverGradientBorder]',
 })
 export class HoverGradientBorderDirective implements OnDestroy {
+
   @Input() gradientConfiguration: IGradientConfiguration = {
     delay: 1000,
     colors: ['#FF0000', 'green', '#FFF000'],
@@ -21,7 +22,7 @@ export class HoverGradientBorderDirective implements OnDestroy {
   };
 
   @HostBinding('style.--border-thickness') borderThickness: string =
-    `${this.gradientConfiguration.thickness}px`;
+    `${ this.gradientConfiguration.thickness }px`;
   @HostBinding('style.--gradient-colors') gradientColors: string =
     this.gradientConfiguration.colors!.join(', ');
 
@@ -56,4 +57,5 @@ export class HoverGradientBorderDirective implements OnDestroy {
       clearTimeout(this.timerId);
     }
   }
+
 }

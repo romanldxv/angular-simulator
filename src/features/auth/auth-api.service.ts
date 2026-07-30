@@ -19,7 +19,7 @@ export class AuthApiService {
   private readonly API_URL: string = 'https://dummyjson.com/auth';
 
   loginUser(login: string, password: string): Observable<IAuthResponse> {
-    return this.http.post<IAuthResponse>(`${this.API_URL}/login`, {
+    return this.http.post<IAuthResponse>(`${ this.API_URL }/login`, {
       username: login,
       password: password,
       expiresInMins: this.sessionTimeout
@@ -27,11 +27,11 @@ export class AuthApiService {
   }
 
   getUser(): Observable<IAuthUser> {
-    return this.http.get<IAuthUser>(`${this.API_URL}/me`);
+    return this.http.get<IAuthUser>(`${ this.API_URL }/me`);
   }
 
   refreshTokens(refreshToken: string): Observable<IToken> {
-    return this.http.post<IToken>(`${this.API_URL}/refresh`, {
+    return this.http.post<IToken>(`${ this.API_URL }/refresh`, {
       refreshToken: refreshToken,
       expiresInMins: this.sessionTimeout
     });

@@ -10,6 +10,7 @@ import {
   selector: '[hoverBold]',
 })
 export class HoverBoldDirective {
+
   private renderer: Renderer2 = inject(Renderer2);
   private elementRef: ElementRef = inject(ElementRef);
 
@@ -27,4 +28,5 @@ export class HoverBoldDirective {
   onLeave() {
     this.renderer.setStyle(this.elementRef.nativeElement, 'font-weight', null);
   }
+
 }

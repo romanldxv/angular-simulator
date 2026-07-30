@@ -26,6 +26,7 @@ import { faCalendar } from '@fortawesome/free-regular-svg-icons';
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
+
   toastService: ToastService = inject(ToastService);
 
   liveInputText!: string;
@@ -141,4 +142,5 @@ export class HomePageComponent {
       imageName: 'india',
     },
   ];
+
 }

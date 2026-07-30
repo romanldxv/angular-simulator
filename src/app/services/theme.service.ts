@@ -12,6 +12,7 @@ import { Theme } from '../../enums/Theme';
   providedIn: 'root',
 })
 export class ThemeService {
+
   private localStorageService: LocalStorageService =
     inject(LocalStorageService);
 
@@ -74,4 +75,5 @@ export class ThemeService {
   getTheme(): ITheme {
     return this.themeSubject.getValue();
   }
+
 }

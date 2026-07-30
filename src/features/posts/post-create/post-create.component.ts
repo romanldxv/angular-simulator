@@ -19,6 +19,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './post-create.component.scss',
 })
 export class PostCreateComponent {
+
   private postService: PostService = inject(PostService);
   private toastService: ToastService = inject(ToastService);
   private router: Router = inject(Router);
@@ -52,4 +53,5 @@ export class PostCreateComponent {
       )
       .subscribe();
   }
+
 }

@@ -85,14 +85,14 @@ module.exports = defineConfig([
       '@angular-eslint/template/no-nested-tags': 'error',
     },
   },
-  prettierConfig,
-  {
-    files: ['**/*.{ts,js,html}'],
-    plugins: {
-      prettier: prettierPlugin,
-    },
-    rules: {
-      'prettier/prettier': 'error',
-    },
-  },
+  // prettierConfig,
+  // {
+  //   files: ['**/*.{ts,js,html}'],
+  //   plugins: {
+  //     prettier: prettierPlugin,
+  //   },
+  //   rules: {
+  //     'prettier/prettier': 'error',
+  //   },
+  // },
 ]);

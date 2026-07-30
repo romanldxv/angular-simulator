@@ -1,4 +1,5 @@
 export class Collection<T> {
+
   items: T[] = [];
 
   constructor(items: T[]) {
@@ -24,4 +25,5 @@ export class Collection<T> {
   setItem(index: number, item: T): void {
     this.items[index] = item;
   }
+
 }

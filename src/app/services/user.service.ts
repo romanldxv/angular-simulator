@@ -10,6 +10,7 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root',
 })
 export class UserService {
+
   private userApiService: UserApiService = inject(UserApiService);
   private loaderService: LoaderService = inject(LoaderService);
   private toastService: ToastService = inject(ToastService);
@@ -61,4 +62,5 @@ export class UserService {
     );
     this.setUsers(updatedUsers);
   }
+
 }

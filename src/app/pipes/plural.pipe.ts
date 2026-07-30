@@ -4,6 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'plural',
 })
 export class PluralPipe implements PipeTransform {
+
   transform(
     number: number,
     singularWord: string,
@@ -19,11 +20,12 @@ export class PluralPipe implements PipeTransform {
       remainder >= 5 ||
       twoDigitNumbers.includes(number)
     ) {
-      return `${number} ${pluralWord}`;
+      return `${ number } ${ pluralWord }`;
     } else if (remainder == 1) {
-      return `${number} ${singularWord}`;
+      return `${ number } ${ singularWord }`;
     } else {
-      return `${number} ${wordBetweenForms}`;
+      return `${ number } ${ wordBetweenForms }`;
     }
   }
+
 }

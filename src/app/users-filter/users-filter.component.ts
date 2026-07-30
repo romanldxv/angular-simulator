@@ -17,6 +17,7 @@ import { debounceTime, distinctUntilChanged, tap } from 'rxjs';
   styleUrl: './users-filter.component.scss',
 })
 export class UsersFilterComponent implements OnInit {
+
   @Output() filterUsers: EventEmitter<string> = new EventEmitter<string>();
   destroyRef: DestroyRef = inject(DestroyRef);
 
@@ -34,4 +35,5 @@ export class UsersFilterComponent implements OnInit {
       )
       .subscribe();
   }
+
 }

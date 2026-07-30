@@ -19,6 +19,7 @@ import { IGradientConfiguration } from '../../interfaces/IGradientConfiguration'
   styleUrl: './user-card.component.scss',
 })
 export class UserCardComponent {
+
   @Input({ required: true }) user!: IUser;
   @Output() deleteUser: EventEmitter<number> = new EventEmitter<number>();
 
@@ -35,4 +36,5 @@ export class UserCardComponent {
   fillEmptyField(field: string): string {
     return field || 'Неизвестно';
   }
+
 }

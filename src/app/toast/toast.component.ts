@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
   styleUrl: './toast.component.scss',
 })
 export class ToastComponent {
+
   toastService: ToastService = inject(ToastService);
 
   toastType: typeof ToastType = ToastType;
@@ -20,4 +21,5 @@ export class ToastComponent {
   closeMessage(message: IToast): void {
     this.toastService.closeToast(message);
   }
+
 }

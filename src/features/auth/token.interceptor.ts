@@ -22,7 +22,7 @@ export const tokenInterceptor: HttpInterceptorFn = (
 
   function addAccessToken(newToken: string): HttpRequest<unknown> {
     return req.clone({
-      setHeaders: { Authorization: `Bearer ${newToken}` },
+      setHeaders: { Authorization: `Bearer ${ newToken }` },
     });
   }
 

@@ -17,6 +17,7 @@ import { AuthService } from '../features/auth/auth.service';
   providers: [],
 })
 export class AppComponent {
+
   private localStorageService: LocalStorageService =
     inject(LocalStorageService);
 
@@ -47,4 +48,5 @@ export class AppComponent {
       (this.localStorageService.getItem<number>(this.VISIT_COUNT_KEY) || 0) + 1;
     this.localStorageService.setItem(this.VISIT_COUNT_KEY, visitCount);
   }
+
 }

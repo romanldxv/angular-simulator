@@ -19,6 +19,7 @@ import { ToastService } from '../../../app/services/toast.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+
   private authService: AuthService = inject(AuthService);
   private router: Router = inject(Router);
   private toastService: ToastService = inject(ToastService);
@@ -55,4 +56,5 @@ export class LoginComponent {
       )
       .subscribe();
   }
+
 }

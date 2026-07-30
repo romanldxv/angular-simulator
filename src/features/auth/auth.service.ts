@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
+
   private authApiService: AuthApiService = inject(AuthApiService);
   private localStorageService: LocalStorageService =
     inject(LocalStorageService);
@@ -92,4 +93,5 @@ export class AuthService {
     }
     return of(null);
   }
+
 }

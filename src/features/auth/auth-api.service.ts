@@ -4,19 +4,25 @@ import { Observable } from 'rxjs';
 import { IAuthResponse } from './IAuthResponse';
 import { IAuthUser } from './IAuthUser';
 import { IToken } from './IToken';
+import { IAppConfiguration } from '../../interfaces/IAppConfiguration';
+import { APP_CONFIGURATION } from '../../app/app-configuration.token';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthApiService {
-  private http: HttpClient = inject(HttpClient);
 
+  private http: HttpClient = inject(HttpClient);
+  private appConfig: IAppConfiguration = inject(APP_CONFIGURATION);
+
+  private sessionTimeout: number = this.appConfig.sessionTimeout;
   private readonly API_URL: string = 'https://dummyjson.com/auth';
 
   loginUser(login: string, password: string): Observable<IAuthResponse> {
     return this.http.post<IAuthResponse>(`${this.API_URL}/login`, {
       username: login,
       password: password,
+      expiresInMins: this.sessionTimeout
     });
   }
 
@@ -27,6 +33,8 @@ export class AuthApiService {
   refreshTokens(refreshToken: string): Observable<IToken> {
     return this.http.post<IToken>(`${this.API_URL}/refresh`, {
       refreshToken: refreshToken,
+      expiresInMins: this.sessionTimeout
     });
   }
+
 }

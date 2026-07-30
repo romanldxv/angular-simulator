@@ -1,8 +1,8 @@
 1. Будет создан 1 экземпляр на всё приложение, т.к. в сервис providedIn: 'root'
 
-2. Будет создано 3 экземпляра:
+2. Будет создано 2 экземпляра:
   - 1 на всё приложение, потому что будет создан в RootInjector
-  - 2 на каждый экземпляр компонента app-child, которые будут созданы в ComponentInjector
+  - 1 на каждый экземпляр компонента app-child, которые будут созданы в ComponentInjector
 
 3. ChildComponent получит экземпляр из ComponentInjector (ParentComponent), потому что Angular сначала проверяет ComponentInjector, а затем RootInjector 
 
